@@ -332,7 +332,7 @@ public class UsersDao {
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO users"
 					+ " (id, pwd, nick, email, lang, grade, regdate)"
-					+ " VALUES( ?, ?, ?, ?, ?, \"child\", SYSDATE)";
+					+ " VALUES( ?, ?, ?, ?, ?, ?, SYSDATE)";
 			pstmt = conn.prepareStatement(sql);
 			//? 에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getId());
@@ -340,6 +340,7 @@ public class UsersDao {
 			pstmt.setString(3, dto.getNick());
 			pstmt.setString(4, dto.getEmail());
 			pstmt.setString(5,dto.getLang());
+			pstmt.setString(6, dto.getGrade());
 			
 			//insert or update or delete 문 수행하고 변화된 row 의 갯수 리턴 받기
 			flag = pstmt.executeUpdate();

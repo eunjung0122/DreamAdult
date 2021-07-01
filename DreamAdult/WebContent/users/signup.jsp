@@ -9,6 +9,7 @@
 	String nick=request.getParameter("nick");
 	String email=request.getParameter("email");
 	String[] language=request.getParameterValues("language");
+	String grade="child";
 	
 	String lang="";
 	if(language != null){
@@ -25,6 +26,7 @@
 	dto.setNick(nick);
 	dto.setEmail(email);
 	dto.setLang(lang);
+	dto.setGrade(grade);
 	//UsersDao 객체를 이용해서 DB 에 저장한다.
 	boolean isSuccess=UsersDao.getInstance().insert(dto);
 	//응답하기 
