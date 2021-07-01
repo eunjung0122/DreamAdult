@@ -12,7 +12,7 @@ public class UsersDto {
 	
 	//디폴트 생성자 
 	public UsersDto() {}
-	
+
 	public UsersDto(String id, String pwd, String nick, String email, String profile, String lang, String regdate) {
 		super();
 		this.id = id;
@@ -78,7 +78,8 @@ public class UsersDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
-	}	
+	}
+
 	
 	
 }

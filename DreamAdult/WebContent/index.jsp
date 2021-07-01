@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%String id=(String)session.getAttribute("id"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,13 @@
 <body>
 <div class="container">
 	<h1>Dream Adult</h1>
+	<%if(id!=null){ %>
+	<p><strong><%=id %></strong>님 로그인 중..</p>
+	<%} %>
+	<ul>
+		<li><a href="users/loginform.jsp">로그인</a></li>
+		<li><a href="users/signup_form.jsp">회원가입</a></li>
+	</ul>
 </div>
 </body>
 </html>

@@ -202,7 +202,7 @@ public class UsersDao {
 	}
 	
 	//인자로 전달된 아이디가 DB 에 존재하는지 여부를 리턴하는 메소드
-	public boolean isExist(String id) {
+	public boolean isExistId(String id) {
 		boolean isExist=false;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -240,7 +240,45 @@ public class UsersDao {
 		return isExist;
 	}
 	
-	
+	//인자로 전달된 아이디가 DB 에 존재하는지 여부를 리턴하는 메소드
+		public boolean isExistNick(String nick) {
+			boolean isExist=false;
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				//Connection 객체의 참조값 얻어오기 
+				conn = new DbcpBean().getConn();
+				//실행할 sql 문 작성
+				String sql = "SELECT nick"
+						+ " FROM users"
+						+ " WHERE nick=?";
+				//PreparedStatement 객체의 참조값 얻어오기
+				pstmt = conn.prepareStatement(sql);
+				//? 에 바인딩할 내용이 있으면 여기서 바인딩
+				pstmt.setString(1, nick);
+				//select 문 수행하고 결과를 ResultSet 으로 받아오기
+				rs = pstmt.executeQuery();
+				//만일 select 된 row 가 있다면
+				if (rs.next()) {
+					isExist=true; //이미 존재하는 아이디라고 표시 
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			return isExist;
+		}
+		
 	//인자로 전달된 회원정보(id, pwd) 가 유효한 정보인지 여부를 리턴하는 메소드
 	public boolean isValid(UsersDto dto) {
 		//아이디 비밀번호가 유효한 정보인지 여부를 담을 지역변수 만들고 초기값 부여
@@ -301,7 +339,7 @@ public class UsersDao {
 			pstmt.setString(2, dto.getPwd());
 			pstmt.setString(3, dto.getNick());
 			pstmt.setString(4, dto.getEmail());
-			pstmt.setString(5, dto.getLang());
+			pstmt.setString(5,dto.getLang());
 			
 			//insert or update or delete 문 수행하고 변화된 row 의 갯수 리턴 받기
 			flag = pstmt.executeUpdate();
