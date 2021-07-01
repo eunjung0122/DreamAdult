@@ -331,8 +331,8 @@ public class UsersDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO users"
-					+ " (id, pwd, nick, email, lang, regdate)"
-					+ " VALUES( ?, ?, ?, ?, ?, SYSDATE)";
+					+ " (id, pwd, nick, email, lang, grade, regdate)"
+					+ " VALUES( ?, ?, ?, ?, ?, \"child\", SYSDATE)";
 			pstmt = conn.prepareStatement(sql);
 			//? 에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getId());
