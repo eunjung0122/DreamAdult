@@ -293,13 +293,16 @@ public class UsersDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO users"
-					+ " (id, pwd, email, regdate)"
-					+ " VALUES( ?, ?, ?, SYSDATE)";
+					+ " (id, pwd, nick, email, lang, regdate)"
+					+ " VALUES( ?, ?, ?, ?, ?, SYSDATE)";
 			pstmt = conn.prepareStatement(sql);
 			//? 에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getId());
 			pstmt.setString(2, dto.getPwd());
-			pstmt.setString(3, dto.getEmail());
+			pstmt.setString(3, dto.getNick());
+			pstmt.setString(4, dto.getEmail());
+			pstmt.setString(5, dto.getLang());
+			
 			//insert or update or delete 문 수행하고 변화된 row 의 갯수 리턴 받기
 			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
