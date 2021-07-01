@@ -10,8 +10,11 @@
 <body>
 <div class="container">
 	<h1>Dream Adult</h1>
-	<%if(id!=null){ %>
-	<p><strong><%=id %></strong>님 로그인 중..</p>
+	<%if(id!=null){ %> 
+		<p>
+			<a href="users/private/info.jsp"><%=id %></a>	님 로그인 중..
+			<a href="users/logout.jsp">로그아웃</a>	  
+		</p>
 	<%} %>
 	<ul>
 		<li><a href="users/loginform.jsp">로그인</a></li>
