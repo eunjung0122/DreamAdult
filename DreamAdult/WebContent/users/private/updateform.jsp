@@ -49,8 +49,8 @@
 			<input type="text" id="id" value="<%=id %>" disabled/>
 		</div>
 		<div>
-			<label for="id">닉네임</label>
-			<input type="text" id="nick" value="<%=dto.getNick() %>" />
+			<label for="nick">닉네임</label>
+			<input type="text" name="nick" id="nick" value="<%=dto.getNick() %>" />
 		</div>
 		<div>
 			<label for="email">이메일</label>
