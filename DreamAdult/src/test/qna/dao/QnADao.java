@@ -18,43 +18,166 @@ public class QnADao {
 		}
 		return dao;
 	}
-	//QnA 글 수정하는 메소드
-    public boolean update(QnADto dto) {
-       Connection conn = null;
-       PreparedStatement pstmt = null;
-       int flag = 0;
-       try {
-          conn = new DbcpBean().getConn();
-          //실행할 sql문 작성
-          String sql = "UPDATE board_QnA"
-                + " SET title=?, content=?, category=?"
-                + " WHERE num=?";
-          pstmt = conn.prepareStatement(sql);
-          //?에 바인딩 할 내용이 있으면 여기서 바인딩
-          pstmt.setString(1, dto.getTitle());
-          pstmt.setString(2, dto.getContent());
-          pstmt.setString(3, dto.getCategory());
-          pstmt.setInt(4, dto.getNum());
-          //insert or update or delete 문 수행하고 변화된 row의 갯수 리턴 받기
-          flag = pstmt.executeUpdate();
-       } catch (Exception e) {
-          e.printStackTrace();
-       } finally {
-          try {
-             if (pstmt != null)
-                pstmt.close();
-             if (conn != null)
-                conn.close();
-          } catch (Exception e) {
-          }
-       }
-       if (flag > 0) {
-          return true;
-       } else {
-          return false;
-       }
-    }
+
 	
+
+	//QnA 글 하나의 정보를 리턴하는 메소드
+	public QnADto getData(int num) {
+		QnADto dto=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT writer, nick, title, content, viewCount, regdate, category"
+					+ " FROM board_QnA"
+					+ " WHERE num=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용이 있으면 여기서 바인딩
+			pstmt.setInt(1, num);
+			//select 문 수행하고 결과를 ResultSet 으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type 으로 포장하기
+			if (rs.next()) {
+				dto=new QnADto();
+				dto.setNum(num);
+				dto.setWriter(rs.getString("writer"));
+				dto.setNick(rs.getString("nick"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setViewCount(rs.getInt("viewCount"));
+				dto.setRegdate(rs.getString("regdate"));
+				dto.setCategory(rs.getString("category"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return dto;
+	}
+	
+	//QnA 글 삭제하는 메소드
+	   public boolean delete(int num) {
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      int flag = 0;
+	      try {
+	         conn = new DbcpBean().getConn();
+	         //실행할 sql문 작성
+	         String sql = "DELETE FROM board_QnA"
+	               + " WHERE num=?";
+	         pstmt = conn.prepareStatement(sql);
+	         //?에 바인딩 할 내용이 있으면 여기서 바인딩
+	         pstmt.setInt(1, num);
+	         //insert or update or delete 문 수행하고 변화된 row의 갯수 리턴 받기
+	         flag = pstmt.executeUpdate();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (pstmt != null)
+	               pstmt.close();
+	            if (conn != null)
+	               conn.close();
+	         } catch (Exception e) {
+	         }
+	      }
+	      if (flag > 0) {
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
+	   
+	   //QnA 글 수정하는 메소드
+	   public boolean update(QnADto dto) {
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      int flag = 0;
+	      try {
+	         conn = new DbcpBean().getConn();
+	         //실행할 sql문 작성
+	         String sql = "UPDATE board_QnA"
+	               + " SET title=?, content=?, category=?"
+	               + " WHERE num=?";
+	         pstmt = conn.prepareStatement(sql);
+	         //?에 바인딩 할 내용이 있으면 여기서 바인딩
+	         pstmt.setString(1, dto.getTitle());
+	         pstmt.setString(2, dto.getContent());
+	         pstmt.setString(3, dto.getCategory());
+	         pstmt.setInt(4, dto.getNum());
+	         //insert or update or delete 문 수행하고 변화된 row의 갯수 리턴 받기
+	         flag = pstmt.executeUpdate();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (pstmt != null)
+	               pstmt.close();
+	            if (conn != null)
+	               conn.close();
+	         } catch (Exception e) {
+	         }
+	      }
+	      if (flag > 0) {
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
+	   
+	   //QnA 새 글 추가하는 메소드
+	   public boolean insert(QnADto dto) {
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      int flag = 0;
+	      try {
+	         conn = new DbcpBean().getConn();
+	         //실행할 sql문 작성
+	         String sql = "INSERT INTO board_QnA"
+	                    + " (num, writer, nick, title, content, viewCount, regdate, category)"
+	                    + " VALUES(board_QnA_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, ?)";
+	         pstmt = conn.prepareStatement(sql);
+	         //?에 바인딩 할 내용이 있으면 여기서 바인딩
+	            pstmt.setString(1, dto.getWriter());
+	            pstmt.setString(2, dto.getNick());
+	            pstmt.setString(3, dto.getTitle());
+	            pstmt.setString(4, dto.getContent());
+	            pstmt.setString(5, dto.getCategory());
+	         //insert or update or delete 문 수행하고 변화된 row의 갯수 리턴 받기
+	         flag = pstmt.executeUpdate();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (pstmt != null)
+	               pstmt.close();
+	            if (conn != null)
+	               conn.close();
+	         } catch (Exception e) {
+	         }
+	      }
+	      if (flag > 0) {
+	         return true;
+	      } else {
+	         return false;
+	      }
+	   }
+	   
+
 	public boolean addViewCount(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

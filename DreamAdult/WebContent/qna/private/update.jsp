@@ -36,5 +36,6 @@
          location.href="${pageContext.request.contextPath}/qna/list.jsp";
       </script>
    <%}%>
+
 </body>
 </html>
