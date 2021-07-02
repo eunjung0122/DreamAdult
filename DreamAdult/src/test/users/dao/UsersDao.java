@@ -123,6 +123,7 @@ public class UsersDao {
 			return false;
 		}
 	}
+	
 	//인자로 전달된 아이디에 해당하는 정보를 삭제하는 메소드
 	public boolean delete(String id) {
 		Connection conn = null;
@@ -168,7 +169,7 @@ public class UsersDao {
 			//Connection 객체의 참조값 얻어오기 
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 작성
-			String sql = "SELECT pwd, profile, email, regdate"
+			String sql = "SELECT pwd, nick, grade, profile, lang, email, regdate"
 					+ " FROM users"
 					+ " WHERE id=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -181,6 +182,9 @@ public class UsersDao {
 			if (rs.next()) {
 				dto=new UsersDto();
 				dto.setId(id);
+				dto.setNick(rs.getString("nick"));
+				dto.setGrade(rs.getString("grade"));
+				dto.setLang(rs.getString("lang"));
 				dto.setPwd(rs.getString("pwd"));
 				dto.setProfile(rs.getString("profile"));
 				dto.setEmail(rs.getString("email"));
@@ -241,7 +245,7 @@ public class UsersDao {
 		return isExist;
 	}
 	
-	//인자로 전달된 아이디가 DB 에 존재하는지 여부를 리턴하는 메소드
+	//인자로 전달된 닉네임이 DB 에 존재하는지 여부를 리턴하는 메소드
 		public boolean isExistNick(String nick) {
 			boolean isExist=false;
 			Connection conn = null;
