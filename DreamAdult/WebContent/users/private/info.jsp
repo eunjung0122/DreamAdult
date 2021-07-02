@@ -8,6 +8,8 @@
 	//2. UsersDao 객체를 이용해서 가입된 정보를 얻어온다.
 	UsersDto dto=UsersDao.getInstance().getData(id);
 	//3. 응답한다.
+	String lang=dto.getLang(); 
+	
 	
 %>    
 <!DOCTYPE html>
@@ -61,7 +63,17 @@
 		</tr>
 		<tr>
 			<th>관심언어</th>
-			<td><%=dto.getLang() %></td>
+			<td>
+				<label>
+					<input type="checkbox" name="language" value="Java" <%=lang.contains("Java") ? "checked":""%>/> 자바
+				</label>
+				<label>
+					<input type="checkbox" name="language" value="Javascript" <%=lang.contains("Javascript") ? "checked":""%>/> 자바스크립트
+				</label>
+				<label>
+					<input type="checkbox" name="language" value="JSP" <%=lang.contains("JSP") ? "checked":""%>/> JSP
+				</label>
+			</td>
 		</tr>
 		<tr>
 			<th>이메일</th>
