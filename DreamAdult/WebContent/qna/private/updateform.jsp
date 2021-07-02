@@ -3,8 +3,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	int num=Integer.parseInt(request.getParameter("num"));
-	QnADto dto=QnADao.getInstance().getData(num);
+
+   int num=Integer.parseInt(request.getParameter("num"));
+   QnADto dto=new QnADto();
+   dto.setNum(num);
+	dto=QnADao.getInstance().getData(dto);
+	String category=dto.getCategory();
 %>
 <!DOCTYPE html>
 <html>
@@ -14,36 +18,36 @@
 </head>
 <body>
 <div class="container">
-	<h1>글 수정</h1>
-	<form action="update.jsp" method="post">
-	<input type="hidden" name="num" value="<%=num %>" />
-	<div>
-		<label for="writer">작성자</label>
-		<input type="text" id="writer" value="<%=dto.getWriter() %>" disabled/>
-	</div>
-	<div>
-		<label for="nick">닉네임</label>
-		<input type="text" id="nick" value="<%=dto.getNick() %>" disabled/>
-	</div>
-	<div>
-         <label for="title">제목</label>
-         <input type="text" id="title" name="title" value="<%=dto.getTitle()%>"/>
-    </div>
-    <div>
-         <label for="category">말머리</label>
-         <select name="category">
-            <option value="">Please choose an option</option>
-            <option value=java>Java</option>
-            <option value="javascript">JavaScript</option>
-            <option value="jsp">JSP</option>
-         </select>
-    </div>
-	<div>
-		<label for="content">내용</label>
-		<textarea id="content" name="content"><%=dto.getContent() %></textarea>
-	</div>
-    <button type="submit">수정하기</button>
-	</form>
+   <h1>글 수정</h1>
+   <form action="update.jsp" method="post" id="updateForm">
+	   <input type="hidden" name="num" value="<%=num %>" />
+	   <div>
+	      <label for="writer">작성자</label>
+	      <input type="text" id="writer" value="<%=dto.getWriter() %>" disabled/>
+	   </div>
+	   <div>
+	      <label for="nick">닉네임</label>
+	      <input type="text" id="nick" value="<%=dto.getNick() %>" disabled/>
+	   </div>
+	   <div>
+	         <label for="title">제목</label>
+	         <input type="text" id="title" name="title" value="<%=dto.getTitle()%>"/>
+	    </div>
+	    <div>
+	         <label for="category">말머리</label>
+	         <select name="category">
+	            <option value="">Please choose an option</option>
+	            <option value="java" <%=category.equals("java") ? "selected": "" %> >Java</option>
+	            <option value="javascript" <%=category.equals("javascript") ? "selected": "" %>>JavaScript</option>
+	            <option value="jsp" <%=category.equals("jsp") ? "selected": "" %>>JSP</option>
+	         </select>
+	    </div>
+	   <div>
+	      <label for="content">내용</label>
+	      <textarea id="content" name="content"><%=dto.getContent() %></textarea>
+	   </div>
+	    <button type="submit">수정하기</button>
+   </form>
 </div>
 <!-- SmartEditor 에서 필요한 javascript 로딩  -->
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
@@ -82,6 +86,7 @@
       var sHTML = oEditors.getById["content"].getIR();
       alert(sHTML);
    }
+      
    
    function setDefaultFont() {
       var sDefaultFont = '궁서';
@@ -89,22 +94,10 @@
       oEditors.getById["content"].setDefaultFont(sDefaultFont, nFontSize);
    }
    
-   //폼에 submit 이벤트가 일어났을 때 실행할 함수 등록
-   document.querySelector("#insertForm")
-         .addEventListener("submit", function(e){
-          //에디터에 입력한 내용이 textarea 의 value 값이 될 수 있도록 변환한다.
-          oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
-          //textarea 이외에 입력한 내용을 여기서 검증하고
-          const title=document.querySelector("#title").value;
-          
-          //만일 폼 제출을 막고 싶으면
-          //e.preventDefault();
-          //을 수행하게 해서 폼 제출을 막아준다.
-          if(title.length < 1){
-             alert("제목은 5글자 이상 입력하세요!"); //테스트 중이라 length < 1로 설정해 둔 상황입니다.
-             e.preventDefault();
-          }
-         });
+   document.querySelector("#updateForm").addEventListener("submit",function(){
+	   oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+   });
+
 </script>
 </body>
 </html>

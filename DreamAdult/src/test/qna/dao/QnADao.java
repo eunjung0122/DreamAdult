@@ -18,6 +18,9 @@ public class QnADao {
 		}
 		return dao;
 	}
+
+	
+
 	//QnA 글 하나의 정보를 리턴하는 메소드
 	public QnADto getData(int num) {
 		QnADto dto=null;
@@ -174,6 +177,7 @@ public class QnADao {
 	      }
 	   }
 	   
+
 	public boolean addViewCount(int num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
