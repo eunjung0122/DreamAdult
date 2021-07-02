@@ -27,7 +27,7 @@ public class UsersDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 작성
 			String sql = "UPDATE users"
-					+ " SET email=?, profile=?, set nick=?"
+					+ " SET email=?, profile=?, nick=?"
 					+ " WHERE id=?";
 			pstmt = conn.prepareStatement(sql);
 			//? 에 바인딩할 내용이 있으면 여기서 바인딩
