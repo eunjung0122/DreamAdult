@@ -10,11 +10,13 @@
 		profile=null; // profile 칼럼을 비워놓기 위해 null 을 대입한다. 
 	}
 	String email=request.getParameter("email");
+	String nick=request.getParameter("nick");
 	//session 영역에 저장된 아이디를 읽어온다.
 	String id=(String)session.getAttribute("id");
 	//UsersDto 객체에 담아서
 	UsersDto dto=new UsersDto();
 	dto.setProfile(profile);
+	dto.setNick(nick);
 	dto.setEmail(email);
 	dto.setId(id);
 	//DB 에 수정 반영하고
