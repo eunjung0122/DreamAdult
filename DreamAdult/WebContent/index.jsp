@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%String id=(String)session.getAttribute("id"); %>
+<%String id=(String)session.getAttribute("id");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +19,7 @@
 	<ul>
 		<li><a href="users/loginform.jsp">로그인</a></li>
 		<li><a href="users/signup_form.jsp">회원가입</a></li>
+		<li><a href="qna/list.jsp">Q&A</a></li>
 	</ul>
 </div>
 </body>
