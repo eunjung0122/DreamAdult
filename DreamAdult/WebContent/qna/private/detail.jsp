@@ -62,6 +62,9 @@
 	}
 	
 	String id=(String)session.getAttribute("id");
+	
+	//글 하나의 정보를 DB에서 불러온다.
+	QnADto dto2=QnADao.getInstance().getData(num);
 %>
 <!DOCTYPE html>
 <html>
@@ -129,7 +132,8 @@
    		<li><a href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a></li>
    		<%if(dto.getWriter().equals(id)) {%>
    			<li><a href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
-   			<li><a href="<%=request.getContextPath()%>/qna/private/delete.jsp?num=<%=dto.getNum()%>">삭제</a></li>
+   			<li><a href="<%=request.getContextPath()%>/qna/private/delete.jsp?num=<%=dto.getNum()%>"
+   					onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a></li>
    		<%} %>
    </ul>
 </div>
