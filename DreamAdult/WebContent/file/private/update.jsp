@@ -47,7 +47,10 @@
 	    - upload 폴더안에 동일한 이름의 파일이 있으면 파일명 뒤에 1, 2, 3 ... 숫자를 자동으로 부여해서 저장한다.
 	    ex)  image.jpg  image1.jpg  image2.jpg ...
 	*/
-	String saveFileName=mr.getFilesystemName("myFile"); 
+	String saveFileName = mr.getFilesystemName("myFile");
+	if(saveFileName == null){
+		saveFileName = mr.getParameter("myFile2"); 
+	}
 	// 'myFile' 은 name value 의 이름과 같아야함.    
 	// 파일 다운로드를 위해선 파일 크기, 원래 이름, 저장된 이름의 정보가 있어야함.
 	   

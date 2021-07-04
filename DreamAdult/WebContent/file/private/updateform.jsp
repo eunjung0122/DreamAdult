@@ -43,6 +43,7 @@
 			</div>
 			<div>
 				<label for="myFile">첨부 파일</label>
+				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getFileName()%>" />
 				<input type="file" name="myFile" id="myFile"/>
 				<p><%=dto.getFileName()%></p>
 			</div>
