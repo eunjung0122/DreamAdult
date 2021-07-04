@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div>
-		<a href="insertform.jsp">새글 작성</a>
+		<a href="<%=request.getContextPath() %>/file/private/uploadform.jsp">새글 작성</a>
 		<table>
 	         <thead>
 	            <tr>
@@ -31,7 +31,7 @@
 	                  <tr>
 	                     <td><%=tmp.getNum() %></td>
 	                     <td><%=tmp.getCategory() %></td>
-	                     <td><a href="detail.jsp"><%=tmp.getTitle() %></a></td>
+	                     <td><a href="<%=request.getContextPath() %>/file/private/detail.jsp?num=<%=tmp.getNum() %>"><%=tmp.getTitle() %></a></td>
 	                     <td><%=tmp.getNick() %></td>
 	                     <td><%=tmp.getViewCount() %></td>
 	                     <td><%=tmp.getRegdate() %></td>

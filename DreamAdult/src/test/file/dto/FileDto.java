@@ -8,7 +8,7 @@ public class FileDto {
 	private String category;
 	private String title;
 	private String content;
-	private String saveFileName;
+	private String FileName;
 	private int viewCount;
 	private String regdate;
 	private int startRowNum;
@@ -19,8 +19,7 @@ public class FileDto {
 	public FileDto() {}
 
 	public FileDto(int num, String writer, String nick, String grade, String category, String title, String content,
-			String saveFileName, int viewCount, String regdate, int startRowNum, int endRowNum, int prevNum,
-			int nextNum) {
+			String fileName, int viewCount, String regdate, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -29,7 +28,7 @@ public class FileDto {
 		this.category = category;
 		this.title = title;
 		this.content = content;
-		this.saveFileName = saveFileName;
+		FileName = fileName;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
@@ -94,12 +93,12 @@ public class FileDto {
 		this.content = content;
 	}
 
-	public String getSaveFileName() {
-		return saveFileName;
+	public String getFileName() {
+		return FileName;
 	}
 
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
+	public void setFileName(String fileName) {
+		FileName = fileName;
 	}
 
 	public int getViewCount() {
@@ -149,8 +148,5 @@ public class FileDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-
 	
-	
-		
 }
