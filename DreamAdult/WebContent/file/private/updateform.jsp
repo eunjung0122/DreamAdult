@@ -48,6 +48,7 @@
 			<div>
 				<label for="myFile">첨부 파일</label>
 				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getOrgFileName()%>" />
+				<input type="hidden" name="myFileSize" id="myFileSize" value="<%=dto.getFileSize()%>" />
 				<input type="file" name="myFile" id="myFile"/>
 				<%if(dto.getOrgFileName()!=null) {%>
 					<p><%=dto.getOrgFileName()%></p>
