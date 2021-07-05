@@ -131,10 +131,10 @@
       </tr>
    </table>
    <ul>
-   		<li><a href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a></li>
+   		<li><a href="<%=request.getContextPath()%>/study/list.jsp">목록보기</a></li>
    		<%if(dto.getWriter().equals(id)) {%>
-   			<li><a href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
-   			<li><a href="<%=request.getContextPath()%>/qna/private/delete.jsp?num=<%=dto.getNum()%>"
+   			<li><a href="<%=request.getContextPath()%>/study/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
+   			<li><a href="<%=request.getContextPath()%>/study/private/delete.jsp?num=<%=dto.getNum()%>"
    					onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a></li>
    		<%} %>
    </ul>
