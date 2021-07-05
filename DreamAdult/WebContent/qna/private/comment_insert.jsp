@@ -28,11 +28,13 @@
 	dto.setContent(content);
 	dto.setRef_group(ref_group);
 	
+	
 	//원글의 댓글인 경우
 	if(comment_group==null){
 		//댓글의 글번호를 comment_group 번호로 사용한다.
 		dto.setComment_group(seq);
 	}else{
+		dto.setComment_group(Integer.parseInt(comment_group));
 	}
 	
 	//댓글 정보를 DB에 저장하기

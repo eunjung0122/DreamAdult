@@ -18,6 +18,43 @@ public class QnACommentDao {
 		}
 		return dao;
 	}
+	public int getCount(int ref_group) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS count"
+					+ " FROM board_qna_comment"
+					+ "	WHERE ref_group=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setInt(1, ref_group);
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			if (rs.next()) {
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
+	
 	//댓글 목록을 리턴하는 메소드
 	public List<QnACommentDto> getList(QnACommentDto dto2){
 		List<QnACommentDto> list=new ArrayList<>();
@@ -28,16 +65,23 @@ public class QnACommentDao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT num, writer, board_qna_comment.nick, content, target_nick, ref_group, comment_group, deleted, profile, board_qna_comment.regdate" + 
-					" FROM board_qna_comment" + 
-					" INNER JOIN users" + 
-					" ON board_qna_comment.writer = users.id" +
-					" WHERE ref_group=?" + 
-					" ORDER BY comment_group ASC, num ASC";
+			String sql = "SELECT *"
+					+ "	FROM"
+					+ "	(SELECT result1.*,ROWNUM AS rnum"
+					+ " 	FROM"
+					+ "		(SELECT num, writer, board_qna_comment.nick, content, target_nick, ref_group, comment_group, deleted, profile, board_qna_comment.regdate" + 
+					" 		FROM board_qna_comment" + 
+					" 		INNER JOIN users" + 
+					" 		ON board_qna_comment.writer = users.id" +
+					" 		WHERE ref_group=?" + 
+					" 		ORDER BY comment_group DESC, num ASC) result1)"
+					+ "	WHERE rnum BETWEEN ? AND ?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setInt(1, dto2.getRef_group());
+			pstmt.setInt(2, dto2.getStartRowNum());
+			pstmt.setInt(3, dto2.getEndRowNum());
 			//select 문 수행하고 결과를 ResultSet 으로 받아오기
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type 으로 포장하기
