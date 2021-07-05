@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="test.qna.dao.QnACommentDao"%>
+<%@page import="test.qna.dto.QnACommentDto"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="test.qna.dto.QnADto"%>
 <%@page import="test.qna.dao.QnADao"%>
@@ -65,6 +68,13 @@
 	
 	//글 하나의 정보를 DB에서 불러온다.
 	QnADto dto2=QnADao.getInstance().getData(num);
+	
+	//원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
+	QnACommentDto commentDto=new QnACommentDto();
+	commentDto.setRef_group(num);
+	
+	List<QnACommentDto> commentList=
+			QnACommentDao.getInstance().getList(commentDto);
 %>
 <!DOCTYPE html>
 <html>
@@ -136,6 +146,27 @@
    					onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a></li>
    		<%} %>
    </ul>
+   <div class="comments">
+   		<ul>
+   			<%for(QnACommentDto tmp: commentList){ %>
+   				<li>
+   					<dl>
+   						<dt>프로필 이미지, 작성자 닉네임, 수정, 삭제 표기예정</dt>
+   						<dd>
+   							<pre><%=tmp.getContent() %></pre>
+   						</dd>
+   					</dl>
+   				</li>
+   			<%} %>	
+   		</ul>
+   </div>
+   <!-- 원글에 댓글 작성할 폼 -->
+   <form action="comment_insert.jsp" method="post">
+   		<input type="hidden" name="ref_group" value="<%=num %>" />
+   		<input type="hidden" name="target_nick" value="<%=dto.getNick() %>" />
+   		<textarea name="content"></textarea>
+   		<button type="submit">등록</button>
+   </form>
 </div>
 </body>
 </html>
