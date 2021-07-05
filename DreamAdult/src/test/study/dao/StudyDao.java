@@ -1,4 +1,4 @@
-package test.qna.dao;
+package test.study.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,24 +6,24 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.qna.dto.QnADto;
+import test.study.dto.StudyDto;
 import test.util.DbcpBean;
 
-public class QnADao {
-	private static QnADao dao;
-	private QnADao() {}
-	public static QnADao getInstance() {
+public class StudyDao {
+	private static StudyDao dao;
+	private StudyDao() {}
+	public static StudyDao getInstance() {
 		if(dao==null) {
-			dao=new QnADao();
+			dao=new StudyDao();
 		}
 		return dao;
 	}
 
 	
 
-	//QnA 글 하나의 정보를 리턴하는 메소드
-	public QnADto getData(int num) {
-		QnADto dto=null;
+	//학습공부 글 하나의 정보를 리턴하는 메소드
+	public StudyDto getData(int num) {
+		StudyDto dto=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -32,7 +32,7 @@ public class QnADao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT writer, nick, title, content, viewCount, regdate, category"
-					+ " FROM board_QnA"
+					+ " FROM board_study"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -42,7 +42,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type 으로 포장하기
 			if (rs.next()) {
-				dto=new QnADto();
+				dto=new StudyDto();
 				dto.setNum(num);
 				dto.setWriter(rs.getString("writer"));
 				dto.setNick(rs.getString("nick"));
@@ -69,7 +69,7 @@ public class QnADao {
 		return dto;
 	}
 	
-	//QnA 글 삭제하는 메소드
+	//학습공부 글 삭제하는 메소드
 	   public boolean delete(int num) {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;
@@ -77,7 +77,7 @@ public class QnADao {
 	      try {
 	         conn = new DbcpBean().getConn();
 	         //실행할 sql문 작성
-	         String sql = "DELETE FROM board_QnA"
+	         String sql = "DELETE FROM board_study"
 	               + " WHERE num=?";
 	         pstmt = conn.prepareStatement(sql);
 	         //?에 바인딩 할 내용이 있으면 여기서 바인딩
@@ -102,15 +102,15 @@ public class QnADao {
 	      }
 	   }
 	   
-	   //QnA 글 수정하는 메소드
-	   public boolean update(QnADto dto) {
+	   //학습공부 글 수정하는 메소드
+	   public boolean update(StudyDto dto) {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;
 	      int flag = 0;
 	      try {
 	         conn = new DbcpBean().getConn();
 	         //실행할 sql문 작성
-	         String sql = "UPDATE board_QnA"
+	         String sql = "UPDATE board_study"
 	               + " SET title=?, content=?, category=?"
 	               + " WHERE num=?";
 	         pstmt = conn.prepareStatement(sql);
@@ -139,17 +139,17 @@ public class QnADao {
 	      }
 	   }
 	   
-	   //QnA 새 글 추가하는 메소드
-	   public boolean insert(QnADto dto) {
+	   //학습공부 새 글 추가하는 메소드
+	   public boolean insert(StudyDto dto) {
 	      Connection conn = null;
 	      PreparedStatement pstmt = null;
 	      int flag = 0;
 	      try {
 	         conn = new DbcpBean().getConn();
 	         //실행할 sql문 작성
-	         String sql = "INSERT INTO board_QnA"
+	         String sql = "INSERT INTO board_study"
 	                    + " (num, writer, nick, title, content, viewCount, regdate, category)"
-	                    + " VALUES(board_QnA_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, ?)";
+	                    + " VALUES(board_study_seq.NEXTVAL, ?, ?, ?, ?, 0, SYSDATE, ?)";
 	         pstmt = conn.prepareStatement(sql);
 	         //?에 바인딩 할 내용이 있으면 여기서 바인딩
 	            pstmt.setString(1, dto.getWriter());
@@ -185,7 +185,7 @@ public class QnADao {
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "UPDATE board_QnA"
+			String sql = "UPDATE board_study"
 					+ "	SET viewCount=viewCount+1"
 					+ "	WHERE num=?";
 			pstmt = conn.prepareStatement(sql);
@@ -211,8 +211,8 @@ public class QnADao {
 			return false;
 		}
 	}
-	public QnADto getData(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getData(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -225,7 +225,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -236,7 +236,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -262,8 +262,8 @@ public class QnADao {
 			}
 		}return dto2;
 	}
-	public QnADto getDataT(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataT(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -276,7 +276,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE title LIKE '%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -289,7 +289,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -315,8 +315,8 @@ public class QnADao {
 			}
 		}return dto2;
 	}
-	public QnADto getDataN(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataN(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -329,7 +329,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE nick LIKE '%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -342,7 +342,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -368,8 +368,8 @@ public class QnADao {
 			}
 		}return dto2;
 	}
-	public QnADto getDataTC(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataTC(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -382,7 +382,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE title LIKE '%'||?||'%' OR content LIKE '%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -396,7 +396,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -422,8 +422,8 @@ public class QnADao {
 			}
 		}return dto2;
 	}
-	public QnADto getDataC(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataC(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -436,7 +436,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE category LIKE '%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -449,7 +449,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -476,8 +476,8 @@ public class QnADao {
 		}return dto2;
 	}
 	
-	public QnADto getDataTCa(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataTCa(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -490,7 +490,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE'%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -504,7 +504,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -530,8 +530,8 @@ public class QnADao {
 			}
 		}return dto2;
 	}
-	public QnADto getDataNCa(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataNCa(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -544,7 +544,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE'%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -558,7 +558,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -584,8 +584,8 @@ public class QnADao {
 			}
 		}return dto2;
 	}
-	public QnADto getDataTCCa(QnADto dto) {
-		QnADto dto2=null;
+	public StudyDto getDataTCCa(StudyDto dto) {
+		StudyDto dto2=null;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -598,7 +598,7 @@ public class QnADao {
 					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE'%'||?||'%'"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
@@ -613,7 +613,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			if (rs.next()) {
-				dto2=new QnADto();
+				dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setWriter(rs.getString("writer"));
 				dto2.setNick(rs.getString("nick"));
@@ -640,8 +640,8 @@ public class QnADao {
 		}return dto2;
 	}
 	
-	public List<QnADto> getList(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getList(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -655,7 +655,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -667,7 +667,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -701,7 +701,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA";
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용 있으면 여기서 바인딩
@@ -727,8 +727,8 @@ public class QnADao {
 		}return count;
 	}
 	
-	public List<QnADto> getListT(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListT(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -742,7 +742,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE title LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -756,7 +756,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -781,8 +781,8 @@ public class QnADao {
 		}return list;
 	}
 	
-	public List<QnADto> getListN(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListN(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -796,7 +796,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE nick LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -810,7 +810,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -835,8 +835,8 @@ public class QnADao {
 		}return list;
 	}
 	
-	public List<QnADto> getListTC(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListTC(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -850,7 +850,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE title LIKE '%'||?||'%' OR content LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -865,7 +865,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -889,8 +889,8 @@ public class QnADao {
 			}
 		}return list;
 	}
-	public List<QnADto> getListC(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListC(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -904,7 +904,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE category LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -918,7 +918,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -943,7 +943,7 @@ public class QnADao {
 		}return list;
 	}
 	
-	public int getCountT(QnADto dto) {
+	public int getCountT(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -952,7 +952,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE title LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -978,7 +978,7 @@ public class QnADao {
 			}
 		}return count;
 	}
-	public int getCountN(QnADto dto) {
+	public int getCountN(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -987,7 +987,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE nick LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1013,7 +1013,7 @@ public class QnADao {
 			}
 		}return count;
 	}
-	public int getCountTC(QnADto dto) {
+	public int getCountTC(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1022,7 +1022,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE title LIKE '%'||?||'%' OR content LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1049,7 +1049,7 @@ public class QnADao {
 			}
 		}return count;
 	}
-	public int getCountC(QnADto dto) {
+	public int getCountC(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1058,7 +1058,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE category LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1084,8 +1084,8 @@ public class QnADao {
 			}
 		}return count;
 	}
-	public List<QnADto> getListTCa(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListTCa(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1099,7 +1099,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -1114,7 +1114,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -1138,8 +1138,8 @@ public class QnADao {
 			}
 		}return list;
 	}
-	public List<QnADto> getListNCa(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListNCa(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1153,7 +1153,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -1168,7 +1168,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -1193,8 +1193,8 @@ public class QnADao {
 		}return list;
 	}
 	
-	public List<QnADto> getListTCCa(QnADto dto){
-		List<QnADto> list=new ArrayList<QnADto>();
+	public List<StudyDto> getListTCCa(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1208,7 +1208,7 @@ public class QnADao {
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
-					+ "		FROM board_QnA"
+					+ "		FROM board_study"
 					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -1224,7 +1224,7 @@ public class QnADao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnADto tmp=new QnADto();
+				StudyDto tmp=new StudyDto();
 				tmp.setNum(rs.getInt("num"));
 				tmp.setWriter(rs.getString("writer"));
 				tmp.setNick(rs.getString("nick"));
@@ -1249,7 +1249,7 @@ public class QnADao {
 		}return list;
 	}
 	
-	public int getCountTCa(QnADto dto) {
+	public int getCountTCa(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1258,7 +1258,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1285,7 +1285,7 @@ public class QnADao {
 			}
 		}return count;
 	}
-	public int getCountNCa(QnADto dto) {
+	public int getCountNCa(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1294,7 +1294,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1321,7 +1321,7 @@ public class QnADao {
 			}
 		}return count;
 	}
-	public int getCountTCCa(QnADto dto) {
+	public int getCountTCCa(StudyDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -1330,7 +1330,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_QnA"
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
 					+ "	WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);

@@ -20,6 +20,8 @@
 		<li><a href="users/loginform.jsp">로그인</a></li>
 		<li><a href="users/signup_form.jsp">회원가입</a></li>
 		<li><a href="qna/list.jsp">Q&A</a></li>
+		<li><a href="file/list.jsp">자료실</a></li>
+		<li><a href="study/list.jsp">학습공부</a></li>
 	</ul>
 </div>
 </body>
