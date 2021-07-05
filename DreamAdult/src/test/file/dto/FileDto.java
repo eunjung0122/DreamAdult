@@ -8,7 +8,9 @@ public class FileDto {
 	private String category;
 	private String title;
 	private String content;
+	private String orgFileName;
 	private String saveFileName;
+	private long fileSize;
 	private int viewCount;
 	private String regdate;
 	private int startRowNum;
@@ -19,8 +21,8 @@ public class FileDto {
 	public FileDto() {}
 
 	public FileDto(int num, String writer, String nick, String grade, String category, String title, String content,
-			String saveFileName, int viewCount, String regdate, int startRowNum, int endRowNum, int prevNum,
-			int nextNum) {
+			String orgFileName, String saveFileName, long fileSize, int viewCount, String regdate, int startRowNum,
+			int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -29,7 +31,9 @@ public class FileDto {
 		this.category = category;
 		this.title = title;
 		this.content = content;
+		this.orgFileName = orgFileName;
 		this.saveFileName = saveFileName;
+		this.fileSize = fileSize;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
 		this.startRowNum = startRowNum;
@@ -94,12 +98,28 @@ public class FileDto {
 		this.content = content;
 	}
 
+	public String getOrgFileName() {
+		return orgFileName;
+	}
+
+	public void setOrgFileName(String orgFileName) {
+		this.orgFileName = orgFileName;
+	}
+
 	public String getSaveFileName() {
 		return saveFileName;
 	}
 
 	public void setSaveFileName(String saveFileName) {
 		this.saveFileName = saveFileName;
+	}
+
+	public long getFileSize() {
+		return fileSize;
+	}
+
+	public void setFileSize(long fileSize) {
+		this.fileSize = fileSize;
 	}
 
 	public int getViewCount() {
@@ -149,8 +169,5 @@ public class FileDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-
 	
-	
-		
 }
