@@ -65,7 +65,7 @@
 	}
 	
 	String id=(String)session.getAttribute("id");
-	
+
 	//글 하나의 정보를 DB에서 불러온다.
 	QnADto dto2=QnADao.getInstance().getData(num);
 	
@@ -81,6 +81,11 @@
 <head>
 <meta charset="UTF-8">
 <title>/qna/private/detail.jsp</title>
+<style>
+	.comment-form{
+		display: none;
+	}
+</style>
 </head>
 <body>
 <div class="container">
@@ -149,24 +154,126 @@
    <div class="comments">
    		<ul>
    			<%for(QnACommentDto tmp: commentList){ %>
-   				<li>
+	   			<%if(tmp.getDeleted().equals("yes")){ %>
+	               <li>삭제된 댓글 입니다.</li>
+	            <% 
+	               continue;
+	            }%>
+   				<li id="reli<%=tmp.getNum()%>">
    					<dl>
-   						<dt>프로필 이미지, 작성자 닉네임, 수정, 삭제 표기예정</dt>
+   						<dt>
+   							<a data-num="<%=tmp.getNum() %>" href="javascript:" class="reply-link">답글</a>
+   						<%if(id != null && tmp.getWriter().equals(id)){ %>
+                     		<a data-num="<%=tmp.getNum() %>" class="update-link" href="javascript:">수정</a>
+                     		<a data-num="<%=tmp.getNum() %>" class="delete-link" href="javascript:">삭제</a>
+                 		<%} %>
+   						</dt>
    						<dd>
-   							<pre><%=tmp.getContent() %></pre>
+   							<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
    						</dd>
    					</dl>
+   					<form id="reForm<%=tmp.getNum() %>" class="comment-form re-insert-form" action="comment_insert.jsp" method="post">
+                  		<input type="hidden" name="ref_group" value="<%=dto.getNum()%>"/>
+                  		<input type="hidden" name="target_id" value="<%=tmp.getWriter()%>"/>
+                  		<input type="hidden" name="comment_group" value="<%=tmp.getComment_group()%>"/>
+                  		<textarea name="content"></textarea>
+                  		<button type="submit">등록</button>
+               		</form> 
+   					<%if(tmp.getWriter().equals(id)){ %>
+   					<form id="updateForm<%=tmp.getNum() %>" class="comment-form update-form" action="comment_update.jsp" method="post">
+   						<input type="hidden" name="num" value="<%=tmp.getNum() %>"/>
+   						<textarea name="content"><%=tmp.getContent() %></textarea>
+   						<button type="submit">수정</button>
+   					</form>
+   					<%} %>
    				</li>
    			<%} %>	
    		</ul>
    </div>
    <!-- 원글에 댓글 작성할 폼 -->
-   <form action="comment_insert.jsp" method="post">
+   <form class="insert-form" action="comment_insert.jsp" method="post">
    		<input type="hidden" name="ref_group" value="<%=num %>" />
    		<input type="hidden" name="target_nick" value="<%=dto.getNick() %>" />
    		<textarea name="content"></textarea>
    		<button type="submit">등록</button>
    </form>
 </div>
+<script src="${pageContext.request.contextPath}/js/gura_util.js"></script>
+<script>
+	addDeleteListener(".delete-link");
+	addUpdateListener(".update-link");
+	addUpdateFormListener(".update-form");
+	addReplyListener(".reply-link");
+	
+	function addDeleteListener(sel){
+		let deleteLinks=document.querySelectorAll(sel);
+		for(let i=0; i<deleteLinks.length; i++){
+			deleteLinks[i].addEventListener("click", function(){
+				const num=this.getAttribute("data-num")
+				const isDelete=confirm("이 댓글을 삭제 하시겠습니까?");
+				if(isDelete){
+					ajaxPromise("comment_delete.jsp", "post", "num="+num)
+					.then(function(response){
+						return response.json();
+					})
+					.then(function(data){
+						if(data.isSuccess){
+							document.querySelector("#reli"+num).innerText="삭제된 댓글 입니다.";
+						}
+					});
+				}
+			});
+		}
+	}
+
+	function addUpdateListener(sel){
+		let updateLinks=document.querySelectorAll(sel);
+		for(let i=0; i<updateLinks.length; i++){
+			updateLinks[i].addEventListener("click", function(){
+				const num=this.getAttribute("data-num");
+				document.querySelector("#updateForm"+num).style.display="block";
+			});
+		}
+	}
+	
+	function addUpdateFormListener(sel){
+		let updateForms=document.querySelectorAll(sel);
+		for(let i=0; i<updateForms.length; i++){
+			updateForms[i].addEventListener("submit", function(e){
+				const form=this;
+				e.preventDefault();
+				ajaxFormPromise(form)
+				.then(function(response){
+					return response.json();
+				})
+				.then(function(data){
+					if(data.isSuccess){
+		                  const num=form.querySelector("input[name=num]").value;
+		                  const content=form.querySelector("textarea[name=content]").value;
+		                  //수정폼에 입력한 value 값을 pre 요소에도 출력하기 
+		                  document.querySelector("#pre"+num).innerText=content;
+		                  form.style.display="none";
+					}
+				});
+			});
+		}
+	}
+	
+	function addReplyListener(sel){
+		let replyLinks=document.querySelectorAll(sel);
+		for(let i=0; i<replyLinks.length; i++){
+			replyLinks[i].addEventListener("click", function(){
+				const num=this.getAttribute("data-num");
+				const form=document.querySelector("#reForm"+num);
+				let current=this.innerText;
+				if(current == "답글"){
+					form.style.display="block";
+				}else if(current == "취소"){
+					form.style.display="none";
+				}
+			});
+		}
+	}
+</script>
 </body>
 </html>
