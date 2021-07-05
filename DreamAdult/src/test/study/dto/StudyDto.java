@@ -1,41 +1,32 @@
-package test.file.dto;
+package test.study.dto;
 
-public class FileDto {
+public class StudyDto {
 	private int num;
 	private String writer;
 	private String nick;
-	private String grade;
-	private String category;
 	private String title;
 	private String content;
-	private String orgFileName;
-	private String saveFileName;
-	private long fileSize;
 	private int viewCount;
 	private String regdate;
+	private String category;
 	private int startRowNum;
 	private int endRowNum;
 	private int prevNum;
 	private int nextNum;
 	
-	public FileDto() {}
+	public StudyDto() {}
 
-	public FileDto(int num, String writer, String nick, String grade, String category, String title, String content,
-			String orgFileName, String saveFileName, long fileSize, int viewCount, String regdate, int startRowNum,
-			int endRowNum, int prevNum, int nextNum) {
+	public StudyDto(int num, String writer, String nick, String title, String content, int viewCount, String regdate,
+			String category, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
 		this.nick = nick;
-		this.grade = grade;
-		this.category = category;
 		this.title = title;
 		this.content = content;
-		this.orgFileName = orgFileName;
-		this.saveFileName = saveFileName;
-		this.fileSize = fileSize;
 		this.viewCount = viewCount;
 		this.regdate = regdate;
+		this.category = category;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
@@ -66,22 +57,6 @@ public class FileDto {
 		this.nick = nick;
 	}
 
-	public String getGrade() {
-		return grade;
-	}
-
-	public void setGrade(String grade) {
-		this.grade = grade;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
-	}
-
 	public String getTitle() {
 		return title;
 	}
@@ -98,30 +73,6 @@ public class FileDto {
 		this.content = content;
 	}
 
-	public String getOrgFileName() {
-		return orgFileName;
-	}
-
-	public void setOrgFileName(String orgFileName) {
-		this.orgFileName = orgFileName;
-	}
-
-	public String getSaveFileName() {
-		return saveFileName;
-	}
-
-	public void setSaveFileName(String saveFileName) {
-		this.saveFileName = saveFileName;
-	}
-
-	public long getFileSize() {
-		return fileSize;
-	}
-
-	public void setFileSize(long fileSize) {
-		this.fileSize = fileSize;
-	}
-
 	public int getViewCount() {
 		return viewCount;
 	}
@@ -136,6 +87,14 @@ public class FileDto {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	public int getStartRowNum() {
@@ -169,5 +128,6 @@ public class FileDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
+	
 	
 }
