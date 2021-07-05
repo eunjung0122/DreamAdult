@@ -22,6 +22,39 @@ public class FileDao {
 		return dao;
 	}
 	
+	   public boolean addViewCount(int num) {
+		      Connection conn = null;
+		      PreparedStatement pstmt = null;
+		      int flag = 0;
+		      try {
+		         conn = new DbcpBean().getConn();
+		         //실행할 sql 문 작성
+		         String sql = "UPDATE board_file"
+		               + " SET viewCount=viewCount+1"
+		               + " WHERE num=?";
+		         pstmt = conn.prepareStatement(sql);
+		         //? 에 바인딩할 내용이 있으면 여기서 바인딩
+		         pstmt.setInt(1, num);
+		         //insert or update or delete 문 수행하고 변화된 row 의 갯수 리턴 받기
+		         flag = pstmt.executeUpdate();
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         try {
+		            if (pstmt != null)
+		               pstmt.close();
+		            if (conn != null)
+		               conn.close();
+		         } catch (Exception e) {
+		         }
+		      }
+		      if (flag > 0) {
+		         return true;
+		      } else {
+		          return false;
+		       }
+		    }
+	
 	// 한명의 파일 목록을 삭제하는 메소드
 	public boolean delete(int num) {
 		Connection conn = null;
@@ -64,15 +97,17 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 작성
 			String sql = "UPDATE board_file" + 
-					" SET category=?, title=?, content=?, fileName=?" + 
+					" SET category=?, title=?, content=?, orgFileName=?, saveFileName=?, fileSize=?" + 
 					" WHERE num=?";
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getCategory());
 			pstmt.setString(2, dto.getTitle());
 			pstmt.setString(3, dto.getContent());
-			pstmt.setString(4, dto.getFileName());
-			pstmt.setInt(5, dto.getNum());
+			pstmt.setString(4, dto.getOrgFileName());
+			pstmt.setString(5, dto.getSaveFileName());
+			pstmt.setLong(6, dto.getFileSize());
+			pstmt.setInt(7, dto.getNum());
 			//insert or update or delete 문 수행하고 변화된 row 의 갯수 리턴 받기
 			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -103,8 +138,9 @@ public class FileDao {
 		try {
 			conn = new DbcpBean().getConn();
 			// 실행할 SELECT 문.
-			String sql = "SELECT num, category, writer, title, content, fileName"
-					+" FROM board_file"
+			String sql = "SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize"
+					+" FROM board_file INNER JOIN users"
+					+" ON board_file.writer = users.id"
 					+" WHERE num = ?";
 			pstmt = conn.prepareStatement(sql);
 			// ? 에 바인딩할 내용은 여기서.
@@ -116,9 +152,14 @@ public class FileDao {
 				dto.setNum(rs.getInt("num"));
 				dto.setCategory(rs.getString("category"));
 				dto.setWriter(rs.getString("writer"));
+				dto.setNick(rs.getString("nick"));
+				dto.setGrade(rs.getString("grade"));
 				dto.setTitle(rs.getString("title"));
+				dto.setViewCount(rs.getInt("viewCount"));
 				dto.setContent(rs.getString("content"));
-				dto.setFileName(rs.getString("fileName"));
+				dto.setOrgFileName(rs.getString("orgFileName"));
+				dto.setSaveFileName(rs.getString("saveFileName"));
+				dto.setFileSize(rs.getLong("fileSize"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -145,15 +186,17 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO board_file" + 
-					" (num, writer, category, title, content, regdate, viewCount, fileName)" + 
-					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, SYSDATE, 0, ?)";
+					" (num, writer, category, title, content, regdate, viewCount, orgFileName, saveFileName, fileSize)" + 
+					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, SYSDATE, 0, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getWriter());
 			pstmt.setString(2, dto.getCategory());
 			pstmt.setString(3, dto.getTitle());
 			pstmt.setString(4, dto.getContent());
-			pstmt.setString(5, dto.getFileName());
+			pstmt.setString(5, dto.getOrgFileName());
+			pstmt.setString(6, dto.getSaveFileName());
+			pstmt.setLong(7, dto.getFileSize());
 			//insert or update or delete 문 수행하고 변화된 row 의 갯수 리턴 받기
 			flag = pstmt.executeUpdate();
 		} catch (Exception e) {
@@ -185,7 +228,8 @@ public class FileDao {
 			// 실행할 SELECT 문.
 			String sql = "SELECT num, nick, category, title, board_file.regdate, viewCount" + 
 					" FROM board_file INNER JOIN users" + 
-					" ON board_file.writer = users.id";
+					" ON board_file.writer = users.id" +
+					" ORDER BY num DESC";
 			pstmt = conn.prepareStatement(sql);
 			// ? 에 바인딩할 내용은 여기서.
 

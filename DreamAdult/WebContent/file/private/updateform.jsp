@@ -39,18 +39,24 @@
 			</div>
 			<div>
 				<label for="content">내용</label>
-				<textarea name="contnet" id="content" cols="30" rows="10"><%=dto.getContent() %></textarea>
+				<textarea name="contnet" id="content" cols="30" rows="10">
+				<%if(dto.getContent()!=null) {
+					dto.getContent();
+				} %>
+				</textarea>
 			</div>
 			<div>
 				<label for="myFile">첨부 파일</label>
-				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getFileName()%>" />
+				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getOrgFileName()%>" />
 				<input type="file" name="myFile" id="myFile"/>
-				<p><%=dto.getFileName()%></p>
+				<%if(dto.getOrgFileName()!=null) {%>
+					<p><%=dto.getOrgFileName()%></p>
+				<%} %>
 			</div>
 			<button type="submit" >수정 확인</button>
 		</form>
 	</div>
-<script src="<%=request.getContextPath() %>/SmartEditor/js/HuskyEZCreator.js"></script>
+<script src="<%=request.getContextPath()%>/SmartEditor/js/HuskyEZCreator.js"></script>
 <script>
 	var oEditors = [];
 	
@@ -99,7 +105,6 @@
 		// 에디터에 입력한 내용이 textarea 의 value 값이 될 수 있도록 변환한다.
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); 
 		// 스마트 에디터 사용하려면  출력한 내용을 등록하기 위해 이 줄은 꼭 필요
-		// textarea 이외에 title, category 검증
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
 		if(!title && !category){
