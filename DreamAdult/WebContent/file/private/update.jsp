@@ -30,26 +30,21 @@
 	String title=mr.getParameter("title");
 	String content=mr.getParameter("content"); 
 	String orgFileName=mr.getOriginalFileName("myFile");
-
+	File myFile=mr.getFile("myFile");
+	long fileSize=myFile.length();
 	String saveFileName = mr.getFilesystemName("myFile");
 	if(saveFileName == null){
 		saveFileName = mr.getParameter("myFile2"); 
 	}
-	
-	   
+	 
 	FileDto dto = new FileDto();
 	dto.setCategory(category);
 	dto.setTitle(title);
 	dto.setContent(content);
 	dto.setOrgFileName(orgFileName);
 	dto.setNum(num);
-	if(orgFileName!=null){
-		File myFile=mr.getFile("myFile");
-		long fileSize=myFile.length();
-		
-		dto.setSaveFileName(saveFileName);
-		dto.setFileSize(fileSize);
-	}
+	dto.setSaveFileName(saveFileName);
+	dto.setFileSize(fileSize);
 	
 	boolean isSuccess = FileDao.getInstance().update(dto);
 	 

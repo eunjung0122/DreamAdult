@@ -7,7 +7,6 @@
     pageEncoding="UTF-8"%>
 <%
 	int num=Integer.parseInt(request.getParameter("num"));
-
 	FileDto dto=FileDao.getInstance().getData(num);
 %>    
 <!DOCTYPE html>
@@ -23,7 +22,7 @@
 			<div>
 				<label for="category">카테고리</label>
 				<select name="category" id="category">
-					<option value="">선택</option>
+					<option value="whole">선택</option>
 					<option value="java" <%=dto.getCategory().equals("java") ? "selected" : "" %>>java</option>
 					<option value="javascript" <%=dto.getCategory().equals("javascript") ? "selected" : "" %>>javascript</option>
 					<option value="jsp" <%=dto.getCategory().equals("jsp") ? "selected" : "" %>>jsp</option>
@@ -49,9 +48,7 @@
 				<label for="myFile">첨부 파일</label>
 				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getOrgFileName()%>" />
 				<input type="file" name="myFile" id="myFile"/>
-				<%if(dto.getOrgFileName()!=null) {%>
-					<p><%=dto.getOrgFileName()%></p>
-				<%} %>
+				<p><%=dto.getOrgFileName()%></p>
 			</div>
 			<button type="submit" >수정 확인</button>
 		</form>
@@ -93,7 +90,6 @@
 	   alert(sHTML);
 	}
 	   
-	
 	function setDefaultFont() {
 	   var sDefaultFont = '궁서';
 	   var nFontSize = 24;
@@ -102,9 +98,7 @@
 	
 	// 폼에 submit 이벤트가 일어났을 때 실행할 함수 등록
 	document.querySelector("#updateForm").addEventListener("submit", function(e){
-		// 에디터에 입력한 내용이 textarea 의 value 값이 될 수 있도록 변환한다.
 		oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []); 
-		// 스마트 에디터 사용하려면  출력한 내용을 등록하기 위해 이 줄은 꼭 필요
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
 		if(!title && !category){
