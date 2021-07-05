@@ -423,12 +423,12 @@
 		for(let i=0; i<updateForms.length; i++){
 			updateForms[i].addEventListener("submit",function(e){
 				const form=this;
-				e.preventDefault;
+				e.preventDefault();
 				ajaxFormPromise(form)
 				.then(function(response){
 					return response.json();
 				})
-				.then(function(date){
+				.then(function(data){
 					if(data.isSuccess){
 						const num=form.querySelector("input[name=num]").value;
 		                const content=form.querySelector("textarea[name=content]").value;
