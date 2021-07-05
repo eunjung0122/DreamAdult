@@ -81,6 +81,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/qna/private/detail.jsp</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
 	.comment-form{
 		display: none;
@@ -263,17 +264,29 @@
 		let replyLinks=document.querySelectorAll(sel);
 		for(let i=0; i<replyLinks.length; i++){
 			replyLinks[i].addEventListener("click", function(){
-				const num=this.getAttribute("data-num");
-				const form=document.querySelector("#reForm"+num);
-				let current=this.innerText;
-				if(current == "답글"){
-					form.style.display="block";
-				}else if(current == "취소"){
-					form.style.display="none";
-				}
-			});
-		}
-	}
+	            const num=this.getAttribute("data-num")
+	            const form=document.querySelector("#reForm"+num);
+	            
+	            let current = this.innerText;
+	            if(current == "답글"){
+	               form.style.display="block";
+	               form.classList.add("animate__flash");
+	               this.innerText="취소";   
+	               form.addEventListener("animationend", function(){
+	                  form.classList.remove("animate__flash");
+	               }, {once:true});
+	            }else if(current == "취소"){
+	               form.classList.add("animate__fadeOut");
+	               this.innerText="답글";
+	               form.addEventListener("animationend", function(){
+	                  form.classList.remove("animate__fadeOut");
+	                  form.style.display="none";
+	               },{once:true});
+	            }
+	         });
+	      }
+	   }
+
 </script>
 </body>
 </html>
