@@ -1,3 +1,5 @@
+<%@page import="test.qna.dto.QnALikeDto"%>
+<%@page import="test.qna.dao.QnALikeDao"%>
 <%@page import="java.util.List"%>
 <%@page import="test.qna.dao.QnACommentDao"%>
 <%@page import="test.qna.dto.QnACommentDto"%>
@@ -66,6 +68,11 @@
 	
 	String id=(String)session.getAttribute("id");
 	
+	QnALikeDto dtoL=new QnALikeDto();
+	dtoL.setNum(num);
+	dtoL.setId(id);
+	QnALikeDao.getInstance().insert(dtoL);
+	
 	   /*
     [ 댓글 페이징 처리에 관련된 로직 ]
 	 */
@@ -96,6 +103,15 @@
 	
 	int totalRow=QnACommentDao.getInstance().getCount(num);
 	int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+	
+	int likeCount=QnALikeDao.getInstance().getCount(num);
+	
+	dtoL=QnALikeDao.getInstance().getData(dtoL);
+	boolean isLike=false;
+	if(dtoL.getLiked().equals("yes")){
+		isLike=true;
+	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -252,6 +268,11 @@
    </table>
    <ul>
    		<li><a href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a></li>
+   		<%if(isLike){ %>
+   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♥<%=likeCount%></a></li>
+   		<%}else{ %>
+   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
+   		<%} %>
    		<%if(dto.getWriter().equals(id)) {%>
    			<li><a href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
    			<li><a href="<%=request.getContextPath()%>/qna/private/delete.jsp?num=<%=dto.getNum()%>"
@@ -460,6 +481,38 @@
 	         });
 		}
 	}
+	
+	let isLike=<%=isLike%>;
+	let likeCount=<%=likeCount%>
+	
+	document.querySelector(".like-link").addEventListener("click",function(){
+		const num=this.getAttribute("data-num");
+		if(isLike){
+			ajaxPromise("qna_unlike.jsp","post","num="+num)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess){
+					likeCount--; 
+					document.querySelector(".like-link").innerText="♡"+likeCount;
+				}
+			});
+			isLike=false;
+		}else{
+			ajaxPromise("qna_like.jsp","post","num="+num)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess){
+					likeCount++;
+					document.querySelector(".like-link").innerText="♥"+likeCount;
+				}
+			});
+			isLike=true;
+		}
+	});
 	
 	
 </script>
