@@ -159,7 +159,6 @@
 	               <%} %>
 	         </tbody>
 	      </table>	
-	</div>
 	<div class="page-ui clearfix">
       <ul>
          <%if(startPageNum != 1){ %>
@@ -213,6 +212,6 @@
 		</p>
    <%} %>
 	
-	
+</div>
 </body>
 </html>
