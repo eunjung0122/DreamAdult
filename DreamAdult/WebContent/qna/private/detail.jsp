@@ -71,8 +71,10 @@
 	QnALikeDto dtoL=new QnALikeDto();
 	dtoL.setNum(num);
 	dtoL.setId(id);
-	QnALikeDao.getInstance().insert(dtoL);
-	
+	dtoL=QnALikeDao.getInstance().getData(dtoL);
+	if(dtoL.getLiked()==null){
+		QnALikeDao.getInstance().insert(dtoL);
+	}
 	   /*
     [ 댓글 페이징 처리에 관련된 로직 ]
 	 */
@@ -106,7 +108,7 @@
 	
 	int likeCount=QnALikeDao.getInstance().getCount(num);
 	
-	dtoL=QnALikeDao.getInstance().getData(dtoL);
+	
 	boolean isLike=false;
 	if(dtoL.getLiked().equals("yes")){
 		isLike=true;
