@@ -9,7 +9,7 @@
 <%
 	int num=Integer.parseInt(request.getParameter("num"));
 	QnADao.getInstance().addViewCount(num);
-	
+		
 	String category=request.getParameter("category");
 	String keyword=request.getParameter("keyword");
 	String condition=request.getParameter("condition");
@@ -191,7 +191,7 @@
    }
    a{
    	 text-decoration:none;
-   }	
+   }
 </style>
 </head>
 <body>
