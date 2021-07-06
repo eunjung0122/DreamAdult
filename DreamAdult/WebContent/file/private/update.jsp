@@ -10,8 +10,6 @@
 	
 	//파일을 업로드할 절대 경로를 메소드를 통해서 얻어오기
 	String path=request.getServletContext().getRealPath("/upload");
-	//경로 확인!   
-	System.out.println(path);
 	//만일 폴더가 만들어져 있지 않다면 폴더를 만든다.
 	File file=new File(path);
 	if(!file.exists()){
@@ -29,31 +27,36 @@
 	String category=mr.getParameter("category");
 	String title=mr.getParameter("title");
 	String content=mr.getParameter("content"); 
-	String orgFileName=mr.getOriginalFileName("myFile");
 
-	String saveFileName = mr.getFilesystemName("myFile");
-	if(saveFileName == null){
-		saveFileName = mr.getParameter("myFile2"); 
-	}
 	
-	   
-	FileDto dto = new FileDto();
-	dto.setCategory(category);
-	dto.setTitle(title);
-	dto.setContent(content);
-	dto.setOrgFileName(orgFileName);
-	dto.setNum(num);
-	if(orgFileName!=null){
-		File myFile=mr.getFile("myFile");
-		long fileSize=myFile.length();
-		
-		dto.setSaveFileName(saveFileName);
-		dto.setFileSize(fileSize);
-	}
+	String existFile=mr.getParameter("myFile2"); //기존 첨부 파일
+  long existSize= Long.parseLong(mr.getParameter("myFileSize"));
+
+  FileDto dto = new FileDto();
+   dto.setCategory(category);
+   dto.setTitle(title);
+   dto.setContent(content);
+   dto.setNum(num);
+
+  File myFile=mr.getFile("myFile");
+   String orgFileName = mr.getOriginalFileName("myFile");
+   String saveFileName = mr.getFilesystemName("myFile");
+   
+   if(orgFileName == null){
+      dto.setOrgFileName(existFile);
+      dto.setSaveFileName(existFile);
+      dto.setFileSize(existSize);
+      
+   }else{
+      dto.setOrgFileName(orgFileName);
+      dto.setSaveFileName(saveFileName);
+      long fileSize=myFile.length();
+      dto.setFileSize(fileSize);
+   }
+	
 	
 	boolean isSuccess = FileDao.getInstance().update(dto);
 	 
-	System.out.println(saveFileName);
 %>
 <!DOCTYPE html>
 <html>

@@ -147,7 +147,7 @@
 	                  <tr>
 	                     <td><%=tmp.getNum() %></td>
 	                     <td><%=tmp.getCategory() %></td>
-	                     <td><a href="<%=request.getContextPath() %>/file/private/detail.jsp?num=<%=tmp.getNum() %>"><%=tmp.getTitle() %></a></td>
+	                     <td><a href="<%=request.getContextPath() %>/file/private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle() %></a></td>
 	                     <td><%=tmp.getNick() %></td>
 	                     <td><%=tmp.getViewCount() %></td>
 	                     <td><%=tmp.getRegdate() %></td>
