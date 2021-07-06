@@ -1,3 +1,5 @@
+<%@page import="test.study.dto.StudyLikeDto"%>
+<%@page import="test.study.dao.StudyLikeDao"%>
 <%@page import="test.study.dao.StudyCommentDao"%>
 <%@page import="test.study.dto.StudyCommentDto"%>
 <%@page import="java.util.List"%>
@@ -66,7 +68,12 @@
 	
 	String id=(String)session.getAttribute("id");
 	
-	//한 페이지에 몇개씩 표시할 것인지
+	StudyLikeDto dtoL=new StudyLikeDto();
+	dtoL.setNum(num);
+	dtoL.setId(id);
+	StudyLikeDao.getInstance().insert(dtoL);
+	
+		//한 페이지에 몇개씩 표시할 것인지
 		 final int PAGE_ROW_COUNT=10;
 		 
 		 //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
@@ -77,10 +84,10 @@
 		 //보여줄 페이지의 끝 ROWNUM
 		 int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-	//글 하나의 정보를 DB에서 불러온다.
-	StudyDto dto2=StudyDao.getInstance().getData(num);
+		//글 하나의 정보를 DB에서 불러온다.
+		StudyDto dto2=StudyDao.getInstance().getData(num);
 	
-	//원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
+		//원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
 		StudyCommentDto commentDto=new StudyCommentDto();
 		commentDto.setRef_group(num);
 		
@@ -93,6 +100,15 @@
 		
 		int totalRow=StudyCommentDao.getInstance().getCount(num);
 		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+	
+		int likeCount=StudyLikeDao.getInstance().getCount(num);
+		
+		dtoL=StudyLikeDao.getInstance().getData(dtoL);
+		boolean isLike=false;
+		if(dtoL.getLiked().equals("yes")){
+			isLike=true;
+		}
+		
 	%>
 <!DOCTYPE html>
 <html>
@@ -248,13 +264,18 @@
    </table>
    <ul>
    		<li><a href="<%=request.getContextPath()%>/study/list.jsp">목록보기</a></li>
+   		<%if(isLike){ %>
+   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♥<%=likeCount%></a></li>
+   		<%}else{ %>
+   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
+   		<%} %>
    		<%if(dto.getWriter().equals(id)) {%>
    			<li><a href="<%=request.getContextPath()%>/study/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
    			<li><a href="<%=request.getContextPath()%>/study/private/delete.jsp?num=<%=dto.getNum()%>"
    					onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a></li>
    		<%} %>
    </ul>
- <div class="comments">
+ 	<div class="comments">
    		<ul>
    			<%for(StudyCommentDto tmp: commentList){ %>
    				<%if(tmp.getDeleted().equals("yes")){ %>
@@ -327,7 +348,6 @@
    		<button type="submit">등록</button>
    </form>
 </div>
-
 <script src="${pageContext.request.contextPath}/js/gura_util.js"></script>
 <script>
 	addReplyListener(".reply-link");
@@ -458,6 +478,37 @@
 		}
 	}
 	
+	let isLike=<%=isLike%>;
+	let likeCount=<%=likeCount%>
+	
+	document.querySelector(".like-link").addEventListener("click",function(){
+		const num=this.getAttribute("data-num");
+		if(isLike){
+			ajaxPromise("study_unlike.jsp","post","num="+num)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess){
+					likeCount--; 
+					document.querySelector(".like-link").innerText="♡"+likeCount;
+				}
+			});
+			isLike=false;
+		}else{
+			ajaxPromise("study_like.jsp","post","num="+num)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess){
+					likeCount++;
+					document.querySelector(".like-link").innerText="♥"+likeCount;
+				}
+			});
+			isLike=true;
+		}
+	});
 	
 </script>
 </body>

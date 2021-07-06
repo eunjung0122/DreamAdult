@@ -31,6 +31,7 @@
 				<input type="file" name="myFile" id="myFile"/>
 			</div>
 			<button type="submit">업로드</button>
+			<img id="myImage" />
 		</form>
 	</div>
 <script src="<%=request.getContextPath() %>/SmartEditor/js/HuskyEZCreator.js"></script>
@@ -91,5 +92,6 @@
 		}
 	});	   
 </script>
+
 </body>
 </html>
