@@ -1,3 +1,5 @@
+<%@page import="test.qna.dao.QnACommentDao"%>
+<%@page import="test.qna.dto.QnACommentDto"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="test.qna.dao.QnADao"%>
 <%@page import="java.util.List"%>
@@ -5,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+
 	//한 페이지에 몇개씩 표시할 것인지
 	final int PAGE_ROW_COUNT=5;
 	//하단 페이지를 몇개씩 표시할 것인지
@@ -101,6 +104,7 @@
 	if(endPageNum > totalPageCount){
 	   endPageNum=totalPageCount; //보정해 준다.
 	}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -150,12 +154,14 @@
 		</thead>
 		<tbody>
 		<%for(QnADto tmp:list){%>
+		
          <tr>
             <td><%=tmp.getNum() %></td>
             <td><%=tmp.getCategory() %></td>
             <td><%=tmp.getNick() %></td>
             <td>
-               <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle() %></a>
+               <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle()%></a>
+            [<%=QnACommentDao.getInstance().replyCount(tmp.getNum()) %>]
             </td>
             <td><%=tmp.getViewCount() %></td>
             <td><%=tmp.getRegdate() %></td>

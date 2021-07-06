@@ -59,3 +59,4 @@ CREATE TABLE board_qna_comment(
 
 -- 댓글기능의 번호를 얻어낼 시퀀스
 CREATE SEQUENCE board_qna_comment_seq;
+
