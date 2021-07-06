@@ -16,7 +16,39 @@ public class StudyLikeDao {
 		}
 		return dao;
 	} 
-	
+	public int isExist(StudyLikeDto dto) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 SELECT 문
+			String sql = "SELECT count(*) AS count FROM studylike"
+					+ " WHERE id=? AND num=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 에 바인딩할 내용은 여기서 바인딩한다.
+			pstmt.setString(1, dto.getId());
+			pstmt.setInt(2, dto.getNum());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				//SELECT 된 결과를 여기서 추출해서 객체에 담는다. 
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
 	public boolean update2(StudyLikeDto dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -24,7 +56,7 @@ public class StudyLikeDao {
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sqp(INSERT,UPATE,DELETE)문 작성
-			String sql = "UPDATE qnalike"
+			String sql = "UPDATE studylike"
 					+ " SET liked='no'"
 					+ " WHERE num=? AND id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -58,7 +90,7 @@ public class StudyLikeDao {
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sqp(INSERT,UPATE,DELETE)문 작성
-			String sql = "UPDATE qnalike"
+			String sql = "UPDATE studylike"
 					+ " SET liked='yes'"
 					+ " WHERE num=? AND id=?";
 			pstmt = conn.prepareStatement(sql);
@@ -91,7 +123,7 @@ public class StudyLikeDao {
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sqp(INSERT,UPATE,DELETE)문 작성
-			String sql = "insert into qnalike"
+			String sql = "insert into studylike"
 					+ "	(num,id)"
 					+ "	values(?,?)";
 			pstmt = conn.prepareStatement(sql);
@@ -127,7 +159,7 @@ public class StudyLikeDao {
 			conn = new DbcpBean().getConn();
 			//실행할 SELECT 문
 			String sql = "SELECT count(*) as count"
-					+ "	FROM qnalike"
+					+ "	FROM studylike"
 					+ "	WHERE num=? AND liked='yes'";
 			pstmt = conn.prepareStatement(sql);
 			//? 에 바인딩할 내용은 여기서 바인딩한다.
@@ -161,7 +193,7 @@ public class StudyLikeDao {
 			conn = new DbcpBean().getConn();
 			//실행할 SELECT 문
 			String sql = "SELECT liked"
-					+ " FROM qnalike"
+					+ " FROM studylike"
 					+ "	WHERE id=? AND num=?";
 			pstmt = conn.prepareStatement(sql);
 			//? 에 바인딩할 내용은 여기서 바인딩한다.

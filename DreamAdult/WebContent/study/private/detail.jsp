@@ -1,8 +1,8 @@
 <%@page import="test.study.dto.StudyLikeDto"%>
 <%@page import="test.study.dao.StudyLikeDao"%>
+<%@page import="java.util.List"%>
 <%@page import="test.study.dao.StudyCommentDao"%>
 <%@page import="test.study.dto.StudyCommentDto"%>
-<%@page import="java.util.List"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="test.study.dto.StudyDto"%>
 <%@page import="test.study.dao.StudyDao"%>
@@ -11,7 +11,7 @@
 <%
 	int num=Integer.parseInt(request.getParameter("num"));
 	StudyDao.getInstance().addViewCount(num);
-	
+		
 	String category=request.getParameter("category");
 	String keyword=request.getParameter("keyword");
 	String condition=request.getParameter("condition");
@@ -71,50 +71,60 @@
 	StudyLikeDto dtoL=new StudyLikeDto();
 	dtoL.setNum(num);
 	dtoL.setId(id);
-	StudyLikeDao.getInstance().insert(dtoL);
+	int count=StudyLikeDao.getInstance().isExist(dtoL);
+	if(count<1){
+		StudyLikeDao.getInstance().insert(dtoL);
+	}
+	dtoL=StudyLikeDao.getInstance().getData(dtoL);
 	
-		//한 페이지에 몇개씩 표시할 것인지
-		 final int PAGE_ROW_COUNT=10;
-		 
-		 //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
-		 int pageNum=1;
-		 
-		 //보여줄 페이지의 시작 ROWNUM
-		 int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-		 //보여줄 페이지의 끝 ROWNUM
-		 int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-		//글 하나의 정보를 DB에서 불러온다.
-		StudyDto dto2=StudyDao.getInstance().getData(num);
 	
-		//원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
-		StudyCommentDto commentDto=new StudyCommentDto();
-		commentDto.setRef_group(num);
-		
-		//1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
-		commentDto.setStartRowNum(startRowNum);
-		commentDto.setEndRowNum(endRowNum);
-		
-		List<StudyCommentDto> commentList=
-				StudyCommentDao.getInstance().getList(commentDto);
-		
-		int totalRow=StudyCommentDao.getInstance().getCount(num);
-		int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+	   /*
+    [ 댓글 페이징 처리에 관련된 로직 ]
+	 */
+	 //한 페이지에 몇개씩 표시할 것인지
+	 final int PAGE_ROW_COUNT=10;
+	 
+	 //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
+	 int pageNum=1;
+	 
+	 //보여줄 페이지의 시작 ROWNUM
+	 int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+	 //보여줄 페이지의 끝 ROWNUM
+	 int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-		int likeCount=StudyLikeDao.getInstance().getCount(num);
-		
-		dtoL=StudyLikeDao.getInstance().getData(dtoL);
-		boolean isLike=false;
-		if(dtoL.getLiked().equals("yes")){
-			isLike=true;
-		}
-		
-	%>
+	//글 하나의 정보를 DB에서 불러온다.
+	StudyDto dto2=StudyDao.getInstance().getData(num);
+	
+	//원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
+	StudyCommentDto commentDto=new StudyCommentDto();
+	commentDto.setRef_group(num);
+	
+	//1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
+	commentDto.setStartRowNum(startRowNum);
+	commentDto.setEndRowNum(endRowNum);
+	
+	List<StudyCommentDto> commentList=
+			StudyCommentDao.getInstance().getList(commentDto);
+	
+	int totalRow=StudyCommentDao.getInstance().getCount(num);
+	int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
+	
+	int likeCount=StudyLikeDao.getInstance().getCount(num);
+	
+	
+	boolean isLike=false;
+	if(dtoL.getLiked().equals("yes")){
+		isLike=true;
+	}
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/study/private/detail.jsp</title>
+<title>/Study/private/detail.jsp</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
    .content{
       border: 1px dotted gray;
@@ -203,7 +213,7 @@
    }
    a{
    	 text-decoration:none;
-   }	
+   }
 </style>
 </head>
 <body>
@@ -275,7 +285,7 @@
    					onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a></li>
    		<%} %>
    </ul>
- 	<div class="comments">
+   <div class="comments">
    		<ul>
    			<%for(StudyCommentDto tmp: commentList){ %>
    				<%if(tmp.getDeleted().equals("yes")){ %>
@@ -509,6 +519,7 @@
 			isLike=true;
 		}
 	});
+	
 	
 </script>
 </body>
