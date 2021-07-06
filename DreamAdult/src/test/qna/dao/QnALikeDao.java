@@ -16,7 +16,39 @@ public class QnALikeDao {
 		}
 		return dao;
 	} 
-	
+	public int isExist(QnALikeDto dto) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 SELECT 문
+			String sql = "SELECT count(*) AS count FROM qnalike"
+					+ " WHERE id=? AND num=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 에 바인딩할 내용은 여기서 바인딩한다.
+			pstmt.setString(1, dto.getId());
+			pstmt.setInt(2, dto.getNum());
+			rs = pstmt.executeQuery();
+			if (rs.next()) {
+				//SELECT 된 결과를 여기서 추출해서 객체에 담는다. 
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
 	public boolean update2(QnALikeDto dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
