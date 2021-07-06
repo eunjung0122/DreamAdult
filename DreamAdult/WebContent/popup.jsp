@@ -23,7 +23,7 @@
 <form action="nopopup.jsp" method="post">
 	<label>
 		<input type="checkbox" name="isPopup" value="no" />
-		1분동안 팝업 띄우지 않기
+		하루동안 팝업 띄우지 않기
 	</label>
 	<button type="submit">닫기</button>
 </form>
