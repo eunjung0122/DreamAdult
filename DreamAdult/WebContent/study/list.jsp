@@ -214,6 +214,8 @@
    		<input type="text" id="keyword" name="keyword" placeholder="검색어..." value="<%=keyword%>" />
    		
    		<button type="submit">검색</button>
+   		
+   		<a href="private/mypage.jsp">내가 쓴 글 보기</a>
    </form>
    <%if(!condition.equals("")) {%>
 		<p>
