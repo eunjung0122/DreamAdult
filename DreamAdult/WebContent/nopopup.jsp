@@ -5,7 +5,7 @@
 
 	if(isPopup !=null){
 		Cookie cook=new Cookie("isPopup", isPopup);
-		cook.setMaxAge(60);
+		cook.setMaxAge(60*60*24);
 		response.addCookie(cook);
 	}
 %>
