@@ -143,6 +143,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="../include/navber.jsp">
+   <jsp:param value="study" name="thisPage"/>
+</jsp:include>
 <div class="container">
 	<h1>학습공부 게시판</h1>
 	<a href="<%=request.getContextPath()%>/study/private/insertform.jsp">새글 작성</a>

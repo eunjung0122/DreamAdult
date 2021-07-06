@@ -8,6 +8,7 @@
 <title>index.jsp</title>
 </head>
 <body>
+<jsp:include page="include/navber.jsp"></jsp:include>
 <div class="container">
 	<h1>Dream Adult</h1>
 	<%if(id!=null){ %> 

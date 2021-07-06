@@ -103,6 +103,7 @@
 <head>
 <meta charset="UTF-8">
 <title>list.jsp</title>
+
 <style>
 	.page-ui a{
       text-decoration: none;
@@ -129,6 +130,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="../include/navber.jsp">
+   <jsp:param value="file" name="thisPage"/>
+</jsp:include>
 <div class="container">
     <a href="<%=request.getContextPath() %>/file/private/uploadform.jsp">새글 작성</a>
 		<table>
