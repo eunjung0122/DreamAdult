@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +12,7 @@
 			<div>
 				<label for="category">카테고리</label>
 				<select name="category" id="category">
-					<option value="">선택</option>
+					<option value="whole">선택</option>
 					<option value="java">java</option>
 					<option value="javascript">javascript</option>
 					<option value="jsp">jsp</option>
@@ -37,9 +36,6 @@
 <script src="<%=request.getContextPath() %>/SmartEditor/js/HuskyEZCreator.js"></script>
 <script>
 	var oEditors = [];
-	
-	//추가 글꼴 목록
-	//var aAdditionalFontSet = [["MS UI Gothic", "MS UI Gothic"], ["Comic Sans MS", "Comic Sans MS"],["TEST","TEST"]];
 	
 	nhn.husky.EZCreator.createInIFrame({
 	   oAppRef: oEditors,
@@ -80,9 +76,7 @@
 	
 	// 폼에 submit 이벤트가 일어났을 때 실행할 함수
 	document.querySelector("#uploadForm").addEventListener("submit", function(e){
-		// 에디터에 입력한 내용이 textarea 의 value 값이 될 수 있도록 변환한다
 		oEditors.getById["fileContent"].exec("UPDATE_CONTENTS_FIELD", []); 
-		// 스마트 에디터 사용하려면  출력한 내용을 등록하기 위해 이 줄은 꼭 필요
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
 		if(!title && !category){
