@@ -20,6 +20,46 @@ public class StudyCommentDao {
 		return dao;
 	}
 	
+	//게시판 목록에 댓글 수를 불러오는 메소드
+	   public int replyCount(int ref_group) {
+	      int reply=0;
+	      Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      try {
+	         //Connection 객체의 참조값 얻어오기
+	         conn = new DbcpBean().getConn();
+	         //실행할 sql문 작성
+	         String sql = " SELECT MAX(ROWNUM) as num" + 
+	               " FROM board_study_comment" + 
+	               " WHERE ref_group=?";
+	         //PreparedStatement 객체의 참조값 얻어오기
+	         pstmt = conn.prepareStatement(sql);
+	         //?에 바인딩할 내용이 있으면 여기서 바인딩
+	         pstmt.setInt(1, ref_group);
+	         //select 문 수행하고 결과를 ResultSet 으로 받아오기
+	         rs = pstmt.executeQuery();
+	         //반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type 으로 포장하기
+	         while (rs.next()) {
+	            reply=rs.getInt("num");
+	         }
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      } finally {
+	         try {
+	            if (rs != null)
+	               rs.close();
+	            if (pstmt != null)
+	               pstmt.close();
+	            if (conn != null)
+	               conn.close();
+	         } catch (Exception e) {
+	            e.printStackTrace();
+	         }
+	      }
+	      return reply;
+	   }
+	   
 	public List<StudyCommentDto> getMyList(StudyCommentDto dto){
 		List<StudyCommentDto> list=new ArrayList<StudyCommentDto>();
 		Connection conn = null;
@@ -69,6 +109,7 @@ public class StudyCommentDao {
 			}
 		}return list;
 	}
+	
 	public int getMyCount(StudyCommentDto dto) {
 		int count=0;
 		Connection conn = null;
