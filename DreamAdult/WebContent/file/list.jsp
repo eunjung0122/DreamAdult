@@ -1,3 +1,5 @@
+<%@page import="test.file.dao.FileCommentDao"%>
+<%@page import="test.file.dto.FileCommentDto"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="test.file.dto.FileDto"%>
 <%@page import="java.util.List"%>
@@ -147,7 +149,10 @@
 	                  <tr>
 	                     <td><%=tmp.getNum() %></td>
 	                     <td><%=tmp.getCategory() %></td>
-	                     <td><a href="<%=request.getContextPath() %>/file/private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle() %></a></td>
+	                     <td>
+              				 <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle()%></a>
+            				[<%=FileCommentDao.getInstance().replyCount(tmp.getNum()) %>]
+           				 </td>
 	                     <td><%=tmp.getNick() %></td>
 	                     <td><%=tmp.getViewCount() %></td>
 	                     <td><%=tmp.getRegdate() %></td>
