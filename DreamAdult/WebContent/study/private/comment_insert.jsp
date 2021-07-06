@@ -1,5 +1,5 @@
-<%@page import="test.qna.dto.QnACommentDto"%>
-<%@page import="test.qna.dao.QnACommentDao"%>
+<%@page import="test.study.dto.StudyCommentDto"%>
+<%@page import="test.study.dao.StudyCommentDao"%>
 <%@page import="test.users.dao.UsersDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -17,10 +17,10 @@
 	String nick=UsersDao.getInstance().getData(id).getNick();
 	
 	//댓글의 시퀀스 번호 미리 얻어내기
-	int seq=QnACommentDao.getInstance().getSequence();
+	int seq=StudyCommentDao.getInstance().getSequence();
 	
 	//저장할 댓글의 정보를 dto 에 담기
-	QnACommentDto dto=new QnACommentDto();
+	StudyCommentDto dto=new StudyCommentDto();
 	dto.setNum(seq);
 	dto.setWriter(writer);
 	dto.setNick(nick);
@@ -38,10 +38,10 @@
 	}
 	
 	//댓글 정보를 DB에 저장하기
-	QnACommentDao.getInstance().insert(dto);
+	StudyCommentDao.getInstance().insert(dto);
 	
 	//원글 자세히보기(detail) 로 리다일렉트 이동
 	String cPath=request.getContextPath();
-	response.sendRedirect(cPath+"/qna/private/detail.jsp?num="+ref_group);
+	response.sendRedirect(cPath+"/study/private/detail.jsp?num="+ref_group);
 		
 %>

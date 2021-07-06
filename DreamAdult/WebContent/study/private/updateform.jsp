@@ -3,10 +3,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
    int num=Integer.parseInt(request.getParameter("num"));
 	StudyDto dto=new StudyDto();
-   dto.setNum(num);
+   	dto.setNum(num);
 	dto=StudyDao.getInstance().getData(dto);
 	String category=dto.getCategory();
 %>

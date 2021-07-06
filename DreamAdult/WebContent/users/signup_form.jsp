@@ -35,7 +35,7 @@
 			<label class="control-label" for="email">이메일</label>
 			<input class="form-control" type="text" name="email" id="email"/>
 			<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
-		</div>
+		</div> 
 		<fieldset>
 			<legend>관심있는 언어 선택</legend>
 			<div class="form-check form-check-inline">
@@ -51,6 +51,8 @@
 				<label class="form-check-label" for="lan3">JSP</label>
 			</div>
 		</fieldset>
+			
+		
 		<button class="btn btn-primary" type="submit">가입</button>
 	</form>
 </div>

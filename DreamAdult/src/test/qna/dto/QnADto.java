@@ -128,6 +128,7 @@ public class QnADto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
+
 	
 	
 }

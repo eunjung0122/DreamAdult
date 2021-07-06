@@ -1,4 +1,4 @@
-package test.qna.dao;
+package test.study.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,22 +6,22 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import test.qna.dto.QnACommentDto;
-import test.qna.dto.QnADto;
+import test.study.dto.StudyCommentDto;
+import test.study.dto.StudyDto;
 import test.util.DbcpBean;
 
-public class QnACommentDao {
-	private static QnACommentDao dao;
-	private QnACommentDao() {}
-	public static QnACommentDao getInstance() {
+public class StudyCommentDao {
+	private static StudyCommentDao dao;
+	private StudyCommentDao() {}
+	public static StudyCommentDao getInstance() {
 		if(dao==null) {
-			dao=new QnACommentDao();
+			dao=new StudyCommentDao();
 		}
 		return dao;
 	}
 	
-	public List<QnACommentDto> getMyList(QnACommentDto dto){
-		List<QnACommentDto> list=new ArrayList<QnACommentDto>();
+	public List<StudyCommentDto> getMyList(StudyCommentDto dto){
+		List<StudyCommentDto> list=new ArrayList<StudyCommentDto>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -34,7 +34,7 @@ public class QnACommentDao {
 					+ "	(SELECT result1.*,ROWNUM AS rnum"
 					+ " 	FROM"
 					+ "		(SELECT num,B.nick,content,ref_group,B.regdate" + 
-					"		FROM board_qna_comment B,users U" + 
+					"		FROM board_study_comment B,users U" + 
 					"		WHERE B.WRITER=U.ID AND WRITER=? AND deleted='no')result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -47,7 +47,7 @@ public class QnACommentDao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
 			while (rs.next()) {
-				QnACommentDto dto2=new QnACommentDto();
+				StudyCommentDto dto2=new StudyCommentDto();
 				dto2.setNum(rs.getInt("num"));
 				dto2.setNick(rs.getString("nick"));
 				dto2.setContent(rs.getString("content"));
@@ -69,7 +69,7 @@ public class QnACommentDao {
 			}
 		}return list;
 	}
-	public int getMyCount(QnACommentDto dto) {
+	public int getMyCount(StudyCommentDto dto) {
 		int count=0;
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -79,7 +79,7 @@ public class QnACommentDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS count"
-					+ " FROM BOARD_QNA_COMMENT B, USERS U" + 
+					+ " FROM BOARD_STUDY_COMMENT B, USERS U" + 
 					"	WHERE B.WRITER=U.ID AND WRITER=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -106,14 +106,14 @@ public class QnACommentDao {
 		}return count;
 	}
 	//댓글 수정하는 메소드
-	public boolean update(QnACommentDto dto) {
+	public boolean update(StudyCommentDto dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int flag = 0;
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "UPDATE board_qna_comment"
+			String sql = "UPDATE board_study_comment"
 					+ " SET content=?"
 					+ " WHERE num=?";
 			pstmt = conn.prepareStatement(sql);
@@ -148,7 +148,7 @@ public class QnACommentDao {
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "UPDATE board_qna_comment"
+			String sql = "UPDATE board_study_comment"
 					+ " SET deleted = 'yes'"
 					+ " WHERE num=?";
 			pstmt = conn.prepareStatement(sql);
@@ -175,8 +175,8 @@ public class QnACommentDao {
   }
 	
 	//댓글 목록을 리턴하는 메소드
-	public List<QnACommentDto> getList(QnACommentDto dto2){
-		List<QnACommentDto> list=new ArrayList<>();
+	public List<StudyCommentDto> getList(StudyCommentDto dto2){
+		List<StudyCommentDto> list=new ArrayList<>();
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -188,10 +188,10 @@ public class QnACommentDao {
 					+ "	FROM"
 					+ "	(SELECT result1.*,ROWNUM AS rnum"
 					+ " 	FROM"
-					+ "		(SELECT num, writer, board_qna_comment.nick, content, target_nick, ref_group, comment_group, deleted, profile, board_qna_comment.regdate" + 
-					" 		FROM board_qna_comment" + 
+					+ "		(SELECT num, writer, board_study_comment.nick, content, target_nick, ref_group, comment_group, deleted, profile, board_study_comment.regdate" + 
+					" 		FROM board_study_comment" + 
 					" 		INNER JOIN users" + 
-					" 		ON board_qna_comment.writer = users.id" +
+					" 		ON board_study_comment.writer = users.id" +
 					" 		WHERE ref_group=?" + 
 					" 		ORDER BY comment_group DESC, num ASC) result1)"
 					+ "	WHERE rnum BETWEEN ? AND ?";
@@ -205,7 +205,7 @@ public class QnACommentDao {
 			rs = pstmt.executeQuery();
 			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type 으로 포장하기
 			while (rs.next()) {
-				QnACommentDto dto=new QnACommentDto();
+				StudyCommentDto dto=new StudyCommentDto();
 				dto.setNum(rs.getInt("num"));
 				dto.setWriter(rs.getString("writer"));
 				dto.setNick(rs.getString("nick"));
@@ -245,7 +245,7 @@ public class QnACommentDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS count"
-					+ " FROM board_qna_comment"
+					+ " FROM board_study_comment"
 					+ "	WHERE ref_group=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -282,7 +282,7 @@ public class QnACommentDao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT board_qna_comment_seq.NEXTVAL AS seq"
+			String sql = "SELECT board_study_comment_seq.NEXTVAL AS seq"
 					+ " FROM DUAL";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -312,14 +312,14 @@ public class QnACommentDao {
 	}
 	
 	//댓글 추가하는 메소드
-	public boolean insert(QnACommentDto dto) {
+	public boolean insert(StudyCommentDto dto) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int flag = 0;
 		try {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "INSERT INTO board_qna_comment"
+			String sql = "INSERT INTO board_study_comment"
 					+ " (num, writer, nick, content, target_nick, ref_group, comment_group, regdate)"
 					+ " VALUES(?, ?, ?, ?, ?, ?, ?, SYSDATE)";
 			pstmt = conn.prepareStatement(sql);

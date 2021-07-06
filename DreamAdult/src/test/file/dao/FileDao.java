@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import test.file.dto.FileDto;
+import test.qna.dto.QnADto;
 import test.util.DbcpBean;
 
 public class FileDao {
@@ -1435,9 +1436,7 @@ public class FileDao {
       }
         return count;
    }
-	
-	
-	
+	///////////////////////////////////////////////////////////////
 	
 	
 	

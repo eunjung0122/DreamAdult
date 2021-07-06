@@ -24,5 +24,24 @@
 		<li><a href="study/list.jsp">학습공부</a></li>
 	</ul>
 </div>
+
+<%
+	Cookie[] cookies=request.getCookies();
+	
+	boolean isPopup=true;
+	if(cookies != null){
+		for(Cookie tmp : cookies){
+			if(tmp.getName().equals("isPopup")){
+				isPopup=false;
+			}
+		}
+	}
+%>
+
+<%if(isPopup){ %>
+	<script>
+		window.open("popup.jsp", "웰컴팝업창", "width=500,height=400,top=100,left=100");
+	</script>
+<%} %>
 </body>
 </html>
