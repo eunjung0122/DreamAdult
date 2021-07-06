@@ -18,6 +18,8 @@ public class QnADao {
 		}
 		return dao;
 	}
+	
+	
 	public List<QnADto> getMyList(QnADto dto){
 		List<QnADto> list=new ArrayList<QnADto>();
 		Connection conn = null;
