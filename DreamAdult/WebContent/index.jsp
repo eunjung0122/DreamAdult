@@ -116,6 +116,11 @@
 </style>
 </head>
 <body>
+
+<jsp:include page="include/navber.jsp"></jsp:include>
+<div class="container">
+	<h1>Dream Adult</h1>
+
 <div class="main_page container">
 	<h1 class="main_tit">
 		오늘의 코린이<br>
@@ -209,6 +214,7 @@
 
 
 		<%if(id!=null){ %> 
+
 		<p>
 			<a href="users/private/info.jsp"><%=id %></a>	님 로그인 중..
 			<a href="users/logout.jsp">로그아웃</a>	  
