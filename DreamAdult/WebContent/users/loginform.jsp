@@ -37,6 +37,14 @@
 <title>/users/loginform.jsp</title>
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
+	  .btn-success, .btn-success:hover{ 
+	  	background-color: #9843e8;
+	  	border-color:#9843e8;
+	  }	
+	  .btn-success:hover {
+	  	background-color: #8017e3;
+	  	border-color:#8017e3;
+	  }
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
