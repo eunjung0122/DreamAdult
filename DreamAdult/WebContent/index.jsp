@@ -1,3 +1,5 @@
+<%@page import="test.file.dao.FileDao"%>
+<%@page import="test.file.dto.FileDto"%>
 <%@page import="test.study.dao.StudyDao"%>
 <%@page import="java.util.List"%>
 <%@page import="test.study.dto.StudyDto"%>
@@ -15,10 +17,12 @@
 	int pageNum=1;
 	int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-	StudyDto dto=new StudyDto();
+	StudyDto dto = new StudyDto();
 	dto.setEndRowNum(endRowNum);
 	List<StudyDto> studyList=StudyDao.getInstance().getLikeMaxList(dto);
 	
+	FileDto filedto = new FileDto();
+	List<FileDto> fileList = FileDao.getInstance().getLikeMaxList(filedto);
 
 	boolean isUpgrade=false;
 	
@@ -41,150 +45,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index.jsp</title>
+<title>Dream Adult</title>
 <jsp:include page="include/resource.jsp"></jsp:include>
-<style>
-	html, body{
-		font-family: 'Montserrat', 'Noto Sans KR',  sans-serif !important;
-	}
-	a{
-		text-decoration: none !important;
-	}
-	.btn.btn-custom-dark {
-	  display: inline-block;
-	  height: 40px;
-	  margin-top: 24px;
-	  padding: 9px 20px 0;
-	  border-radius: 42px;
-	  font-size: 14px;
-	  line-height: 22px;
-	  color: #fff;
-	  background-color: #000;
-	  vertical-align: top;
-	}
-	.btn.btn-custom-dark:hover{
-		color:#fff;
-		background-color: #000;
-	}
-
-	.main_page .main_tit{
-		margin:60px 0;
-		font-size:2.8rem;
-		line-height:1.4;
-	}
-	.table-wrap{
-		display:flex;
-		flex-wrap:wrap;
-		margin: 0 -18px;
-	}
-	.table-row {
-		display: flex;
-		flex:1;
-		padding: 0 0.5vw;
-	}
-	.column {
-		flex: 50%;
-		padding: 0 0.5vw; 
-	}
-	.column .box {
-		margin-top: 1.0vw;
-		vertical-align: middle;
-	    overflow: hidden;
-	    position: relative;
-	    border-radius: 14px;
-	    background:#fff;
-	    box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
-	    transition: box-shadow .2s, top .2s ease-in-out;
-	    top:0px;
-	}
-	.column .box:hover{
-		box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 16%);
-		transition: box-shadow .2s, top .2s ease-in-out;
-		top:-10px;
-	}
-	.box.box-l{
-		height:600px;
-		position: sticky;
-		top:120px;
-		min-width:500px;
-	}
-	.box.box-l:hover{
-		top:110px;
-	}
-	.box.box-m{
-		height:400px;
-		min-width:250px;
-	}
-	.box.box-s{
-		height:200px;
-		min-width:250px;
-	}
-	.txt_wrap{
-		padding:25px 24px 0;
-		box-sizing:border-box;
-		display:block;
-	}
-	.txt_wrap .info_cate{
-		display:block;
-		width:100%;
-	}
-	.info_cate .txt_cate{
-		vertical-align:middle;
-		font-size:0.9rem;
-	}
-	.img-wrap{
-		overflow:hidden;
-	}
-	.img-wrap img{
-		width:100%;
-		display:block;
-	}
-	.wrap-etc{
-		margin:40px 0;
-	}
-	.wrap-etc .item_etc{
-		padding: 0 0.5vw; 
-		margin-top:20px;
-	}
-	.wrap-etc .item_etc>div{
-		height:300px;
-		border-radius: 14px;
-	}
-	.wrap-etc .item_etc:first-of-type>div{
-		background:#fae100;
-	    background-image: url(https://www.daumkakao.com/page/bg_home_service.png);
-	    background-size: 160px 160px;
-	    background-repeat:no-repeat;
-	    background-position:85% 85%;
-	}
-	.wrap-etc .item_etc:last-of-type>div{
-		background:#3c64ff;
-   		background-image: url(https://www.daumkakao.com/page/bg_home_recruit.png);
-   		background-size: 309px 160px;
-   		background-repeat:no-repeat;
-   		background-position:85% 85%;
-	}
-	.card-main-title{
-		margin:10px 0 14px;
-	}
-	.card-main-title .tit_card{
-		font-size:1.8rem;
-		color:#222;
-	}
-	.card-tag{
-		color:#777;
-		margin-bottom: 50px;
-	}
-	.etc-tit{
-	    font-size: 1.8rem;
-	    font-weight: 600;
-	    color: #222;
-	    line-height: 1.4;
-	}
-</style>
+<link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-
 <jsp:include page="include/navber.jsp"></jsp:include>
 <div class="main_page container">
 	<h1 class="main_tit">
@@ -201,16 +66,16 @@
 					<li class="box box-l">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/65636b49017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/65636b49017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">가입인사</span>
 							</span>
-							<a class="card-main-title" href="" style="display:block;">
+							<a class="card-main-tit card-l" href="" style="display:block;">
 								<strong class="tit_card">우리가 Dream Adult에서 노는 방법</strong>
 							</a>
 							<p class="card-tag">#코딩초보 #코린이 #자바 #스터디</p>
 						</span>
 						<div class="img-wrap">
-							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/5ae1aabe017a00001.png?type=thumb&opt=C630x472" alt="" />
+							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/5ae1aabe017a00001.png?type=thumb&opt=C630x472"/>
 						</div>
 					</li>
 				</ul>
@@ -220,15 +85,25 @@
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
-								<span class="txt_cate">코드공유</span>
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
+								<span class="txt_cate">코드공유</span>	
 							</span>
+							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(0).getNum()%>">
+								<strong class="tit_card"><%=fileList.get(0).getTitle()%></strong>
+							</a>
+							<p>
+								<span><%=fileList.get(0).getNick()%></span>
+								<span><%=fileList.get(0).getRegdate()%></span>
+							</p>
 						</span>
+						<div class="img-wrap">
+							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/79590191017a00001.jpg?type=thumb&opt=C630x472"/>
+						</div>
 					</li>
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
 							<a href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">확인</a>
@@ -237,7 +112,7 @@
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
 							1
@@ -245,17 +120,26 @@
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>
+								
 							</span>
+							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(1).getNum()%>">
+								<strong class="tit_card"><%=fileList.get(1).getTitle()%></strong>
+							</a>
+							<p>
+								<span><%=fileList.get(1).getNick()%></span>
+								<span><%=fileList.get(1).getRegdate()%></span>
+							</p>
 						</span>
+						<div class="img-wrap" style="background:#f77028; height:210px;"></div>
 					</li>
 				</ul>
 				<ul class="column">
 					<li class="box box-s">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
 							<a href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">확인</a>
@@ -264,7 +148,7 @@
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
 						</span>
@@ -272,7 +156,7 @@
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
 							<a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a>
@@ -281,10 +165,18 @@
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
-								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>
 							</span>
+							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(2).getNum()%>">
+								<strong class="tit_card"><%=fileList.get(2).getTitle()%></strong>
+							</a>
+							<p>
+								<span><%=fileList.get(2).getNick()%></span>
+								<span><%=fileList.get(2).getRegdate()%></span>
+							</p>
 						</span>
+						<div class="img-wrap" style="background:#801ee3; height:210px;"></div>
 					</li>
 					<li class="box box-s">
 						<span class="txt_wrap">
@@ -333,7 +225,11 @@
 		</div>
 	</div>
 
-
+	<a class="link-top" href="">
+		<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+		  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+		</svg>
+	</a>
 </div>
 <footer style="height:400px; border-top:1px solid #ddd;">
 	<div class="container">
