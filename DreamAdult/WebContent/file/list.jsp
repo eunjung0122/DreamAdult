@@ -209,10 +209,12 @@
    		<input type="text" id="keyword" name="keyword" placeholder="검색어..." value="<%=keyword%>" />
    		
    		<button type="submit">검색</button>
+   		
+   		<%if(id!=null) {%>
+   			<a href="private/myPage.jsp">내가 쓴 글 보기</a>
+   		<%} %>
    </form>
-   <%if(id!=null) {%>
-   		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
-   <%} %>
+
    
    <%if(!condition.equals("")) {%>
 		<p>
