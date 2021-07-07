@@ -18,6 +18,8 @@ public class StudyDao {
 		}
 		return dao;
 	}
+	
+	
 	public List<StudyDto> getMyList(StudyDto dto){
 		List<StudyDto> list=new ArrayList<StudyDto>();
 		Connection conn = null;

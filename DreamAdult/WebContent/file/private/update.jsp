@@ -27,32 +27,32 @@
 	String category=mr.getParameter("category");
 	String title=mr.getParameter("title");
 	String content=mr.getParameter("content"); 
+
+	
 	String existFile=mr.getParameter("myFile2"); //기존 첨부 파일
-	long existSize= Long.parseLong(mr.getParameter("myFileSize"));
-	
-	FileDto dto = new FileDto();
-	dto.setCategory(category);
-	dto.setTitle(title);
-	dto.setContent(content);
-	dto.setNum(num);
-	
-	File myFile=mr.getFile("myFile");
-	String orgFileName = mr.getOriginalFileName("myFile");
-	String saveFileName = mr.getFilesystemName("myFile");
-	
-	if(orgFileName == null){
-		dto.setOrgFileName(existFile);
-		dto.setSaveFileName(existFile);
-		dto.setFileSize(existSize);
-		
-	}else{
-		dto.setOrgFileName(orgFileName);
-		dto.setSaveFileName(saveFileName);
-		long fileSize=myFile.length();
-		dto.setFileSize(fileSize);
-	}
-	
-	
+  long existSize= Long.parseLong(mr.getParameter("myFileSize"));
+
+  FileDto dto = new FileDto();
+   dto.setCategory(category);
+   dto.setTitle(title);
+   dto.setContent(content);
+   dto.setNum(num);
+
+  File myFile=mr.getFile("myFile");
+   String orgFileName = mr.getOriginalFileName("myFile");
+   String saveFileName = mr.getFilesystemName("myFile");
+   
+   if(orgFileName == null){
+      dto.setOrgFileName(existFile);
+      dto.setSaveFileName(existFile);
+      dto.setFileSize(existSize);
+      
+   }else{
+      dto.setOrgFileName(orgFileName);
+      dto.setSaveFileName(saveFileName);
+      long fileSize=myFile.length();
+      dto.setFileSize(fileSize);
+   }
 	
 	
 	boolean isSuccess = FileDao.getInstance().update(dto);

@@ -1,3 +1,9 @@
+CREATE TABLE qnalike (
+    num number NOT NULL,
+    id varchar2(100) NOT NULL,
+	liked CHAR(3) DEFAULT 'no'
+)
+
 CREATE TABLE users(
    id VARCHAR2(100) PRIMARY KEY,
    nick VARCHAR2(100) NOT NULL,
@@ -53,3 +59,4 @@ CREATE TABLE board_qna_comment(
 
 -- 댓글기능의 번호를 얻어낼 시퀀스
 CREATE SEQUENCE board_qna_comment_seq;
+

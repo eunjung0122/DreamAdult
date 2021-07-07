@@ -1,11 +1,13 @@
+<%@page import="test.study.dao.StudyCommentDao"%>
+<%@page import="test.study.dto.StudyCommentDto"%>
 <%@page import="java.util.List"%>
 <%@page import="test.study.dao.StudyDao"%>
 <%@page import="test.study.dto.StudyDto"%>
 <%@page import="java.net.URLEncoder"%>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+
 	//한 페이지에 몇개씩 표시할 것인지
 	final int PAGE_ROW_COUNT=5;
 	//하단 페이지를 몇개씩 표시할 것인지
@@ -102,6 +104,7 @@
 	if(endPageNum > totalPageCount){
 	   endPageNum=totalPageCount; //보정해 준다.
 	}
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -132,13 +135,7 @@
       padding: 5px;
    }
    
-   .link-dark{
-   		text-decoration:none;
-   }
    
-   .title:hover{
-   		text-decoration:underline;
-   }
    
 </style>
 </head>
@@ -160,12 +157,14 @@
 		</thead>
 		<tbody>
 		<%for(StudyDto tmp:list){%>
+		
          <tr>
             <td><%=tmp.getNum() %></td>
             <td><%=tmp.getCategory() %></td>
             <td><%=tmp.getNick() %></td>
             <td>
-               <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle() %></a>
+               <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle()%></a>
+            [<%=StudyCommentDao.getInstance().replyCount(tmp.getNum()) %>]
             </td>
             <td><%=tmp.getViewCount() %></td>
             <td><%=tmp.getRegdate() %></td>
@@ -217,6 +216,8 @@
    		<input type="text" id="keyword" name="keyword" placeholder="검색어..." value="<%=keyword%>" />
    		
    		<button type="submit">검색</button>
+   		
+   		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
    </form>
    <%if(!condition.equals("")) {%>
 		<p>

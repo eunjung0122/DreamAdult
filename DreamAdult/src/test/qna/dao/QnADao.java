@@ -18,6 +18,8 @@ public class QnADao {
 		}
 		return dao;
 	}
+	
+	
 	public List<QnADto> getMyList(QnADto dto){
 		List<QnADto> list=new ArrayList<QnADto>();
 		Connection conn = null;
@@ -106,6 +108,7 @@ public class QnADao {
 			}
 		}return count;
 	}
+
 	//QnA 글 하나의 정보를 리턴하는 메소드
 	public QnADto getData(int num) {
 		QnADto dto=null;
