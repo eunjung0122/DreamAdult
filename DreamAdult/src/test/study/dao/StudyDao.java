@@ -526,7 +526,7 @@ public class StudyDao {
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_study"
-					+ "		WHERE category LIKE '%'||?||'%'"
+					+ "		WHERE category LIKE ?"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -580,7 +580,7 @@ public class StudyDao {
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_study"
-					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE'%'||?||'%'"
+					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -634,7 +634,7 @@ public class StudyDao {
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_study"
-					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE'%'||?||'%'"
+					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE ?"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -688,7 +688,7 @@ public class StudyDao {
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_study"
-					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE'%'||?||'%'"
+					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
 					+ "		ORDER BY num DESC)"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -994,7 +994,7 @@ public class StudyDao {
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
 					+ "		FROM board_study"
-					+ "		WHERE category LIKE '%'||?||'%'"
+					+ "		WHERE category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -1148,7 +1148,7 @@ public class StudyDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
-					+ "	WHERE category LIKE '%'||?||'%'";
+					+ "	WHERE category LIKE ?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용 있으면 여기서 바인딩
@@ -1189,7 +1189,7 @@ public class StudyDao {
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
 					+ "		FROM board_study"
-					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
+					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -1243,7 +1243,7 @@ public class StudyDao {
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
 					+ "		FROM board_study"
-					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
+					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -1298,7 +1298,7 @@ public class StudyDao {
 					+ "	FROM"
 					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
 					+ "		FROM board_study"
-					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'"
+					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -1348,7 +1348,7 @@ public class StudyDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
-					+ "	WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
+					+ "	WHERE title LIKE '%'||?||'%' AND category LIKE ?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용 있으면 여기서 바인딩
@@ -1384,7 +1384,7 @@ public class StudyDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
-					+ "	WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
+					+ "	WHERE nick LIKE '%'||?||'%' AND category LIKE ?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용 있으면 여기서 바인딩
@@ -1420,7 +1420,7 @@ public class StudyDao {
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
 			String sql = "SELECT NVL(MAX(ROWNUM),0) AS num FROM board_study"
-					+ "	WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'";
+					+ "	WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용 있으면 여기서 바인딩
