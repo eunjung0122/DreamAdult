@@ -8,6 +8,13 @@
 		cook.setMaxAge(60*60*24);
 		response.addCookie(cook);
 	}
+	
+	String gradePopup=request.getParameter("gradePopup");
+	if(gradePopup !=null){
+		Cookie cook=new Cookie("gradePopup", gradePopup);
+		cook.setMaxAge(60*60*24*365);
+		response.addCookie(cook);
+	}
 %>
 <!DOCTYPE html>
 <html>
