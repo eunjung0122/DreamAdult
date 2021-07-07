@@ -19,6 +19,52 @@ public class StudyDao {
 		return dao;
 	}
 	
+	public List<StudyDto> getLikeMaxList(StudyDto dto){
+		List<StudyDto> list=new ArrayList<StudyDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT *" + 
+					"FROM" + 
+					"	(SELECT result1.*, ROWNUM AS rnum" + 
+					"	FROM" + 
+					"		(SELECT num, COUNT(*) AS cnt" + 
+					"		FROM studylike" + 
+					"		WHERE liked ='yes'" + 
+					"		GROUP BY num" + 
+					"		ORDER BY cnt DESC) result1)" + 
+					" WHERE rnum<=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setInt(1, dto.getEndRowNum());
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			while (rs.next()) {
+				StudyDto dto2=new StudyDto();
+				dto2.setNum(rs.getInt("num"));
+				list.add(dto2);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return list;
+	}
+	
 	
 	public List<StudyDto> getMyList(StudyDto dto){
 		List<StudyDto> list=new ArrayList<StudyDto>();
