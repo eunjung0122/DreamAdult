@@ -19,6 +19,42 @@ public class QnACommentDao {
 		}
 		return dao;
 	}
+	public int myCount(String id) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT COUNT(*) AS count"
+					+ "	FROM board_qna_comment"
+					+ "	WHERE writer=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, id);
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			if (rs.next()) {
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
 	
    //게시판 목록에 댓글 수를 불러오는 메소드
    public int replyCount(int ref_group) {
