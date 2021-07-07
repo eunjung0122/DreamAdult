@@ -215,7 +215,7 @@
    		
    		<button type="submit">검색</button>
    		
-   		<a href="private/mypage.jsp">내가 쓴 글 보기</a>
+   		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
    </form>
    <%if(!condition.equals("")) {%>
 		<p>
