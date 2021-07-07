@@ -43,7 +43,6 @@
 <meta charset="UTF-8">
 <title>index.jsp</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
-<jsp:include page="include/resource.jsp"></jsp:include>
 <style>
 	.btn.btn-custom-dark {
 	  display: inline-block;
