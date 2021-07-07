@@ -1,6 +1,20 @@
+<%@page import="test.study.dao.StudyDao"%>
+<%@page import="java.util.List"%>
+<%@page import="test.study.dto.StudyDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%String id=(String)session.getAttribute("id");%>
+<%
+	String id=(String)session.getAttribute("id");
+ 
+	final int PAGE_ROW_COUNT=3;
+	int pageNum=1;
+	int endRowNum=pageNum*PAGE_ROW_COUNT;
+	
+	StudyDto dto=new StudyDto();
+	dto.setEndRowNum(endRowNum);
+	List<StudyDto> studyList=StudyDao.getInstance().getLikeMaxList(dto);
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -152,17 +166,16 @@
 			</div>
 			<div class="table-row">
 				<ul class="column">
-					<li class="box box-m">1</li>
-					<li class="box box-m">1</li>
+					<li class="box box-m"><a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a></li>
+					<li class="box box-m"><a href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">확인</a></li>
 					<li class="box box-m">1</li>
 					<li class="box box-m">1</li>
 				</ul>
 				<ul class="column">
-					<li class="box box-s">2</li>
-					<li class="box box-m">2</li>
-					<li class="box box-m">2</li>
-					<li class="box box-m">2</li>
-					<li class="box box-s">2</li>
+					<li class="box box-s"><a href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">확인</a></li>
+					<li class="box box-m"></li>
+					<li class="box box-m"></li>
+					<li class="box box-s"><a href=""></a></li>
 				</ul>
 			</div>
 		</div>

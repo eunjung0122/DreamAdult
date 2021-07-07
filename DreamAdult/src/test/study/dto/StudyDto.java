@@ -128,6 +128,5 @@ public class StudyDto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-	
-	
+
 }
