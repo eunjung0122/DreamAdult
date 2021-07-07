@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	String id=(String)session.getAttribute("id");
 	final int PAGE_ROW_COUNT = 5;
 	final int PAGE_DISPLAY_COUNT = 5;
 	
@@ -209,7 +210,9 @@
    		
    		<button type="submit">검색</button>
    </form>
-   
+   <%if(id!=null) {%>
+   		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
+   <%} %>
    
    <%if(!condition.equals("")) {%>
 		<p>

@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
+	String id=(String)session.getAttribute("id");
 	//한 페이지에 몇개씩 표시할 것인지
 	final int PAGE_ROW_COUNT=5;
 	//하단 페이지를 몇개씩 표시할 것인지
@@ -216,8 +216,9 @@
    		<input type="text" id="keyword" name="keyword" placeholder="검색어..." value="<%=keyword%>" />
    		
    		<button type="submit">검색</button>
-   		
+   		<%if(id!=null) {%>
    		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
+   		<%} %>
    </form>
    <%if(!condition.equals("")) {%>
 		<p>
