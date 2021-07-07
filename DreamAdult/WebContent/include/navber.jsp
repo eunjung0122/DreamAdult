@@ -67,7 +67,9 @@ body {
 	<nav id="menuBer" class="navbar navbar-light navbar-expand-lg title-font">
 		<div class="container">
 			<a class="navbar-brand" href="<%=request.getContextPath() %>/">
-				Dream Adult </a>
+				<img src="${pageContext.request.contextPath}/images/logo2.png" width="21" height="21" />
+				Dream Adult 
+			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav">
 				<span class="navbar-toggler-icon"></span>
@@ -84,6 +86,7 @@ body {
 						class="nav-link <%=thisPage.equals("study") ? "active" : "" %>"
 						href="<%=request.getContextPath() %>/study/list.jsp">학습 공부</a></li>
 				</ul>
+				
 				<div class="dropdown" style="padding-right: 40px;">
 					<button class="btn dropdown-toggle" type="button"
 						id="dropdownMenuButton1" data-bs-toggle="dropdown"
@@ -116,11 +119,10 @@ body {
 			</div>
 		</div>
 	</nav>
-	<nav id="fixedMenuBer"
-		class="navbar navbar-light navbar-expand-lg title-font">
+	<nav id="fixedMenuBer" class="navbar navbar-light navbar-expand-lg title-font">
 		<div class="container">
-			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> <img
-				src="" alt="" /> 오늘의 코린이
+			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> 
+				<img src="" alt="" /> 오늘의 코린이
 			</a>
 			<button class="navbar-toggler" type="button"
 				data-bs-toggle="collapse" data-bs-target="#navbarNav">
