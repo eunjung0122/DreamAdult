@@ -44,6 +44,12 @@
 <title>index.jsp</title>
 <jsp:include page="include/resource.jsp"></jsp:include>
 <style>
+	html, body{
+		font-family: 'Montserrat', 'Noto Sans KR',  sans-serif !important;
+	}
+	a{
+		text-decoration: none !important;
+	}
 	.btn.btn-custom-dark {
 	  display: inline-block;
 	  height: 40px;
@@ -63,10 +69,13 @@
 
 	.main_page .main_tit{
 		margin:60px 0;
+		font-size:2.8rem;
+		line-height:1.4;
 	}
 	.table-wrap{
 		display:flex;
 		flex-wrap:wrap;
+		margin: 0 -18px;
 	}
 	.table-row {
 		display: flex;
@@ -85,17 +94,22 @@
 	    border-radius: 14px;
 	    background:#fff;
 	    box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
-	    transition: top .4s ease-in-out;
+	    transition: box-shadow .2s, top .2s ease-in-out;
+	    top:0px;
 	}
 	.column .box:hover{
-		box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 14%);
-		transition: top .4s ease-in-out;
+		box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 16%);
+		transition: box-shadow .2s, top .2s ease-in-out;
+		top:-10px;
 	}
 	.box.box-l{
 		height:600px;
 		position: sticky;
-		top:60px;
+		top:120px;
 		min-width:500px;
+	}
+	.box.box-l:hover{
+		top:110px;
 	}
 	.box.box-m{
 		height:400px;
@@ -110,14 +124,13 @@
 		box-sizing:border-box;
 		display:block;
 	}
-	.txt_cate:before {
-	    position: absolute;
-	    top: 0;
-	    left: -4px;
-	    width: 16px;
-	    height: 16px;
-	    background: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M0 0c3.003 2.178 4.963 5.706 4.961 9.699V18H18C18 8.059 9.941 0 0 0' fill='%23eee' fill-rule='evenodd'/%3E%3C/svg%3E);
-	    content: "";
+	.txt_wrap .info_cate{
+		display:block;
+		width:100%;
+	}
+	.info_cate .txt_cate{
+		vertical-align:middle;
+		font-size:0.9rem;
 	}
 	.img-wrap{
 		overflow:hidden;
@@ -152,10 +165,15 @@
    		background-position:85% 85%;
 	}
 	.card-main-title{
-		margin:20px 0 ;
+		margin:10px 0 14px;
 	}
-	.card-main-title>strong{
-		font-size:1.6rem;
+	.card-main-title .tit_card{
+		font-size:1.8rem;
+		color:#222;
+	}
+	.card-tag{
+		color:#777;
+		margin-bottom: 50px;
 	}
 	.etc-tit{
 	    font-size: 1.8rem;
@@ -189,7 +207,7 @@
 							<a class="card-main-title" href="" style="display:block;">
 								<strong class="tit_card">우리가 Dream Adult에서 노는 방법</strong>
 							</a>
-							<p>#코딩초보 #코린이 #자바 #스터디</p>
+							<p class="card-tag">#코딩초보 #코린이 #자바 #스터디</p>
 						</span>
 						<div class="img-wrap">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/5ae1aabe017a00001.png?type=thumb&opt=C630x472" alt="" />
@@ -199,16 +217,83 @@
 			</div>
 			<div class="table-row">
 				<ul class="column">
-					<li class="box box-m"><a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a></li>
-					<li class="box box-m"><a href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">확인</a></li>
-					<li class="box box-m">1</li>
-					<li class="box box-m">1</li>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<span class="txt_cate">코드공유</span>
+							</span>
+						</span>
+					</li>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<span class="txt_cate">학습공부</span>
+							</span>
+							<a href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">확인</a>
+						</span>
+					</li>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<span class="txt_cate">QnA</span>
+							</span>
+							1
+						</span>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<span class="txt_cate">코드공유</span>
+							</span>
+						</span>
+					</li>
 				</ul>
 				<ul class="column">
-					<li class="box box-s"><a href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">확인</a></li>
-					<li class="box box-m"></li>
-					<li class="box box-m"></li>
-					<li class="box box-s"><a href=""></a></li>
+					<li class="box box-s">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<span class="txt_cate">학습공부</span>
+							</span>
+							<a href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">확인</a>
+						</span>
+					</li>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<span class="txt_cate">QnA</span>
+							</span>
+						</span>
+					</li>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<span class="txt_cate">학습공부</span>
+							</span>
+							<a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a>
+						</span>
+					</li>
+					<li class="box box-m">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72" style="width:36px;" alt="" />
+								<span class="txt_cate">코드공유</span>
+							</span>
+						</span>
+					</li>
+					<li class="box box-s">
+						<span class="txt_wrap">
+							<span class="info_cate">
+								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<span class="txt_cate">QnA</span>
+							</span>
+						</span>
+					</li>
 				</ul>
 			</div>
 		</div>
