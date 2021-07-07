@@ -1,4 +1,6 @@
 
+<%@page import="test.file.dto.FileLikeDto"%>
+<%@page import="test.file.dao.FileLikeDao"%>
 <%@page import="java.util.List"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="test.file.dao.FileCommentDao"%>
@@ -60,8 +62,17 @@
 			dto=FileDao.getInstance().getDataTCCa(dto);
 		}
 	}
-	
 	String id=(String)session.getAttribute("id");
+	
+	FileLikeDto dtoL=new FileLikeDto();
+	dtoL.setNum(num);
+	dtoL.setId(id);
+	int count=FileLikeDao.getInstance().isExist(dtoL);
+	if( count<1 ){
+		FileLikeDao.getInstance().insert(dtoL);
+	}
+	dtoL = FileLikeDao.getInstance().getData(dtoL);
+	
 	boolean isLogin=false;
 	if(id!=null){
 		isLogin=true;
@@ -84,6 +95,15 @@
 	
 	int totalRow = FileCommentDao.getInstance().getCount(num);
 	int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
+	
+	
+	int likeCount = FileLikeDao.getInstance().getCount(num);
+	
+	
+	boolean isLike = false;
+	if(dtoL.getLiked().equals("yes")){
+		isLike=true;
+	}
 %>    
 <!DOCTYPE html>
 <html>
@@ -228,6 +248,11 @@
 		</table>
 		<ul>
 			<li><a href="<%=request.getContextPath() %>/file/list.jsp">목록보기</a></li>
+			<%if(isLike){ %>
+	   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♥<%=likeCount%></a></li>
+	   		<%}else{ %>
+	   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
+	   		<%} %>
 			<%if(dto.getWriter().equals(id)){ %>
 	        <li><a href="<%=request.getContextPath() %>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
 			<li><a href="<%=request.getContextPath() %>/file/private/delete.jsp?num=<%=dto.getNum()%>">삭제</a></li> 
@@ -434,6 +459,39 @@
 	         });
 		}
 	}
+	
+	
+	let isLike=<%=isLike%>;
+	let likeCount=<%=likeCount%>
+	
+	document.querySelector(".like-link").addEventListener("click",function(){
+		const num=this.getAttribute("data-num");
+		if(isLike){
+			ajaxPromise("file_unlike.jsp","post","num="+num)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess){
+					likeCount--; 
+					document.querySelector(".like-link").innerText="♡"+likeCount;
+				}
+			});
+			isLike=false;
+		}else{
+			ajaxPromise("file_like.jsp","post","num="+num)
+			.then(function(response){
+				return response.json();
+			})
+			.then(function(data){
+				if(data.isSuccess){
+					likeCount++;
+					document.querySelector(".like-link").innerText="♥"+likeCount;
+				}
+			});
+			isLike=true;
+		}
+	});
 	</script>
 </body>
 </html>

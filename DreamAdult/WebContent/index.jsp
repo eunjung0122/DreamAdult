@@ -42,11 +42,25 @@
 <head>
 <meta charset="UTF-8">
 <title>index.jsp</title>
-<link href="css/bootstrap.css" rel="stylesheet">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+<jsp:include page="include/resource.jsp"></jsp:include>
 <style>
+	.btn.btn-custom-dark {
+	  display: inline-block;
+	  height: 40px;
+	  margin-top: 24px;
+	  padding: 9px 20px 0;
+	  border-radius: 42px;
+	  font-size: 14px;
+	  line-height: 22px;
+	  color: #fff;
+	  background-color: #000;
+	  vertical-align: top;
+	}
+	.btn.btn-custom-dark:hover{
+		color:#fff;
+		background-color: #000;
+	}
+
 	.main_page .main_tit{
 		margin:60px 0;
 	}
@@ -154,9 +168,6 @@
 <body>
 
 <jsp:include page="include/navber.jsp"></jsp:include>
-<div class="container">
-	<h1>Dream Adult</h1>
-
 <div class="main_page container">
 	<h1 class="main_tit">
 		오늘의 코린이<br>
@@ -237,22 +248,13 @@
 		</div>
 	</div>
 
-		<%if(id!=null){ %> 
 
-		<p>
-			<a href="users/private/info.jsp"><%=id %></a>	님 로그인 중..
-			<a href="users/logout.jsp">로그아웃</a>	  
-		</p>
-	<%} %>
-	<ul>
-		<li><a href="users/loginform.jsp">로그인</a></li>
-		<li><a href="users/signup_form.jsp">회원가입</a></li>
-		<li><a href="qna/list.jsp">Q&A</a></li>
-		<li><a href="file/list.jsp">자료실</a></li>
-		<li><a href="study/list.jsp">학습공부</a></li>
-	</ul>
 </div>
-
+<footer style="height:400px; border-top:1px solid #ddd;">
+	<div class="container">
+		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
+	</div>
+</footer>
 <%
 	Cookie[] cookies=request.getCookies();
 	
@@ -265,18 +267,13 @@
 		}
 	}
 %>
-
-
-	<script>
-	<%if(isPopup){ %>
-		window.open("popup.jsp", "웰컴팝업창", "width=500,height=400,top=100,left=100");
-	<%} %>
-	<%if(isUpgrade){%>
-		window.open("grade_popup.jsp", "등급 업 팝업창", "width=600,height=450,top=100,left=600");
-	<%}%>
-	</script>
-
-
-
+<script>
+<%if(isPopup){ %>
+	window.open("popup.jsp", "웰컴팝업창", "width=500,height=400,top=100,left=100");
+<%} %>
+<%if(isUpgrade){%>
+	window.open("grade_popup.jsp", "등급 업 팝업창", "width=600,height=450,top=100,left=600");
+<%}%>
+</script>
 </body>
 </html>

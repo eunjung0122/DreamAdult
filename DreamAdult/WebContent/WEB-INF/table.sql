@@ -3,7 +3,11 @@ CREATE TABLE qnalike (
     id varchar2(100) NOT NULL,
 	liked CHAR(3) DEFAULT 'no'
 )
-
+CREATE TABLE filelike(
+  num number NOT NULL,
+  id VARCHAR2(100) NOT NULL,
+  liked CHAR(3) DEFAULT 'no'
+)
 CREATE TABLE users(
    id VARCHAR2(100) PRIMARY KEY,
    nick VARCHAR2(100) NOT NULL,
