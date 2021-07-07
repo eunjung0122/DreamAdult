@@ -38,12 +38,12 @@
 <jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	  .btn-success{
-	  	background-color: #9843e8;
-	  	    border-color: #9843e8;
+	  	background-color: #3c64ff;
+	  	    border-color: #3c64ff;
 	  }
 	  .btn-success:hover{
-	  	background-color: #8017e3;
-	  	border-color: #8017e3;
+	  	background-color: #3258ed;
+	  	border-color: #3258ed;
 	  	
 	  }
       .bd-placeholder-img {
@@ -65,10 +65,11 @@
 <body class="text-center">
 	<main class="form-signin">
 	  	<form action="login.jsp" method="post">
+	  		<img class="mb-4" src="../images/logo2.png" alt="" width="100" height="80">
 	  		<input type="hidden" name="url" value="<%=url %>" />
 		    <h1 class="h3 mb-3 fw-normal">로그인 페이지</h1>
 		    <%if(savedId == null){ %>
-			    <div class="form-floating">
+			    <div class="form-floating mb-2">
 		      		<input type="text" name="id" class="form-control" id="id" placeholder="아이디 입력...">
 		      		<label for="id">아이디</label>
 			    </div>
