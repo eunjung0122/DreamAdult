@@ -256,7 +256,7 @@ public class FileDao {
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
 	               "   ON board_file.writer = users.id"+
-	               "   WHERE category LIKE '%'||?||'%'"+
+	               "   WHERE category LIKE ?"+
 	               "   ORDER BY num DESC)" + 
 	               " WHERE num=?";
 	         
@@ -494,7 +494,7 @@ public class FileDao {
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
 		               "   ON board_file.writer = users.id"+
-		               "   WHERE title LIKE '%'||?||'%' OR category LIKE '%'||?||'%'"+
+		               "   WHERE title LIKE '%'||?||'%' OR category LIKE ?"+
 		               "   ORDER BY num DESC)" + 
 		               " WHERE num=?";
 		         //PreparedStatement 객체의 참조값 얻어오기
@@ -554,7 +554,7 @@ public class FileDao {
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
 		               "   ON board_file.writer = users.id"+
-		               "   WHERE nick LIKE '%'||?||'%' OR category LIKE '%'||?||'%'"+
+		               "   WHERE nick LIKE '%'||?||'%' OR category LIKE ?"+
 		               "   ORDER BY num DESC)" + 
 		               " WHERE num=?";
 		         //PreparedStatement 객체의 참조값 얻어오기
@@ -614,7 +614,7 @@ public class FileDao {
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
 		               "   ON board_file.writer = users.id"+
-		               "   WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE'%'||?||'%'"+
+		               "   WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"+
 		               "   ORDER BY num DESC)" + 
 		               " WHERE num=?";
 		         //PreparedStatement 객체의 참조값 얻어오기
@@ -969,7 +969,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE category LIKE '%'||?||'%'"
+					+ "	 		WHERE category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1022,7 +1022,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'"
+					+ "	 		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1077,7 +1077,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
+					+ "	 		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1131,7 +1131,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
+					+ "	 		WHERE nick LIKE '%'||?||'%' AND category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1309,7 +1309,7 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file"
-		               + " WHERE category LIKE '%'||?||'%'";
+		               + " WHERE category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getCategory());
 			
@@ -1342,7 +1342,7 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file"
-		               + " WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'";
+		               + " WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
@@ -1377,7 +1377,7 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file"
-		               + " WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
+		               + " WHERE title LIKE '%'||?||'%' AND category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getCategory());
@@ -1412,7 +1412,7 @@ public class FileDao {
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file INNER JOIN users"
 		               + " ON board_file.writer = users.id"
-		               + " WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
+		               + " WHERE nick LIKE '%'||?||'%' AND category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getCategory());

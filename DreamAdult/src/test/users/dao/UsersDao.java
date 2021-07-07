@@ -17,7 +17,109 @@ public class UsersDao {
 		}
 		return dao;
 	}
+	public String getGrade(String id) {
+		String grade=null;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT grade"
+					+ "	FROM users"
+					+ "	WHERE id=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, id);
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			if (rs.next()) {
+				grade=rs.getString("grade");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return grade;
+	}
 	
+	public boolean upgradeStudent(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int flag = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "UPDATE users"
+					+ " SET grade='student'"
+					+ "	WHERE id=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 바인딩할 내용 있으면 바인딩
+			pstmt.setString(1, id);
+			//insert or update or delete 문 수행하고 변화된 row의 갯수 리턴받기
+			flag = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public boolean upgradeAdult(String id) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int flag = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "UPDATE users"
+					+ " SET grade='adult'"
+					+ "	WHERE id=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 바인딩할 내용 있으면 바인딩
+			pstmt.setString(1, id);
+			//insert or update or delete 문 수행하고 변화된 row의 갯수 리턴받기
+			flag = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	//가입정보를 수정하는 메소드
 	public boolean update(UsersDto dto) {
 		Connection conn = null;

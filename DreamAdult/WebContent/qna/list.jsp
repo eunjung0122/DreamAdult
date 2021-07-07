@@ -140,6 +140,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="../include/navber.jsp">
+   <jsp:param value="qna" name="thisPage"/>
+</jsp:include>
 <div class="container">
 	<h1>QnA 게시판</h1>
 	<a href="<%=request.getContextPath()%>/qna/private/insertform.jsp">새글 작성</a>
