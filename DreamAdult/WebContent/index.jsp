@@ -1,6 +1,28 @@
+<%@page import="test.users.dao.UsersDao"%>
+<%@page import="test.study.dao.StudyCommentDao"%>
+<%@page import="test.file.dao.FileCommentDao"%>
+<%@page import="test.qna.dao.QnACommentDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%String id=(String)session.getAttribute("id");%>
+<%
+	String id=(String)session.getAttribute("id");
+	boolean isUpgrade=false;
+	
+	if(id!=null){
+		int qnaComment=QnACommentDao.getInstance().myCount(id);
+		int fileComment=FileCommentDao.getInstance().myCount(id);
+		int studyComment=StudyCommentDao.getInstance().myCount(id);
+		int commentCount=qnaComment+fileComment+studyComment;
+		
+		String grade=UsersDao.getInstance().getGrade(id);
+		
+		if(grade.equals("child")&&commentCount>=5&&commentCount<20){
+			isUpgrade=UsersDao.getInstance().upgradeStudent(id);
+		}else if(!grade.equals("adult")&&commentCount>=20){
+			isUpgrade=UsersDao.getInstance().upgradeAdult(id);
+		}
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,10 +264,17 @@
 	}
 %>
 
-<%if(isPopup){ %>
+
 	<script>
+	<%if(isPopup){ %>
 		window.open("popup.jsp", "웰컴팝업창", "width=500,height=400,top=100,left=100");
+	<%} %>
+	<%if(isUpgrade){%>
+		window.open("grade_popup.jsp", "등급 업 팝업창", "width=600,height=450,top=100,left=600");
+	<%}%>
 	</script>
-<%} %>
+
+
+
 </body>
 </html>
