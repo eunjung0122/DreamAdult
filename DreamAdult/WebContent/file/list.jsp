@@ -137,6 +137,7 @@
    <jsp:param value="file" name="thisPage"/>
 </jsp:include>
 <div class="container">
+	<h1>자료실 게시판</h1>
     <a href="<%=request.getContextPath() %>/file/private/uploadform.jsp">새글 작성</a>
 		<table>
 	         <thead>

@@ -45,9 +45,131 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dream Adult</title>
-<jsp:include page="include/resource.jsp"></jsp:include>
-<link rel="stylesheet" href="css/main.css" />
+
+<title>index.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
+<style>
+	.btn.btn-custom-dark {
+	  display: inline-block;
+	  height: 40px;
+	  margin-top: 24px;
+	  padding: 9px 20px 0;
+	  border-radius: 42px;
+	  font-size: 14px;
+	  line-height: 22px;
+	  color: #fff;
+	  background-color: #000;
+	  vertical-align: top;
+	}
+	.btn.btn-custom-dark:hover{
+		color:#fff;
+		background-color: #000;
+	}
+
+	.main_page .main_tit{
+		margin:60px 0;
+	}
+	.table-wrap{
+		display:flex;
+		flex-wrap:wrap;
+	}
+	.table-row {
+		display: flex;
+		flex:1;
+		padding: 0 0.5vw;
+	}
+	.column {
+		flex: 50%;
+		padding: 0 0.5vw; 
+	}
+	.column .box {
+		margin-top: 1.0vw;
+		vertical-align: middle;
+	    overflow: hidden;
+	    position: relative;
+	    border-radius: 14px;
+	    background:#fff;
+	    box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 9%);
+	    transition: top .4s ease-in-out;
+	}
+	.column .box:hover{
+		box-shadow: 4px 12px 30px 6px rgb(0 0 0 / 14%);
+		transition: top .4s ease-in-out;
+	}
+	.box.box-l{
+		height:600px;
+		position: sticky;
+		top:60px;
+		min-width:500px;
+	}
+	.box.box-m{
+		height:400px;
+		min-width:250px;
+	}
+	.box.box-s{
+		height:200px;
+		min-width:250px;
+	}
+	.txt_wrap{
+		padding:25px 24px 0;
+		box-sizing:border-box;
+		display:block;
+	}
+	.txt_cate:before {
+	    position: absolute;
+	    top: 0;
+	    left: -4px;
+	    width: 16px;
+	    height: 16px;
+	    background: url(data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 18 18'%3E%3Cpath d='M0 0c3.003 2.178 4.963 5.706 4.961 9.699V18H18C18 8.059 9.941 0 0 0' fill='%23eee' fill-rule='evenodd'/%3E%3C/svg%3E);
+	    content: "";
+	}
+	.img-wrap{
+		overflow:hidden;
+	}
+	.img-wrap img{
+		width:100%;
+		display:block;
+	}
+	.wrap-etc{
+		margin:40px 0;
+	}
+	.wrap-etc .item_etc{
+		padding: 0 0.5vw; 
+		margin-top:20px;
+	}
+	.wrap-etc .item_etc>div{
+		height:300px;
+		border-radius: 14px;
+	}
+	.wrap-etc .item_etc:first-of-type>div{
+		background:#fae100;
+	    background-image: url(https://www.daumkakao.com/page/bg_home_service.png);
+	    background-size: 160px 160px;
+	    background-repeat:no-repeat;
+	    background-position:85% 85%;
+	}
+	.wrap-etc .item_etc:last-of-type>div{
+		background:#3c64ff;
+   		background-image: url(https://www.daumkakao.com/page/bg_home_recruit.png);
+   		background-size: 309px 160px;
+   		background-repeat:no-repeat;
+   		background-position:85% 85%;
+	}
+	.card-main-title{
+		margin:20px 0 ;
+	}
+	.card-main-title>strong{
+		font-size:1.6rem;
+	}
+	.etc-tit{
+	    font-size: 1.8rem;
+	    font-weight: 600;
+	    color: #222;
+	    line-height: 1.4;
+	}
+</style>
+
 </head>
 <body>
 <jsp:include page="include/navber.jsp"></jsp:include>
