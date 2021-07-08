@@ -22,6 +22,7 @@
 		<li><a href="qna/list.jsp">Q&A</a></li>
 		<li><a href="file/list.jsp">자료실</a></li>
 		<li><a href="study/list.jsp">학습공부</a></li>
+		<li><a href="users/private/bookmarked.jsp">북마크 모아보기</a></li>
 	</ul>
 </div>
 
