@@ -1,144 +1,49 @@
-<%@page import="test.qna.dao.QnABookMarkDao"%>
-<%@page import="test.qna.dto.QnABookMarkDto"%>
-<%@page import="test.qna.dto.QnALikeDto"%>
-<%@page import="test.qna.dao.QnALikeDao"%>
-<%@page import="java.util.List"%>
-<%@page import="test.qna.dao.QnACommentDao"%>
-<%@page import="test.qna.dto.QnACommentDto"%>
-<%@page import="java.net.URLEncoder"%>
 <%@page import="test.qna.dto.QnADto"%>
 <%@page import="test.qna.dao.QnADao"%>
+<%@page import="java.util.List"%>
+<%@page import="test.qna.dto.QnACommentDto"%>
+<%@page import="test.qna.dao.QnACommentDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-   int num=Integer.parseInt(request.getParameter("num"));
-   QnADao.getInstance().addViewCount(num);
-      
-   String category=request.getParameter("category");
-   String keyword=request.getParameter("keyword");
-   String condition=request.getParameter("condition");
-   if(keyword==null){
-      keyword="";
-      condition="";
-   }
-   if(category==null){
-      category="whole";
-      
-   }
-   String encodedK=URLEncoder.encode(keyword);
-   
-   QnADto dto=new QnADto();
-   dto.setNum(num);
-   
-   if(category.equals("whole")&&!keyword.equals("")){
-      if(condition.equals("title")){
-         dto.setTitle(keyword);
-         dto=QnADao.getInstance().getDataT(dto);
-         
-      }else if(condition.equals("nick")){
-         dto.setNick(keyword);
-         dto=QnADao.getInstance().getDataN(dto);
-         
-      }else if(condition.equals("title_content")){
-         dto.setTitle(keyword);
-         dto.setContent(keyword);
-         dto=QnADao.getInstance().getDataTC(dto);
-      }
-   }else if(category.equals("whole")&&keyword.equals("")){
-      dto=QnADao.getInstance().getData(dto);
-   }else if(keyword.equals("")&&!category.equals("whole")){
-      dto.setCategory(category);
-      dto=QnADao.getInstance().getDataC(dto);
-   }else if(!category.equals("whole")&&!keyword.equals("")){
-      if(condition.equals("title")){
-         dto.setCategory(category);
-         dto.setTitle(keyword);
-         dto=QnADao.getInstance().getDataTCa(dto);
-         
-      }else if(condition.equals("nick")){
-         dto.setCategory(category);
-         dto.setNick(keyword);
-         dto=QnADao.getInstance().getDataNCa(dto);
-         
-      }else if(condition.equals("title_content")){
-         dto.setCategory(category);
-         dto.setTitle(keyword);
-         dto.setContent(keyword);
-         dto=QnADao.getInstance().getDataTCCa(dto);
-      }
-   }
-   
-   String id=(String)session.getAttribute("id");
-   
-   QnALikeDto dtoL=new QnALikeDto();
-   dtoL.setNum(num);
-   dtoL.setId(id);
-   int count=QnALikeDao.getInstance().isExist(dtoL);
-   if(count<1){
-      QnALikeDao.getInstance().insert(dtoL);
-   }
-   dtoL=QnALikeDao.getInstance().getData(dtoL);
-   
-   String title=request.getParameter("title");
-   
-   QnABookMarkDto dtoB=new QnABookMarkDto();
-   dtoB.setNum(num);
-   dtoB.setId(id);
-   int counting=QnABookMarkDao.getInstance().isExist(dtoB);
-   if(counting<1){
-      QnABookMarkDao.getInstance().insert(dtoB);
-   }
-   dtoB=QnABookMarkDao.getInstance().getData(dtoB);
-   
-      /*
-    [ 댓글 페이징 처리에 관련된 로직 ]
-    */
-    //한 페이지에 몇개씩 표시할 것인지
-    final int PAGE_ROW_COUNT=10;
-    
-    //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
-    int pageNum=1;
-    
-    //보여줄 페이지의 시작 ROWNUM
-    int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-    //보여줄 페이지의 끝 ROWNUM
-    int endRowNum=pageNum*PAGE_ROW_COUNT;
-   
-   //원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
-   QnACommentDto commentDto=new QnACommentDto();
-   commentDto.setRef_group(num);
-   
-   //1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
-   commentDto.setStartRowNum(startRowNum);
-   commentDto.setEndRowNum(endRowNum);
-   
-   List<QnACommentDto> commentList= QnACommentDao.getInstance().getList(commentDto);
-   
-   int totalRow=QnACommentDao.getInstance().getCount(num);
-   int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
-   
-   int likeCount=QnALikeDao.getInstance().getCount(num);
-   
-   
-   boolean isLike=false;
-   if(dtoL.getLiked().equals("yes")){
-      isLike=true;
-   }
-   
-   int markCount=QnABookMarkDao.getInstance().getCount(num);
-   
-   boolean isMark=false;
-   if(dtoB.getBookmark().equals("yes")){
-      isMark=true;
-   }
-   
-   
+	int num=Integer.parseInt(request.getParameter("num"));
+	String id=(String)session.getAttribute("id");
+	
+	QnADto dto=QnADao.getInstance().getData(num);
+	
+    /*
+  [ 댓글 페이징 처리에 관련된 로직 ]
+  */
+  //한 페이지에 몇개씩 표시할 것인지
+  final int PAGE_ROW_COUNT=10;
+  
+  //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
+  int pageNum=1;
+  
+  //보여줄 페이지의 시작 ROWNUM
+  int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
+  //보여줄 페이지의 끝 ROWNUM
+  int endRowNum=pageNum*PAGE_ROW_COUNT;
+ 
+  
+ //원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
+ QnACommentDto commentDto=new QnACommentDto();
+ commentDto.setRef_group(num);
+ 
+ //1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
+ commentDto.setStartRowNum(startRowNum);
+ commentDto.setEndRowNum(endRowNum);
+ 
+ List<QnACommentDto> commentList= QnACommentDao.getInstance().getList(commentDto);
+ 
+ int totalRow=QnACommentDao.getInstance().getCount(num);
+ int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/private/detail.jsp</title>
+<title>/qna/private/comment.jsp</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
    .content{
@@ -233,82 +138,8 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
-   <%if(dto.getPrevNum()!=0){ %>
-      <a href="detail.jsp?num=<%=dto.getPrevNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>&category=<%=category%>">이전글</a>
-   <%} %>
-   <%if(dto.getNextNum()!=0){ %>
-      <a href="detail.jsp?num=<%=dto.getNextNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>&category=<%=category%>">다음글</a>
-   <%} %>
-   <% if(!keyword.equals("")&&!category.equals("whole")){ %>
-      <p>   
-          <strong><%=category %></strong> 분류,
-         <strong><%=condition %></strong> 조건, 
-         <strong><%=keyword %></strong> 검색어로 검색된 내용 자세히 보기 
-      </p>
-   <%}else if(keyword.equals("")&&!category.equals("whole")) {%>
-         <p>
-            <strong><%=category %></strong>로 분류된 내용 자세히 보기
-         </p>
-   <%}else if(category.equals("whole")&&!keyword.equals("")) {%>
-         <p>   
-         <strong><%=condition %></strong> 조건, 
-         <strong><%=keyword %></strong> 검색어로 검색된 내용 자세히 보기 
-         </p>
-   <%} %>
-
-   <table class="table">
-      <tr>
-         <th>글번호</th>
-         <td><%=dto.getNum() %></td>
-      </tr>
-      <tr>
-         <th>말머리</th>
-         <td><%=dto.getCategory() %></td>
-      </tr>
-      <tr>
-         <th>작성자</th>
-         <td><%=dto.getNick() %></td>
-      </tr>
-      <tr>
-         <th>제목</th>
-         <td><%=dto.getTitle() %>
-         </td>
-      </tr>
-      <tr>
-         <th>조회수</th>
-         <td><%=dto.getViewCount() %></td>
-      </tr>
-      <tr>
-         <th>등록일</th>
-         <td><%=dto.getRegdate() %></td>
-      </tr>
-      <tr>
-         <td colspan="2">
-            <div class="content form-control"><%=dto.getContent() %></div>
-         </td>
-      </tr>
-   </table>
-   <ul>
-         <li><a href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a></li>
-         <%if(isLike){ %>
-            <li><a data-num="<%=num %>" href="javascript:" class="like-link">♥<%=likeCount%></a></li>
-         <%}else{ %>
-            <li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
-         <%} %> 
-         <%if(isMark){ %>
-            <li><a data-num="<%=num %>" href="javascript:" class="mark-link">√ 북마크 된 글입니다.</a></li>
-         <%}else{ %>
-            <li><a data-num="<%=num %>" href="javascript:" class="mark-link">북마크</a></li>
-         <%} %>
-         <%if(dto.getWriter().equals(id)) {%>
-            <li><a href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
-            <li><a href="<%=request.getContextPath()%>/qna/private/delete.jsp?num=<%=dto.getNum()%>"
-                  onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a></li>
-         <%} %>
-   </ul>
-   <div class="comments">
+	<div class="comments">
          <ul>
             <%for(QnACommentDto tmp: commentList){ %>
                <%if(tmp.getDeleted().equals("yes")){ %>
@@ -510,72 +341,6 @@
             });
       }
    }
-   
-   let isLike=<%=isLike%>;
-   let likeCount=<%=likeCount%>
-   
-   document.querySelector(".like-link").addEventListener("click",function(){
-      const num=this.getAttribute("data-num");
-      if(isLike){
-         ajaxPromise("qna_unlike.jsp","post","num="+num)
-         .then(function(response){
-            return response.json();
-         })
-         .then(function(data){
-            if(data.isSuccess){
-               likeCount--; 
-               document.querySelector(".like-link").innerText="♡"+likeCount;
-            }
-         });
-         isLike=false;
-      }else{
-         ajaxPromise("qna_like.jsp","post","num="+num)
-         .then(function(response){
-            return response.json();
-         })
-         .then(function(data){
-            if(data.isSuccess){
-               likeCount++;
-               document.querySelector(".like-link").innerText="♥"+likeCount;
-            }
-         });
-         isLike=true;
-      }
-   });
-   
-   let isMark=<%=isMark%>;
-   let markCount=<%=markCount%>
-   
-   document.querySelector(".mark-link").addEventListener("click",function(){
-      const num=this.getAttribute("data-num");
-      if(isMark){
-         ajaxPromise("qna_unmark.jsp","post","num="+num)
-         .then(function(response){
-            return response.json();
-         })
-         .then(function(data){
-            if(data.isSuccess){
-               markCount--; 
-               document.querySelector(".mark-link").innerText="북마크";
-            }
-         });
-         isMark=false;
-      }else{
-         ajaxPromise("qna_mark.jsp","post","num="+num)
-         .then(function(response){
-            return response.json();
-         })
-         .then(function(data){
-            if(data.isSuccess){
-               markCount++;
-               document.querySelector(".mark-link").innerText="√ 북마크 된 글입니다.";
-            }
-         });
-         isMark=true;
-      }
-   });
-
-   
-</script>
+ </script>
 </body>
 </html>

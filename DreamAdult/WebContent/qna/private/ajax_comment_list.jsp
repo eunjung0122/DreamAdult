@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Thread.sleep(2000);
+
 	String id=(String)session.getAttribute("id");
 	int pageNum=Integer.parseInt(request.getParameter("pageNum"));
 	int num=Integer.parseInt(request.getParameter("num"));
@@ -42,9 +42,9 @@
    		continue;
    	}%>
    	<%if(tmp.getNum()==tmp.getComment_group()) {%>
-   		<li id="reli<%=tmp.getNum()%>">
+   		<li id="reli<%=tmp.getNum()%>" class="page-<%=pageNum%>">
    	<%}else{ %>
-   		<li id="reli<%=tmp.getNum()%>" style="padding-left:50px;">
+   		<li id="reli<%=tmp.getNum()%>" class="page-<%=pageNum%>" style="padding-left:50px;">
    			<svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
                	<path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
        		</svg>
