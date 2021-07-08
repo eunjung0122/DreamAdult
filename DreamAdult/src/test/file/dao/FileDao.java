@@ -8,14 +8,13 @@ import java.util.List;
 
 import test.file.dto.FileDto;
 import test.qna.dto.QnADto;
+import test.study.dto.StudyDto;
 import test.util.DbcpBean;
 
 public class FileDao {
 	
 	private static FileDao dao;
-	
 	private FileDao() {}
-	
 	public static FileDao getInstance() {
 		if(dao==null) {
 			dao=new FileDao();
@@ -23,7 +22,148 @@ public class FileDao {
 		return dao;
 	}
 	
+	public List<FileDto> getLikeMaxList(FileDto dto){
+		List<FileDto> list = new ArrayList<FileDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT *"
+					+ "	FROM"
+					+ "		(SELECT result1.*, ROWNUM AS rnum"
+					+ " 	FROM"
+					+ " 		(SELECT DISTINCT board_file.num, count(*)OVER(PARTITION BY board_file.num) AS cnt,"
+					+ "			writer, title, nick, board_file.regdate"
+					+ " 		FROM board_file"
+					+ " 		INNER JOIN users ON board_file.writer = users.id"
+					+ " 		INNER JOIN filelike ON board_file.num = filelike.num"
+					+ " 		ORDER BY cnt DESC"
+					+ " 		)result1)"
+					+ " 	WHERE rnum <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 3);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				FileDto dto2=new FileDto();
+				dto2.setNum(rs.getInt("num"));
+				dto2.setTitle(rs.getString("title"));
+				dto2.setNick(rs.getString("nick"));
+				dto2.setRegdate(rs.getString("regdate"));
+				
+				
+				list.add(dto2);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+		}
+		}return list;
+	}
 	
+	
+	
+	
+	
+	
+	public List<FileDto> getMyList(FileDto dto){
+		List<FileDto> list=new ArrayList<FileDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT *"
+					+ " FROM"
+					+ "	(SELECT result1.*, ROWNUM AS rnum"
+					+ " FROM"
+					+ "	(SELECT num,title,nick,viewCount,B.regdate,category" + 
+					"	FROM BOARD_FILE B,USERS U" + 
+					"	WHERE B.WRITER=U.ID AND WRITER=?"
+					+ " ORDER BY num DESC) result1)"
+					+ " WHERE rnum>=? AND rnum<=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, dto.getWriter());
+			pstmt.setInt(2, dto.getStartRowNum());
+			pstmt.setInt(3, dto.getEndRowNum());
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			while (rs.next()) {
+				FileDto dto2=new FileDto();
+				dto2.setNum(rs.getInt("num"));
+				dto2.setNick(rs.getString("nick"));
+				dto2.setTitle(rs.getString("title"));
+				dto2.setViewCount(rs.getInt("viewcount"));
+				dto2.setRegdate(rs.getString("regdate"));
+				dto2.setCategory(rs.getString("category"));
+				list.add(dto2);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return list;
+	}
+	
+	public int getMyCount(FileDto dto) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS count"
+					+ " FROM BOARD_FILE B, USERS U" + 
+					"	WHERE B.WRITER=U.ID AND WRITER=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, dto.getWriter());
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			if (rs.next()) {
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
 	
 	   public boolean addViewCount(int num) {
 		      Connection conn = null;
@@ -131,6 +271,42 @@ public class FileDao {
 		}
 	}
 	 
+		public String getTitle(int num) {
+			String title=null;
+			
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			ResultSet rs = null;
+			try {
+				conn = new DbcpBean().getConn();
+				// 실행할 SELECT 문.
+				String sql = "SELECT title" + 
+						" FROM board_file" + 
+						" WHERE num = ?";
+				pstmt = conn.prepareStatement(sql);
+				// ? 에 바인딩할 내용은 여기서.
+				pstmt.setInt(1, num);
+				rs = pstmt.executeQuery();
+				//반복문 돌면서 select 된 회원정보  읽어오기
+				if (rs.next()) {
+					title=rs.getString("title");
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				try {
+					if (rs != null)
+						rs.close();
+					if (pstmt != null)
+						pstmt.close();
+					if (conn != null)
+						conn.close();
+				} catch (Exception e) {
+				}
+			}
+			return title;
+		}
+	
 	
 	// 한명의 파일 목록을 가져오는 메소드
 	public FileDto getData(int num) {
@@ -256,7 +432,7 @@ public class FileDao {
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
 	               "   ON board_file.writer = users.id"+
-	               "   WHERE category LIKE '%'||?||'%'"+
+	               "   WHERE category LIKE ?"+
 	               "   ORDER BY num DESC)" + 
 	               " WHERE num=?";
 	         
@@ -494,7 +670,7 @@ public class FileDao {
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
 		               "   ON board_file.writer = users.id"+
-		               "   WHERE title LIKE '%'||?||'%' OR category LIKE '%'||?||'%'"+
+		               "   WHERE title LIKE '%'||?||'%' OR category LIKE ?"+
 		               "   ORDER BY num DESC)" + 
 		               " WHERE num=?";
 		         //PreparedStatement 객체의 참조값 얻어오기
@@ -554,7 +730,7 @@ public class FileDao {
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
 		               "   ON board_file.writer = users.id"+
-		               "   WHERE nick LIKE '%'||?||'%' OR category LIKE '%'||?||'%'"+
+		               "   WHERE nick LIKE '%'||?||'%' OR category LIKE ?"+
 		               "   ORDER BY num DESC)" + 
 		               " WHERE num=?";
 		         //PreparedStatement 객체의 참조값 얻어오기
@@ -614,7 +790,7 @@ public class FileDao {
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
 		               "   ON board_file.writer = users.id"+
-		               "   WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE'%'||?||'%'"+
+		               "   WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"+
 		               "   ORDER BY num DESC)" + 
 		               " WHERE num=?";
 		         //PreparedStatement 객체의 참조값 얻어오기
@@ -669,7 +845,7 @@ public class FileDao {
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO board_file" + 
 					" (num, writer, category, title, content, regdate, viewCount, orgFileName, saveFileName, fileSize)" + 
-					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, SYSDATE, 0, ?, ?, ?)";
+					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 0, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getWriter());
@@ -969,7 +1145,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE category LIKE '%'||?||'%'"
+					+ "	 		WHERE category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1022,7 +1198,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'"
+					+ "	 		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1077,7 +1253,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
+					+ "	 		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1131,7 +1307,7 @@ public class FileDao {
 					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
-					+ "	 		WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'"
+					+ "	 		WHERE nick LIKE '%'||?||'%' AND category LIKE ?"
 					+ "			ORDER BY num DESC)result1)"
 					+ "		WHERE rnum BETWEEN ? AND ?";
 			pstmt = conn.prepareStatement(sql);
@@ -1309,7 +1485,7 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file"
-		               + " WHERE category LIKE '%'||?||'%'";
+		               + " WHERE category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getCategory());
 			
@@ -1342,7 +1518,7 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file"
-		               + " WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE '%'||?||'%'";
+		               + " WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getContent());
@@ -1377,7 +1553,7 @@ public class FileDao {
 			conn = new DbcpBean().getConn();
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file"
-		               + " WHERE title LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
+		               + " WHERE title LIKE '%'||?||'%' AND category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getTitle());
 			pstmt.setString(2, dto.getCategory());
@@ -1412,7 +1588,7 @@ public class FileDao {
 			String sql = "SELECT NVL(MAX(ROWNUM), 0) AS num "
 		               + " FROM board_file INNER JOIN users"
 		               + " ON board_file.writer = users.id"
-		               + " WHERE nick LIKE '%'||?||'%' AND category LIKE '%'||?||'%'";
+		               + " WHERE nick LIKE '%'||?||'%' AND category LIKE ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getNick());
 			pstmt.setString(2, dto.getCategory());

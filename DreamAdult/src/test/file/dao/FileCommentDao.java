@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import test.file.dto.FileCommentDto;
+import test.qna.dto.QnACommentDto;
 import test.util.DbcpBean;
 
 public class FileCommentDao {
@@ -18,6 +19,130 @@ public class FileCommentDao {
 		}
 		return dao;
 	}
+	public List<FileCommentDto> getMyList(FileCommentDto dto){
+		List<FileCommentDto> list=new ArrayList<>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT *"
+					+ "	FROM"
+					+ "	(SELECT result1.*,ROWNUM AS rnum"
+					+ " 	FROM"
+					+ "		(SELECT num,B.nick,content,ref_group,B.regdate" + 
+					"		FROM board_file_comment B,users U" + 
+					"		WHERE B.WRITER=U.ID AND WRITER=? AND deleted='no')result1)"
+					+ "	WHERE rnum>=? AND rnum<=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, dto.getWriter());
+			pstmt.setInt(2, dto.getStartRowNum());
+			pstmt.setInt(3, dto.getEndRowNum());
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			while (rs.next()) {
+				FileCommentDto dto2=new FileCommentDto();
+				dto2.setNum(rs.getInt("num"));
+				dto2.setNick(rs.getString("nick"));
+				dto2.setContent(rs.getString("content"));
+				dto2.setRef_group(rs.getInt("ref_group"));
+				dto2.setRegdate(rs.getString("regdate"));
+				list.add(dto2);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return list;
+	}
+  
+	public int getMyCount(FileCommentDto dto) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT NVL(MAX(ROWNUM),0) AS count"
+					+ " FROM BOARD_FILE_COMMENT B, USERS U" + 
+					"	WHERE B.WRITER=U.ID AND WRITER=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, dto.getWriter());
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			if (rs.next()) {
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
+	
+	public int myCount(String id) {
+		int count=0;
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			//Connection 객체의 참조값 얻어오기
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT COUNT(*) AS count"
+					+ "	FROM board_file_comment"
+					+ "	WHERE writer=?";
+			//PreparedStatement 객체의 참조값 얻어오기
+			pstmt = conn.prepareStatement(sql);
+			//?에 바인딩할 내용 있으면 여기서 바인딩
+			pstmt.setString(1, id);
+			//select 문 수행하고 결과를 ResultSet으로 받아오기
+			rs = pstmt.executeQuery();
+			//반복문 돌면서 ResultSet 객체에 있는 내용을 추출해서 원하는 Data type으로 포장하기
+			if (rs.next()) {
+				count=rs.getInt("count");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+			}
+		}return count;
+	}
+	
 	//게시판 목록에 댓글 수를 불러오는 메소드
 	   public int replyCount(int ref_group) {
 	      int reply=0;

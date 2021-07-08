@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	String id=(String)session.getAttribute("id");
 	final int PAGE_ROW_COUNT = 5;
 	final int PAGE_DISPLAY_COUNT = 5;
 	
@@ -105,6 +106,7 @@
 <head>
 <meta charset="UTF-8">
 <title>list.jsp</title>
+
 <style>
 	.page-ui a{
       text-decoration: none;
@@ -131,7 +133,11 @@
 </style>
 </head>
 <body>
+<jsp:include page="../include/navber.jsp">
+   <jsp:param value="file" name="thisPage"/>
+</jsp:include>
 <div class="container">
+	<h1>자료실 게시판</h1>
     <a href="<%=request.getContextPath() %>/file/private/uploadform.jsp">새글 작성</a>
 		<table>
 	         <thead>
@@ -160,7 +166,6 @@
 	               <%} %>
 	         </tbody>
 	      </table>	
-	</div>
 	<div class="page-ui clearfix">
       <ul>
          <%if(startPageNum != 1){ %>
@@ -205,8 +210,12 @@
    		<input type="text" id="keyword" name="keyword" placeholder="검색어..." value="<%=keyword%>" />
    		
    		<button type="submit">검색</button>
+   		
+   		<%if(id!=null) {%>
+   			<a href="private/myPage.jsp">내가 쓴 글 보기</a>
+   		<%} %>
    </form>
-   
+
    
    <%if(!condition.equals("")) {%>
 		<p>
@@ -214,6 +223,6 @@
 		</p>
    <%} %>
 	
-	
+</div>
 </body>
 </html>

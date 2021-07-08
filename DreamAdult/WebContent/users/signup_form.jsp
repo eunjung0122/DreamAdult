@@ -5,39 +5,74 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/signup_form.jsp</title>
+<jsp:include page="../include/resource.jsp"></jsp:include>
+<style>
+	.btn-primary{
+	  	background-color: #3c64ff;
+	  	    border-color: #3c64ff;
+	  }
+	  .btn-primary:hover{
+	  	background-color: #3258ed;
+	  	border-color: #3258ed;
+	  }
+	.bd-placeholder-img {
+	    font-size: 1.125rem;
+	    text-anchor: middle;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    user-select: none;
+	  }
+	
+	@media (min-width: 768px) {
+	    .bd-placeholder-img-lg {
+	      font-size: 3.5rem;
+	    }
+	  }
+	.container {
+		max-width: 960px;
+	  }
+</style>
+    
 </head>
-<body>
+<body class="bg-light">
 <div class="container">
-	<h1>회원 가입 폼 입니다.</h1>
+	<div class="mt-4 text-center">
+		<img  src="../images/logo2.png" width="100" height="80">
+		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입 폼</h1>
+	</div>
+	
 	<form action="signup.jsp" method="post" id="myForm">
-		<div>
-			<label class="control-label" for="id">아이디</label>
+		<div class="col-12">
+			<label class="control-label" for="id">아이디
+				<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
+			</label>
 			<input class="form-control" type="text" name="id" id="id"/>
-			<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
 			<div class="invalid-feedback">사용할수 없는 아이디 입니다.</div>
 		</div>
-		<div>
+		<div class="col-12 mt-2">
 			<label class="control-label" for="nick">닉네임</label>
 			<input class="form-control" type="text" name="nick" id="nick"/>
 			<div class="invalid-feedback">사용할수 없는 닉네임 입니다.</div>
 		</div>
-		<div>
-			<label class="control-label" for="pwd">비밀번호</label>
+		<div class="col-12 mt-2">
+			<label class="control-label" for="pwd">비밀번호
+				<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
+			</label>
 			<input class="form-control" type="password" name="pwd" id="pwd"/>
-			<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
 			<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
 		</div>
-		<div>
+		<div class="col-12 mt-2">
 			<label class="control-label" for="pwd2">비밀번호 확인</label>
 			<input class="form-control" type="password" name="pwd2" id="pwd2"/>
 		</div>
-		<div>
-			<label class="control-label" for="email">이메일</label>
-			<input class="form-control" type="text" name="email" id="email"/>
+		<div class="col-12 mt-2">
+			<label class="control-label form-label" for="email">이메일</label>
+			<input class="form-control" type="text" name="email" id="email" placeholder="you@example.com"/>
 			<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
 		</div> 
+
 		<fieldset>
-			<legend>관심있는 언어 선택</legend>
+			<legend class="mt-4">관심있는 언어 선택</legend>
 			<div class="form-check form-check-inline">
 				<input class="form-check-input" type="checkbox" name="language" id="lan1" value="Java"/>
 				<label class="form-check-label" for="lan1">자바</label>
@@ -51,9 +86,10 @@
 				<label class="form-check-label" for="lan3">JSP</label>
 			</div>
 		</fieldset>
-			
 		
-		<button class="btn btn-primary" type="submit">가입</button>
+		<hr class="my-4">
+		<button class="w-100 btn btn-primary btn-lg" type="submit">가입</button>
+		<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 	</form>
 </div>
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>

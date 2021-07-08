@@ -7,7 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-
+	String id=(String)session.getAttribute("id");
 	//한 페이지에 몇개씩 표시할 것인지
 	final int PAGE_ROW_COUNT=5;
 	//하단 페이지를 몇개씩 표시할 것인지
@@ -140,6 +140,9 @@
 </style>
 </head>
 <body>
+<jsp:include page="../include/navber.jsp">
+   <jsp:param value="study" name="thisPage"/>
+</jsp:include>
 <div class="container">
 	<h1>학습공부 게시판</h1>
 	<a href="<%=request.getContextPath()%>/study/private/insertform.jsp">새글 작성</a>
@@ -214,7 +217,9 @@
    		
    		<button type="submit">검색</button>
    		
-   		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
+   		<%if(id!=null) {%>
+   			<a href="private/myPage.jsp">내가 쓴 글 보기</a>
+   		<%} %>
    </form>
    <%if(!condition.equals("")) {%>
 		<p>
