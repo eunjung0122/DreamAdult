@@ -46,9 +46,10 @@
 		session.setAttribute("id", id); 
 		//아무런 동작을 하지 않았을때 초 단위로 세션 유지시간을 설정할수 있다. (초단위)
 		session.setMaxInactiveInterval(60*30);
-		String cPath=request.getContextPath();
-		response.sendRedirect(cPath+"/index.jsp");
 	%>
+	<script>
+		location.href="<%=url%>";
+	</script>
 	<%}else{ %>
 		<div class="alert alert-danger d-flex align-items-center" role="alert">
 			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
