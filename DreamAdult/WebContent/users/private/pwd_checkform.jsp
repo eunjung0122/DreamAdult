@@ -7,6 +7,7 @@
 <title>users/private/pwd_checkform.jsp</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<h1>개인정보 수정 전 비밀번호 확인 폼</h1>
 	<form action="updateform.jsp" method="post" id="myForm">

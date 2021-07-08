@@ -56,7 +56,6 @@
 <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-
 <jsp:include page="include/navber.jsp"></jsp:include>
 <div class="main_page container">
 	<h1 class="main_tit">

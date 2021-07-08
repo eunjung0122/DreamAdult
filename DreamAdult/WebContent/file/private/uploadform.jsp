@@ -7,6 +7,7 @@
 <title>uploadform.jsp</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 	<div class="container">
 		<form action="<%=request.getContextPath() %>/file/private/upload.jsp" method="post" id="uploadForm" enctype="multipart/form-data">
 			<div>

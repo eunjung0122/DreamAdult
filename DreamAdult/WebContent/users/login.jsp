@@ -25,9 +25,9 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/login.jsp</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
 </head>
 <body>
+<jsp:include page="../include/navber.jsp"></jsp:include>
 <div class="container mt-3">
 	<h1 class="mt-3">알림</h1>
 	<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">

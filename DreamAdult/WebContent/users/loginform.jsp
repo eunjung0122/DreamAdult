@@ -35,34 +35,74 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/loginform.jsp</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
-	  .btn-success{
-	  	background-color: #3c64ff;
-	  	    border-color: #3c64ff;
-	  }
-	  .btn-success:hover{
-	  	background-color: #3258ed;
-	  	border-color: #3258ed;
-	  	
-	  }
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
+html, body {
+	height: 100%;
+}
 
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
+body {
+	background-color: #f5f5f5;
+	align-items:center;
+}
+
+#top{
+	padding:200px;
+}
+
+.form-signin {
+	width: 330px;
+	padding: 15px;
+	margin: auto;
+}
+
+.form-signin .checkbox {
+	font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.btn-success {
+	background-color: #3c64ff;
+	border-color: #3c64ff;
+}
+
+.btn-success:hover {
+	background-color: #3258ed;
+	border-color: #3258ed;
+}
+
+.bd-placeholder-img {
+	font-size: 1.125rem;
+	text-anchor: middle;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+@media ( min-width : 768px) {
+	.bd-placeholder-img-lg {
+		font-size: 3.5rem;
+	}
+}
 </style>
-<link href="../css/signin.css" rel="stylesheet">
 </head>
 <body class="text-center">
+<jsp:include page="../include/navber.jsp"></jsp:include>
+<div id="top">
 	<main class="form-signin">
 	  	<form action="login.jsp" method="post">
 	  		<img class="mb-4" src="../images/logo2.png" alt="" width="100" height="80">
@@ -101,5 +141,6 @@
 		    <p class="mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 	  	</form>
 	</main>
+</div>
 </body>
 </html>

@@ -33,6 +33,7 @@
 <title>/users/private/bookmarked</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<h2>QnA 북마크 된 글</h2>
 	<table>

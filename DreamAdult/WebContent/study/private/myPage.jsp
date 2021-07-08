@@ -73,6 +73,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/study/private/myPage.jsp">글 </a>/<a href="${pageContext.request.contextPath}/study/private/myComment.jsp">댓글</a></h1>
 	<table>
