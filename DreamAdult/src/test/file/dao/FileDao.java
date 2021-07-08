@@ -8,20 +8,73 @@ import java.util.List;
 
 import test.file.dto.FileDto;
 import test.qna.dto.QnADto;
+import test.study.dto.StudyDto;
 import test.util.DbcpBean;
 
 public class FileDao {
 	
 	private static FileDao dao;
-	
 	private FileDao() {}
-	
 	public static FileDao getInstance() {
 		if(dao==null) {
 			dao=new FileDao();
 		}
 		return dao;
 	}
+	
+	public List<FileDto> getLikeMaxList(FileDto dto){
+		List<FileDto> list = new ArrayList<FileDto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT *"
+					+ "	FROM"
+					+ "		(SELECT result1.*, ROWNUM AS rnum"
+					+ " 	FROM"
+					+ " 		(SELECT DISTINCT board_file.num, count(*)OVER(PARTITION BY board_file.num) AS cnt,"
+					+ "			writer, title, nick, board_file.regdate"
+					+ " 		FROM board_file"
+					+ " 		INNER JOIN users ON board_file.writer = users.id"
+					+ " 		INNER JOIN filelike ON board_file.num = filelike.num"
+					+ " 		ORDER BY cnt DESC"
+					+ " 		)result1)"
+					+ " 	WHERE rnum <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 3);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				FileDto dto2=new FileDto();
+				dto2.setNum(rs.getInt("num"));
+				dto2.setTitle(rs.getString("title"));
+				dto2.setNick(rs.getString("nick"));
+				dto2.setRegdate(rs.getString("regdate"));
+				
+				
+				list.add(dto2);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+		}
+		}return list;
+	}
+	
+	
+	
+	
+	
 	
 	public List<FileDto> getMyList(FileDto dto){
 		List<FileDto> list=new ArrayList<FileDto>();
@@ -792,7 +845,7 @@ public class FileDao {
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO board_file" + 
 					" (num, writer, category, title, content, regdate, viewCount, orgFileName, saveFileName, fileSize)" + 
-					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, SYSDATE, 0, ?, ?, ?)";
+					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 0, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getWriter());
