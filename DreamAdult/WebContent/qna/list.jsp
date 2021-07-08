@@ -164,7 +164,7 @@
             <td><%=tmp.getNick() %></td>
             <td>
                <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle()%></a>
-            [<%=QnACommentDao.getInstance().replyCount(tmp.getNum()) %>]
+            	<a data-num="<%=tmp.getNum() %>" href="javascript:" class="comment-link">[<%=QnACommentDao.getInstance().replyCount(tmp.getNum()) %>]</a>
             </td>
             <td><%=tmp.getViewCount() %></td>
             <td><%=tmp.getRegdate() %></td>
@@ -226,6 +226,14 @@
 		</p>
    <%} %>
 </div>
-
+<script>
+	let commentLinks=document.querySelectorAll(".comment-link");
+	for(i=0; i<commentLinks.length; i++){
+		commentLinks[i].addEventListener("click",function(){
+			const num=this.getAttribute("data-num");
+			window.open("private/comment.jsp?num="+num, "댓글목록", "width=900,height=600,top=300,left=500");
+		});
+	}
+</script>
 </body>
 </html>
