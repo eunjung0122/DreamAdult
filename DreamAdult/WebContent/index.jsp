@@ -122,8 +122,17 @@
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
-							<a href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">확인</a>
+							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
+								<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
+							</a>
+							<p>
+								<span><%=qnaList.get(1).getNick() %></span>
+								<span><%=qnaList.get(1).getRegdate() %></span>
+							</p>
 						</span>
+						<div class="img-wrap">
+							<img src="images/cactusLine.png"/>
+						</div>
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
@@ -157,9 +166,18 @@
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
-								<a href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">확인</a>
+								<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
+									<strong class="tit_card"><%=qnaList.get(0).getTitle() %></strong>
+								</a>
+								<p>
+									<span><%=qnaList.get(0).getNick() %></span>
+									<span><%=qnaList.get(0).getRegdate() %></span>
+								</p>
 							</span>
 						</span>
+						<div class="img-wrap">
+							<img src="images/star.png"/>
+						</div>
 					</li>
 					<li class="box box-m">
 						<span class="txt_wrap">
