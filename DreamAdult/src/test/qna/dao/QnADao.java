@@ -19,6 +19,52 @@ public class QnADao {
 		return dao;
 	}
 	
+	public List<QnADto> getLikeMaxList(QnADto dto){
+		List<QnADto> list = new ArrayList<QnADto>();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "SELECT *" + 
+					" FROM" + 
+					"	(SELECT result1.*, ROWNUM AS rnum" + 
+					"		FROM" + 
+					"		(SELECT DISTINCT board_qna.num, count(*)OVER(PARTITION BY board_qna.num) AS cnt," + 
+					"		 writer, board_qna.nick, title, TO_CHAR(board_qna.regdate,'YYYY.MM.DD')regdate" + 
+					"		 FROM board_qna" + 
+					"		 INNER JOIN users ON board_qna.writer = users.id" + 
+					"		 INNER JOIN qnalike ON board_qna.num = qnalike.num" + 
+					"		 ORDER BY cnt DESC" + 
+					"		 )result1)" + 
+					" WHERE rnum <= ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 3);
+			rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				QnADto dto2=new QnADto();
+				dto2.setNum(rs.getInt("num"));
+				dto2.setNick(rs.getString("nick"));
+				dto2.setTitle(rs.getString("title"));
+				dto2.setRegdate(rs.getString("regdate"));
+				list.add(dto2);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+		}
+		}return list;
+	}
 	
 	public List<QnADto> getMyList(QnADto dto){
 		List<QnADto> list=new ArrayList<QnADto>();
