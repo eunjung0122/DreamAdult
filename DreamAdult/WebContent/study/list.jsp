@@ -217,6 +217,14 @@
 	  </ul>
 	</nav>
 </div>
-
+<script>
+	let commentLinks=document.querySelectorAll(".comment-link");
+	for(i=0; i<commentLinks.length; i++){
+		commentLinks[i].addEventListener("click",function(){
+			const num=this.getAttribute("data-num");
+			window.open("private/comment.jsp?num="+num, "댓글목록", "width=900,height=600,top=300,left=500");
+		});
+	}
+</script>
 </body>
 </html>

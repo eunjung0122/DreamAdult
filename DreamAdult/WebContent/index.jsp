@@ -1,3 +1,5 @@
+<%@page import="test.qna.dao.QnADao"%>
+<%@page import="test.qna.dto.QnADto"%>
 <%@page import="test.file.dao.FileDao"%>
 <%@page import="test.file.dto.FileDto"%>
 <%@page import="test.study.dao.StudyDao"%>
@@ -23,7 +25,10 @@
 	
 	FileDto filedto = new FileDto();
 	List<FileDto> fileList = FileDao.getInstance().getLikeMaxList(filedto);
-
+	
+	QnADto qnadto =new QnADto();
+	List<QnADto> qnaList = QnADao.getInstance().getLikeMaxList(qnadto);
+	
 	boolean isUpgrade=false;
 	
 	if(id!=null){
@@ -51,7 +56,6 @@
 <link rel="stylesheet" href="css/main.css" />
 </head>
 <body>
-
 <jsp:include page="include/navber.jsp"></jsp:include>
 <div class="main_page container">
 	<h1 class="main_tit">
@@ -117,8 +121,17 @@
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
-							1
+							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
+								<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
+							</a>
+							<p>
+								<span><%=qnaList.get(1).getNick() %></span>
+								<span><%=qnaList.get(1).getRegdate() %></span>
+							</p>
 						</span>
+						<div class="img-wrap">
+							<img src="images/cactusLine.png"/>
+						</div>
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
@@ -152,8 +165,18 @@
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
+								<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
+									<strong class="tit_card"><%=qnaList.get(0).getTitle() %></strong>
+								</a>
+								<p>
+									<span><%=qnaList.get(0).getNick() %></span>
+									<span><%=qnaList.get(0).getRegdate() %></span>
+								</p>
 							</span>
 						</span>
+						<div class="img-wrap">
+							<img src="images/star.png"/>
+						</div>
 					</li>
 					<li class="box box-m">
 						<span class="txt_wrap">
@@ -185,6 +208,7 @@
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
 								<span class="txt_cate">QnA</span>
+								<a href="qna/private/detail.jsp?num=<%=qnaList.get(2).getNum()%>">확인</a>
 							</span>
 						</span>
 					</li>

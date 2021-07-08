@@ -28,6 +28,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<h1>가입 정보 수정 폼 입니다.</h1>
 	<a id="profileLink" href="javascript:">

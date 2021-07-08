@@ -35,10 +35,11 @@ public class FileDao {
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ " 	FROM"
 					+ " 		(SELECT DISTINCT board_file.num, count(*)OVER(PARTITION BY board_file.num) AS cnt,"
-					+ "			writer, title, nick, board_file.regdate"
+					+ "			writer, title, nick, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate"
 					+ " 		FROM board_file"
 					+ " 		INNER JOIN users ON board_file.writer = users.id"
 					+ " 		INNER JOIN filelike ON board_file.num = filelike.num"
+					+ "			WHERE liked ='yes'"
 					+ " 		ORDER BY cnt DESC"
 					+ " 		)result1)"
 					+ " 	WHERE rnum <= ?";

@@ -17,6 +17,7 @@
 <title>/qna/private/updateform.jsp</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
    <h1>글 수정</h1>
    <form action="update.jsp" method="post" id="updateForm">

@@ -36,12 +36,11 @@
 
 body {
 	font-family: 'Noto Sans KR', sans-serif;
-	height: 2000px;
 	font-size: 16px;
 }
 
 .title-font{
-	font-family: 'Noto Sans KR', sans-serif;
+	font-family:'Montserrat', 'Noto Sans KR', sans-serif;
 	font-size: 18px;
 	font-weight: 700;
 }
@@ -64,7 +63,7 @@ body {
 </style>
 </head>
 <body>
-	<nav id="menuBer" class="navbar navbar-light navbar-expand-lg title-font">
+	<nav id="menuBer" class="navbar navbar-light navbar-expand-lg title-font" style="">
 		<div class="container">
 			<a class="navbar-brand" href="<%=request.getContextPath() %>/">
 				<img src="${pageContext.request.contextPath}/images/logo2.png" width="21" height="21" />

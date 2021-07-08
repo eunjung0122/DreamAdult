@@ -178,6 +178,7 @@
          <tr>
             <td><%=tmp.getNum() %></td>
             <td><%=tmp.getCategory() %></td>
+
             <td style="text-align:left;">
                <a class="subject" href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>">
                <%=tmp.getTitle()%>
@@ -221,5 +222,17 @@
 	  </ul>
 	</nav>
 </div>
+
+
+<script>
+	let commentLinks=document.querySelectorAll(".comment-link");
+	for(i=0; i<commentLinks.length; i++){
+		commentLinks[i].addEventListener("click",function(){
+			const num=this.getAttribute("data-num");
+			window.open("private/comment.jsp?num="+num, "댓글목록", "width=900,height=600,top=300,left=500");
+		});
+	}
+</script>
+
 </body>
 </html>
