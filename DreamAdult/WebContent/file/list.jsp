@@ -119,63 +119,6 @@
 		<span>코드공유</span>
 	</h1>
 
-<div class="container">
-	<h1>자료실 게시판</h1>
-    <a href="<%=request.getContextPath() %>/file/private/uploadform.jsp">새글 작성</a>
-		<table>
-	         <thead>
-	            <tr>
-	               <th>글번호</th>
-	               <th>카테고리</th>
-	               <th>제목</th>
-	               <th>작성자</th>
-	               <th>조회수</th>
-	               <th>등록일</th>
-	            </tr>
-	         </thead>
-	         <tbody>
-	            <%for(FileDto tmp:list){%>
-	                  <tr>
-	                     <td><%=tmp.getNum() %></td>
-	                     <td><%=tmp.getCategory() %></td>
-	                     <td>
-              				 <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle()%></a>
-            					<a data-num="<%=tmp.getNum() %>" href="javascript:" class="comment-link">[<%=FileCommentDao.getInstance().replyCount(tmp.getNum()) %>]</a>
-           				 </td>
-	                     <td><%=tmp.getNick() %></td>
-	                     <td><%=tmp.getViewCount() %></td>
-	                     <td><%=tmp.getRegdate() %></td>
-	                  </tr>
-	               <%} %>
-	         </tbody>
-	      </table>	
-	<div class="page-ui clearfix">
-      <ul>
-         <%if(startPageNum != 1){ %>
-            <li>
-               <a href="list.jsp?pageNum=<%=startPageNum-1 %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>">Prev</a>
-            </li>   
-         <%} %>
-         
-         <%for(int i=startPageNum; i<=endPageNum ; i++){ %>
-            <li>
-               <%if(pageNum == i){ %>
-                  <a class="active" href="list.jsp?pageNum=<%=i %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=i %></a>
-               <%}else{ %>
-                  <a href="list.jsp?pageNum=<%=i %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=i %></a>
-               <%} %>
-            </li>   
-         <%} %>
-         <%if(endPageNum < totalPageCount){ %>
-            <li>
-               <a href="list.jsp?pageNum=<%=endPageNum+1 %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>" >Next</a>
-            </li>
-         <%} %>
-      </ul>
-   </div>
-   
-   <div style="clear:both;"></div>
-   
    <form action="list.jsp" method="get" id="myForm">
 
    		<select name="category" id="category">
@@ -276,14 +219,6 @@
 	</div>
 
 
-   
-   <%if(!condition.equals("")) {%>
-		<p>
-			<strong><%=totalRow %></strong>개의 글이 검색 되었습니다. 
-		</p>
-   <%} %>
-	
-</div>
 <script>
 	let commentLinks=document.querySelectorAll(".comment-link");
 	for(i=0; i<commentLinks.length; i++){
