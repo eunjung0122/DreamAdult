@@ -172,6 +172,7 @@
 
 </head>
 <body>
+
 <jsp:include page="include/navber.jsp"></jsp:include>
 <div class="main_page container">
 	<h1 class="main_tit">
@@ -346,6 +347,7 @@
 			</div>
 		</div>
 	</div>
+
 
 	<a class="link-top" href="">
 		<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">

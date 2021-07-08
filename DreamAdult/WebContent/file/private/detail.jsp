@@ -1,4 +1,6 @@
 
+<%@page import="test.file.dao.FileBookMarkDao"%>
+<%@page import="test.file.dto.FileBookMarkDto"%>
 <%@page import="test.file.dto.FileLikeDto"%>
 <%@page import="test.file.dao.FileLikeDao"%>
 <%@page import="java.util.List"%>
@@ -78,6 +80,16 @@
 		isLogin=true;
 	}
 	
+	FileBookMarkDto dtoF=new FileBookMarkDto();
+	dtoF.setNum(num);
+	dtoF.setId(id);
+	int counting=FileBookMarkDao.getInstance().isExist(dtoF);
+	if(counting<1){
+	   FileBookMarkDao.getInstance().insert(dtoF);
+	}
+	dtoF=FileBookMarkDao.getInstance().getData(dtoF);
+	
+	
 	final int PAGE_ROW_COUNT = 10;
 	int pageNum = 1;
 
@@ -96,6 +108,13 @@
 	int totalRow = FileCommentDao.getInstance().getCount(num);
 	int totalPageCount = (int) Math.ceil(totalRow / (double) PAGE_ROW_COUNT);
 	
+
+	int markCount=FileBookMarkDao.getInstance().getCount(num);
+	   
+	boolean isMark=false;
+	if(dtoF.getBookmark().equals("yes")){
+	   isMark=true;
+  }
 	
 	int likeCount = FileLikeDao.getInstance().getCount(num);
 	
@@ -248,11 +267,19 @@
 		</table>
 		<ul>
 			<li><a href="<%=request.getContextPath() %>/file/list.jsp">목록보기</a></li>
+
+			<%if(isMark){ %>
+            	<li><a data-num="<%=num %>" href="javascript:" class="mark-link">√ 북마크 된 글입니다.</a></li>
+         	<%}else{ %>
+            	<li><a data-num="<%=num %>" href="javascript:" class="mark-link">북마크</a></li>
+         	<%} %>
+
 			<%if(isLike){ %>
 	   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♥<%=likeCount%></a></li>
 	   		<%}else{ %>
 	   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
 	   		<%} %>
+
 			<%if(dto.getWriter().equals(id)){ %>
 	        <li><a href="<%=request.getContextPath() %>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
 			<li><a href="<%=request.getContextPath() %>/file/private/delete.jsp?num=<%=dto.getNum()%>">삭제</a></li> 
@@ -460,6 +487,39 @@
 		}
 	}
 	
+
+	   let isMark=<%=isMark%>;
+	   let markCount=<%=markCount%>
+	   
+	   document.querySelector(".mark-link").addEventListener("click",function(){
+	      const num=this.getAttribute("data-num");
+	      if(isMark){
+	         ajaxPromise("file_unmark.jsp","post","num="+num)
+	         .then(function(response){
+	            return response.json();
+	         })
+	         .then(function(data){
+	            if(data.isSuccess){
+	               markCount--; 
+	               document.querySelector(".mark-link").innerText="북마크";
+	            }
+	         });
+	         isMark=false;
+	      }else{
+	         ajaxPromise("file_mark.jsp","post","num="+num)
+	         .then(function(response){
+	            return response.json();
+	         })
+	         .then(function(data){
+	            if(data.isSuccess){
+	               markCount++;
+	               document.querySelector(".mark-link").innerText="√ 북마크 된 글입니다.";
+	            }
+	         });
+	         isMark=true;
+	      }
+	   });
+
 	
 	let isLike=<%=isLike%>;
 	let likeCount=<%=likeCount%>
@@ -492,6 +552,7 @@
 			isLike=true;
 		}
 	});
+
 	</script>
 </body>
 </html>

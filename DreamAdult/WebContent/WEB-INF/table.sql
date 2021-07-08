@@ -64,3 +64,14 @@ CREATE TABLE board_qna_comment(
 -- 댓글기능의 번호를 얻어낼 시퀀스
 CREATE SEQUENCE board_qna_comment_seq;
 
+-- 북마크 기능 테이블 (bookmark_file, bookmark_study 동일)
+CREATE TABLE bookmark_qna(
+	num NUMBER,
+	id VARCHAR2(100),
+	category VARCHAR2(100),
+	nick VARCHAR2(100),
+	title VARCHAR2(100),
+	viewCount NUMBER,
+	regdate VARCHAR2(100), 
+	bookmark CHAR(3) DEFAULT 'no'  
+);

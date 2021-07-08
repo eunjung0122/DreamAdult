@@ -1,3 +1,5 @@
+<%@page import="test.study.dao.StudyBookMarkDao"%>
+<%@page import="test.study.dto.StudyBookMarkDto"%>
 <%@page import="test.study.dto.StudyLikeDto"%>
 <%@page import="test.study.dao.StudyLikeDao"%>
 <%@page import="java.util.List"%>
@@ -75,9 +77,19 @@
 	if(count<1){
 		StudyLikeDao.getInstance().insert(dtoL);
 	}
+	
 	dtoL=StudyLikeDao.getInstance().getData(dtoL);
 	
 	
+	StudyBookMarkDto dtoS=new StudyBookMarkDto();
+	dtoS.setNum(num);
+	dtoS.setId(id);
+	int counting=StudyBookMarkDao.getInstance().isExist(dtoS);
+	if(counting<1){
+	   StudyBookMarkDao.getInstance().insert(dtoS);
+	}
+	
+	dtoS=StudyBookMarkDao.getInstance().getData(dtoS);
 	
 	   /*
     [ 댓글 페이징 처리에 관련된 로직 ]
@@ -118,6 +130,12 @@
 		isLike=true;
 	}
 	
+	int markCount=StudyBookMarkDao.getInstance().getCount(num);
+	   
+	boolean isMark=false;
+	if(dtoS.getBookmark().equals("yes")){
+	   isMark=true;
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -279,6 +297,11 @@
    		<%}else{ %>
    			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
    		<%} %>
+   		<%if(isMark){ %>
+            <li><a data-num="<%=num %>" href="javascript:" class="mark-link">√ 북마크 된 글입니다.</a></li>
+         <%}else{ %>
+            <li><a data-num="<%=num %>" href="javascript:" class="mark-link">북마크</a></li>
+         <%} %>
    		<%if(dto.getWriter().equals(id)) {%>
    			<li><a href="<%=request.getContextPath()%>/study/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
    			<li><a href="<%=request.getContextPath()%>/study/private/delete.jsp?num=<%=dto.getNum()%>"
@@ -520,6 +543,37 @@
 		}
 	});
 	
+	   let isMark=<%=isMark%>;
+	   let markCount=<%=markCount%>
+	   
+	   document.querySelector(".mark-link").addEventListener("click",function(){
+	      const num=this.getAttribute("data-num");
+	      if(isMark){
+	         ajaxPromise("study_unmark.jsp","post","num="+num)
+	         .then(function(response){
+	            return response.json();
+	         })
+	         .then(function(data){
+	            if(data.isSuccess){
+	               markCount--; 
+	               document.querySelector(".mark-link").innerText="북마크";
+	            }
+	         });
+	         isMark=false;
+	      }else{
+	         ajaxPromise("study_mark.jsp","post","num="+num)
+	         .then(function(response){
+	            return response.json();
+	         })
+	         .then(function(data){
+	            if(data.isSuccess){
+	               markCount++;
+	               document.querySelector(".mark-link").innerText="√ 북마크 된 글입니다.";
+	            }
+	         });
+	         isMark=true;
+	      }
+	   });
 	
 </script>
 </body>
