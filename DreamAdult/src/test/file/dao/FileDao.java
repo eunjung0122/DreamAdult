@@ -39,6 +39,7 @@ public class FileDao {
 					+ " 		FROM board_file"
 					+ " 		INNER JOIN users ON board_file.writer = users.id"
 					+ " 		INNER JOIN filelike ON board_file.num = filelike.num"
+					+ "			WHERE liked ='yes'"
 					+ " 		ORDER BY cnt DESC"
 					+ " 		)result1)"
 					+ " 	WHERE rnum <= ?";
