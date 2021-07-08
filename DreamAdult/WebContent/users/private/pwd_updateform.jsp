@@ -7,6 +7,7 @@
 <title>/users/private/pwd_updateform.jsp</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<h1>비밀 번호 수정 폼</h1>
 	<form action="pwd_update.jsp" method="post" id="myForm">

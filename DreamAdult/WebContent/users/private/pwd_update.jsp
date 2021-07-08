@@ -29,6 +29,7 @@
 <title>/users/private/pwd_update.jsp</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<%if(isValid){ %>
 		<p>

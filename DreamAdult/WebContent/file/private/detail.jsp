@@ -1,4 +1,3 @@
-
 <%@page import="test.file.dao.FileBookMarkDao"%>
 <%@page import="test.file.dto.FileBookMarkDto"%>
 <%@page import="test.file.dto.FileLikeDto"%>
@@ -222,6 +221,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 	<div class="container">
 		<%if(dto.getPrevNum()!=0){ %>
     		<a href="detail.jsp?num=<%=dto.getPrevNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>">이전글</a>

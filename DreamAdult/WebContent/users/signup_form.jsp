@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/signup_form.jsp</title>
-<jsp:include page="../include/resource.jsp"></jsp:include>
 <style>
 	.btn-primary{
 	  	background-color: #3c64ff;
@@ -35,6 +34,7 @@
     
 </head>
 <body class="bg-light">
+<jsp:include page="../include/navber.jsp"></jsp:include>
 <div class="container">
 	<div class="mt-4 text-center">
 		<img  src="../images/logo2.png" width="100" height="80">

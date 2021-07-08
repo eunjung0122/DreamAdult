@@ -16,6 +16,7 @@
 <title>uploadform.jsp</title>
 </head>
 <body>
+<jsp:include page="../../include/navber.jsp"></jsp:include>
 	<div class="container">
 		<form action="<%=request.getContextPath() %>/file/private/update.jsp" method="post" id="updateForm" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
