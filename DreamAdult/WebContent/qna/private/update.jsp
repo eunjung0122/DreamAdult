@@ -28,12 +28,12 @@
    <%if(isSuccess){%>
       <script>
          alert("수정 완료 입니다.");
-         location.href="${pageContext.request.contextPath}/qna/list.jsp";
+         location.href="${pageContext.request.contextPath}/qna/private/detail.jsp?num=<%=dto.getNum()%>";
       </script>
    <%}else{%>
       <script>
          alert("수정실패 !");
-         location.href="${pageContext.request.contextPath}/qna/list.jsp";
+         location.href="${pageContext.request.contextPath}/qna/private/detail.jsp?num=<%=dto.getNum()%>";
       </script>
    <%}%>
 
