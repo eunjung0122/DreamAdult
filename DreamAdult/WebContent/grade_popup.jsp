@@ -43,7 +43,7 @@
 	</p>
 </div>
 <form class="text-center" action="nopopup.jsp" method="post">
-	<button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+	<button type="submit" class="btn btn-s btn-custom-dark" data-bs-dismiss="modal">닫기</button>
 </form>
 </body>
 </html>

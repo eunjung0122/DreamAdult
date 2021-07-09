@@ -27,11 +27,11 @@
 		height: 200px;
 	}
 	a{
-		color:#fff;
+		color:#000;
 		text-decoration: none;
 	}
 	a:hover{
-		color:#fff;
+		color:#000;
 		text-decoration: none;
 	}
 	strong {
@@ -41,6 +41,7 @@
 		margin-left:10px;
 	}
 </style>
+<link rel="stylesheet" href="contextPath" />
 </head>
 <body>
  
@@ -59,8 +60,8 @@
 		하루동안 팝업 띄우지 않기
 	</label>
 	
-	<button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-	<button type="button" class="btn btn-primary"><a href="users/signup_form.jsp">회원가입</a></button>
+	<button type="submit" class="btn btn-s btn-custom-dark" data-bs-dismiss="modal">닫기</button>
+	<button type="button" class="btn btn-s btn-custom-yellow"><a href="users/signup_form.jsp">회원가입</a></button>
 </form>
 
 </body>
