@@ -315,7 +315,7 @@
 	   <%} %>
    </div>
    <div class="btn-wrap">
-		<a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a>
+		<a class="btn btn-s btn-custom-dark" href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a>
 		<%if(dto.getWriter().equals(id)) {%>
             <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
             <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/private/delete.jsp?num=<%=dto.getNum()%>"
@@ -331,7 +331,7 @@
 	         <input type="hidden" name="ref_group" value="<%=num %>" />
 	         <input type="hidden" name="target_nick" value="<%=dto.getNick() %>" />
 	         <textarea name="content"></textarea>
-	         <button type="submit" class="btn btn-custom-blue">등록</button>
+	         <button type="submit" class="btn btn-s btn-custom-blue">등록</button>
 	   </form>
 	   <div class="comments" style="margin-top:200px;">
 	         <ul>
