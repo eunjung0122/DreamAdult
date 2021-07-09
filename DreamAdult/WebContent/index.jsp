@@ -140,13 +140,13 @@
 								<span><%=qnaList.get(1).getRegdate() %></span>
 							</p>
 						</span>
-
-					</li>
-
 						<div class="img-wrap">
 							<img src="images/cactusLine.png"/>
 						</div>
+	
+					</li>
 
+						
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">

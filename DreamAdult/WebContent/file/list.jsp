@@ -119,7 +119,7 @@
 		<span>코드공유</span>
 	</h1>
 
-   <form action="list.jsp" method="get" id="myForm">
+   <form action="list.jsp" method="get" id="myForm" class="search-bar">
 
    		<select name="category" id="category">
    			<option value="whole" <%=category.equals("whole") ? "selected" : ""%>>전체 분류</option>

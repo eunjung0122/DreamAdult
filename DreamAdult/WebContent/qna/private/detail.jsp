@@ -90,25 +90,20 @@
    }
    dtoB=QnABookMarkDao.getInstance().getData(dtoB);
    
-      /*
-    [ 댓글 페이징 처리에 관련된 로직 ]
-    */
-    //한 페이지에 몇개씩 표시할 것인지
+
     final int PAGE_ROW_COUNT=10;
-    
-    //detail.jsp 페이지에서는 항상 1페이지의 댓글 내용만 출력한다. 
+
     int pageNum=1;
     
-    //보여줄 페이지의 시작 ROWNUM
     int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-    //보여줄 페이지의 끝 ROWNUM
+
     int endRowNum=pageNum*PAGE_ROW_COUNT;
    
-   //원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
+
    QnACommentDto commentDto=new QnACommentDto();
    commentDto.setRef_group(num);
    
-   //1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
+
    commentDto.setStartRowNum(startRowNum);
    commentDto.setEndRowNum(endRowNum);
    
@@ -146,14 +141,14 @@
       border: 1px dotted gray;
    }
    
-   /* 댓글 프로필 이미지를 작은 원형으로 만든다. */
+
    .profile-image{
       width: 50px;
       height: 50px;
       border: 1px solid #cecece;
       border-radius: 50%;
    }
-   /* ul 요소의 기본 스타일 제거 */
+
    .comments ul{
       padding: 0;
       margin: 0;
@@ -172,11 +167,11 @@
       clear: left;
    }
    
-   /* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
+
    .comments .comment-form{
       display: none;
    }
-   /* .reply_icon 을 li 요소를 기준으로 배치 하기 */
+
    .comments li{
       position: relative;
    }
@@ -200,9 +195,9 @@
      border-radius: 4px;
    }      
    .loader{
-         /*로딩 이미지를 가운데 정렬*/
+
          text-align:center;
-         /*일단 숨겨 놓기*/
+
          display:none;
    }
    .loader svg{
@@ -306,7 +301,7 @@
 	      	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
 			  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
 			</svg>
-			<span>이전글 제목을 출력해주세요</span>
+			<span><%=QnADao.getInstance().getData(dto.getPrevNum()).getTitle() %></span>
 	      </a>
 	   <%} %>
 	   <%if(dto.getNextNum()!=0){ %>
@@ -315,7 +310,7 @@
 	      	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
 			  <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
 			</svg>
-			<span>다음글 제목을 출력해주세요</span>
+			<span><%=QnADao.getInstance().getData(dto.getNextNum()).getTitle() %></span>
 	      </a>
 	   <%} %>
    </div>
@@ -329,8 +324,8 @@
    </div>
    
    
-   <div class="comment-wrap">
-	   	<p>댓글 <strong>36</strong>개</p>
+	<div class="comment-wrap">
+	   	<p>댓글 <strong><%=QnACommentDao.getInstance().getCount(num) %></strong>개</p>
 	   	<!-- 원글에 댓글 작성할 폼 -->
 	   <form class="comment-form insert-form" action="comment_insert.jsp" method="post">
 	         <input type="hidden" name="ref_group" value="<%=num %>" />
@@ -398,13 +393,15 @@
 	            <%} %>   
 	         </ul>
 	   </div>
+	</div>
+
 	   <div class="loader">
 	         <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
 	        <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
 	        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
 	      </svg>
 	   </div>
-   </div>
+
    
    
 </div>
@@ -422,7 +419,7 @@
    let isLoading=false;
    
    window.addEventListener("scroll",function(){
-      const isBottom=window.innerHeight + window.scrollY  >= document.body.offsetHeight;
+      const isBottom=window.innerHeight + window.scrollY  == document.body.offsetHeight;
       let isLast=currentPage==lastPage;
       if(isBottom&&!isLoading&&!isLast){
          document.querySelector(".loader").style.display="block";
