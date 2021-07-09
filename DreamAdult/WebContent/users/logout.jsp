@@ -16,7 +16,7 @@
 	Swal.fire({
 		  position: 'top-50 start-50',
 		  icon: 'success',
-		  title: '로그아웃이 완료 되었습니다.',
+		  title: 'Bye bye!',
 		  showConfirmButton: false,
 		  timer: 1500
 	}).then(function(){
