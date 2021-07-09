@@ -17,6 +17,9 @@
 	href="https://fonts.googleapis.com/css2?family=Nerko+One&family=Noto+Sans:wght@700&display=swap"
 	rel="stylesheet">
 <style>
+	.btn-custom-dark{
+		margin-top:-20px;
+	}
 	body {
 	font-family: 'Noto Sans KR', sans-serif;
 	font-size: 16px;

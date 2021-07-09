@@ -309,10 +309,10 @@
 %>
 <script>
 <%if(isPopup){ %>
-	window.open("popup.jsp", "웰컴팝업창", "width=500,height=400,top=100,left=100");
+	window.open("popup.jsp", "웰컴팝업창", "width=500,height=450,top=100,left=100");
 <%} %>
 <%if(isUpgrade){%>
-	window.open("grade_popup.jsp", "등급 업 팝업창", "width=600,height=450,top=100,left=600");
+	window.open("grade_popup.jsp", "등급 업 팝업창", "width=500,height=450,top=100,left=600");
 <%}%>
 </script>
 </body>
