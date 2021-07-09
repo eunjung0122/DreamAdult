@@ -502,7 +502,9 @@ a {
 	background:#000;
 	border:1px solid #000;
 }
-
+#signupForm>div{
+	display:inline-block;
+}
 
 
 

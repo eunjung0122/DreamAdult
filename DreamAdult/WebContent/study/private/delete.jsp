@@ -1,3 +1,5 @@
+<%@page import="test.study.dao.StudyCommentDao"%>
+<%@page import="test.study.dto.StudyCommentDto"%>
 <%@page import="test.study.dao.StudyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,6 +16,7 @@
 	}
 	
 	boolean isSuccess=StudyDao.getInstance().delete(num);
+	StudyCommentDao.getInstance().deleteReal(num);
 %>
 <!DOCTYPE html>
 <html>
