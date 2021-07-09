@@ -28,9 +28,9 @@
 	//보여줄 페이지의 끝 ROWNUM
 	int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-	String keyword=request.getParameter("keyword");
-	String condition=request.getParameter("condition");
-	String category=request.getParameter("category");
+	String keyword = request.getParameter("keyword");
+	String condition = request.getParameter("condition");
+	String category = request.getParameter("category");
 	
 	if(keyword==null){
 		keyword="";
@@ -110,122 +110,129 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/list.jsp</title>
-<style>
-   .page-ui a{
-      text-decoration: none;
-      color: #000;
-   }
-   
-   .page-ui a:hover{
-      text-decoration: underline;
-   }
-   
-   .page-ui a.active{
-      color: red;
-      font-weight: bold;
-   }
-   .page-ui ul{
-      list-style-type: none;
-      padding: 0;
-   }
-   
-   .page-ui ul > li{
-      float: left;
-      padding: 5px;
-   }
-   
-
-   
-</style>
+<title>Dream Adult</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
 <jsp:include page="../include/navber.jsp">
    <jsp:param value="qna" name="thisPage"/>
 </jsp:include>
-<div class="container">
-	<h1>QnA 게시판</h1>
-	<a href="<%=request.getContextPath()%>/qna/private/insertform.jsp">새글 작성</a>
-	<table>
-		<thead>
-			<th>글번호</th>
-			<th>카테고리</th>
-			<th>작성자</th>
-			<th>제목</th>
-			<th>조회수</th>
-			<th>등록일</th>
-		</thead>
-		<tbody>
-		<%for(QnADto tmp:list){%>
-		
-         <tr>
-            <td><%=tmp.getNum() %></td>
-            <td><%=tmp.getCategory() %></td>
-            <td><%=tmp.getNick() %></td>
-            <td>
-               <a href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=tmp.getTitle()%></a>
-            [<%=QnACommentDao.getInstance().replyCount(tmp.getNum()) %>]
-            </td>
-            <td><%=tmp.getViewCount() %></td>
-            <td><%=tmp.getRegdate() %></td>
-         </tr>
-      <%} %>
-		</tbody>
-	</table>
-	<div class="page-ui clearfix">
-      <ul>
-         <%if(startPageNum != 1){ %>
-            <li>
-               <a href="list.jsp?pageNum=<%=startPageNum-1 %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>">Prev</a>
-            </li>   
-         <%} %>
-         
-         <%for(int i=startPageNum; i<=endPageNum ; i++){ %>
-            <li>
-               <%if(pageNum == i){ %>
-                  <a class="active" href="list.jsp?pageNum=<%=i %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=i %></a>
-               <%}else{ %>
-                  <a href="list.jsp?pageNum=<%=i %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=i %></a>
-               <%} %>
-            </li>   
-         <%} %>
-         <%if(endPageNum < totalPageCount){ %>
-            <li>
-               <a href="list.jsp?pageNum=<%=endPageNum+1 %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>" >Next</a>
-            </li>
-         <%} %>
-      </ul>
-   </div>
-   
-   <div style="clear:both;"></div>
-   
-   <form action="list.jsp" method="get" id="myForm">
+<div class="sub_page container">
+	<h1 class="main_tit">
+		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72">
+		<span>큐앤에이</span>
+	</h1>
+	<!--  <p class="main_txt">
+		모르는게 있어도 괜찮아요! 우린 여러명이니까요~
+	</p>-->
+	<form action="list.jsp" method="get" id="myForm" class="search-bar">
    		<select name="category" id="category">
    			<option value="whole" <%=category.equals("whole") ? "selected" : ""%>>전체 분류</option>
    			<option value="java" <%=category.equals("java") ? "selected" : ""%>>java</option>
    			<option value="javascript" <%=category.equals("javascript") ? "selected" : ""%>>javascript</option>
    			<option value="jsp" <%=category.equals("jsp") ? "selected" : ""%>>jsp</option>
    		</select>
-   		
    		<select name="condition" id="condition" onchange="categoryChange(this)">
    			<option value="title_content" <%=condition.equals("title_content") ? "selected" : ""%>>제목 내용</option>
    			<option value="title" <%=condition.equals("title") ? "selected" : ""%>>제목</option>
 		    <option value="nick" <%=condition.equals("nick") ? "selected" : ""%>>작성자</option>
 		</select>
-   		
    		<input type="text" id="keyword" name="keyword" placeholder="검색어..." value="<%=keyword%>" />
-   		
-   		<button type="submit">검색</button>
-   		<%if(id!=null) {%>
-   		<a href="private/myPage.jsp">내가 쓴 글 보기</a>
-   		<%} %>
+   		<button type="submit">
+   			<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+			  <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+			</svg>
+   		</button>
    </form>
-   <%if(!condition.equals("")) {%>
-		<p>
-			<strong><%=totalRow %></strong>개의 글이 검색 되었습니다. 
-		</p>
-   <%} %>
+	<div class="table-info">
+		<p><strong><%=totalRow %></strong>개의 글이 검색 되었습니다. </p>
+		<div>
+			<a href="<%=request.getContextPath()%>/qna/private/insertform.jsp" class="btn btn-custom-blue">새글 작성</a>
+			<%if(id!=null) {%>
+		  		<a href="private/myPage.jsp" class="btn btn-custom-dark">내가 쓴 글 보기</a>
+		 	<%} %>
+	 	</div>
+	</div>
+	
+	<table class="table table-hover">
+	  <colgroup>
+	    <col width="100px"/>
+	    <col width="200px"/>
+	    <col width="auto" style="text-align:left;"/>
+	    <col width="160px"/>
+	    <col width="200px"/>
+	    <col width="80px"/>
+	  </colgroup>
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>카테고리</th>
+				<th>제목</th>
+				<th>작성자</th>
+				<th>등록일</th>
+				<th>조회수</th>
+			</tr>
+		</thead>
+		<tbody>
+		<%for(QnADto tmp:list){%>
+         <tr>
+            <td><%=tmp.getNum() %></td>
+            <td><%=tmp.getCategory() %></td>
+
+            <td style="text-align:left;">
+               <a class="subject" href="private/detail.jsp?num=<%=tmp.getNum()%>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>">
+               <%=tmp.getTitle()%>
+               <span>[<%=QnACommentDao.getInstance().replyCount(tmp.getNum()) %>]</span>
+               </a>
+            </td>
+            <td><%=tmp.getNick() %></td>
+            <td><%=tmp.getRegdate() %></td>
+            <td><%=tmp.getViewCount() %></td>
+         </tr>
+      <%} %>
+		</tbody>
+	</table>
+   <nav class="pagination-wrap" aria-label="Page navigation example">
+	  <ul class="pagination">
+	  	<%if(startPageNum != 1){ %>
+	    <li class="page-item">
+	      <a class="page-link" href="list.jsp?pageNum=<%=startPageNum-1 %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>" aria-label="Previous">
+	        <span aria-hidden="true">&laquo;</span>
+	      </a>
+	    </li>
+	    <%} %>
+	    <%for(int i=startPageNum; i<=endPageNum ; i++){ %>
+	    	<%if(pageNum == i){ %>
+            <li class="page-item active">
+                <a class=" page-link" href="list.jsp?pageNum=<%=i %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=i %></a>
+            </li>   
+            <%}else{ %>
+            <li class="page-item">
+              <a class="page-link" href="list.jsp?pageNum=<%=i %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>"><%=i %></a>
+            </li>   
+            <%} %>
+         <%} %>
+	    <%if(endPageNum < totalPageCount){ %>
+            <li class="page-item">
+               <a class="page-link" href="list.jsp?pageNum=<%=endPageNum+1 %>&condition=<%=condition %>&keyword=<%=encodedK %>&category=<%=category%>" aria-label="Next">
+               	<span aria-hidden="true">&raquo;</span>
+               </a>
+            </li>
+         <%} %>
+	  </ul>
+	</nav>
 </div>
+
+
+<script>
+	let commentLinks=document.querySelectorAll(".comment-link");
+	for(i=0; i<commentLinks.length; i++){
+		commentLinks[i].addEventListener("click",function(){
+			const num=this.getAttribute("data-num");
+			window.open("private/comment.jsp?num="+num, "댓글목록", "width=900,height=600,top=300,left=500");
+		});
+	}
+</script>
 
 </body>
 </html>

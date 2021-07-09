@@ -104,9 +104,6 @@
     //보여줄 페이지의 끝 ROWNUM
     int endRowNum=pageNum*PAGE_ROW_COUNT;
    
-   //글 하나의 정보를 DB에서 불러온다.
-   QnADto dto2=QnADao.getInstance().getData(num);
-   
    //원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
    QnACommentDto commentDto=new QnACommentDto();
    commentDto.setRef_group(num);
@@ -115,8 +112,7 @@
    commentDto.setStartRowNum(startRowNum);
    commentDto.setEndRowNum(endRowNum);
    
-   List<QnACommentDto> commentList=
-         QnACommentDao.getInstance().getList(commentDto);
+   List<QnACommentDto> commentList= QnACommentDao.getInstance().getList(commentDto);
    
    int totalRow=QnACommentDao.getInstance().getCount(num);
    int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);

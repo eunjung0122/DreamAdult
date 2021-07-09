@@ -45,14 +45,11 @@
 		//로그인 했다는 의미에서 session 영역에 "id" 라는 키값으로 로그인된 아이디를 담는다.
 		session.setAttribute("id", id); 
 		//아무런 동작을 하지 않았을때 초 단위로 세션 유지시간을 설정할수 있다. (초단위)
-		session.setMaxInactiveInterval(60*30);%>
-		<div class="alert alert-success d-flex align-items-center" role="alert">
-			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
-			<div>
-				<strong><%=id %></strong>님 로그인 되었습니다.
-				<a href="<%=url%>">확인</a>
-			</div>
-		</div>
+		session.setMaxInactiveInterval(60*30);
+	%>
+	<script>
+		location.href="<%=url%>";
+	</script>
 	<%}else{ %>
 		<div class="alert alert-danger d-flex align-items-center" role="alert">
 			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
