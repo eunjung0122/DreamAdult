@@ -1,8 +1,7 @@
+<%@page import="test.qna.dao.QnADao"%>
 <%@page import="test.qna.dao.QnACommentDao"%>
 <%@page import="test.qna.dto.QnACommentDto"%>
-<%@page import="test.qna.dto.QnADto"%>
 <%@page import="java.util.List"%>
-<%@page import="test.qna.dao.QnADao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -54,7 +53,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/private/myComment.jsp</title>
+<title>/QnA/private/myComment.jsp</title>
 <style>
    .page-ui a{
       text-decoration: none;
@@ -86,7 +85,7 @@
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
-	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/qna/private/myPage.jsp">글 </a>/<a href="${pageContext.request.contextPath}/qna/private/myComment.jsp">댓글</a></h1>
+	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/qna/private/myPage.jsp"> 글 </a>/<a href="${pageContext.request.contextPath}/qna/private/myComment.jsp">댓글</a></h1>
 	<table>
 		<thead>
 			<th>댓글번호</th>
@@ -97,10 +96,12 @@
 			<th>삭제</th>
 		</thead>
 		<tbody>
+	
+		
 		<%for(QnACommentDto tmp:list){%>
          <tr>
             <td><%=tmp.getNum() %></td>
-            <td><a href="detail.jsp?num=<%=tmp.getRef_group()%>"><%=QnADao.getInstance().getData(tmp.getRef_group()).getTitle() %></a></td>
+            <td><a href="detail.jsp?num=<%=tmp.getRef_group()%>"><%=QnADao.getInstance().getData(tmp.getRef_group()).getTitle() %> </a></td>
             <td><%=tmp.getNick() %></td>
             <td><a href="detail.jsp?num=<%=tmp.getRef_group()%>"><%=tmp.getContent() %></a></td>
             <td><%=tmp.getRegdate() %></td>
