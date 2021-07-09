@@ -8,19 +8,23 @@
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
+
+
 <div class="container">
-	<h1>개인정보 수정 전 비밀번호 확인 폼</h1>
-	<form action="updateform.jsp" method="post" id="myForm">
-		<div>
-			<label for="Pwd">비밀번호</label>
-			<input type="password" name="Pwd" id="Pwd"/>
-		</div>
-		<div>
-			<label for="Pwd2">비밀번호 확인</label>
-			<input type="password" id="Pwd2"/>
-		</div>
-		<button type="submit">확인</button>
-	</form>
+	<h1>비밀번호 확인</h1>
+		<form class="row g-3 mt-3" action="updateform.jsp" method="post" id="myForm">
+			<div class="col-auto">
+		    	<label for="Pwd" class="col-form-label">비밀번호</label>
+		  	</div>
+		  	<div class="col-auto">
+		    	<input type="password" id="Pwd" name="Pwd" class="form-control">
+		  	</div>
+		  	<div class="col-auto">
+		   		 <button type="submit" class="btn btn-primary">
+		    		확인
+		   		 </button>
+		  	</div>
+  		</form>
 </div>
 <script>
 	//폼에 submit 이벤트가 일어났을때 실행할 함수를 등록하고 
