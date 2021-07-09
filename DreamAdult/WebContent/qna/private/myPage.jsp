@@ -44,47 +44,30 @@
 	if(endPageNum > totalPageCount){
 	   endPageNum=totalPageCount; //보정해 준다.
 	}
-	
-	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/private/myPage.jsp</title>
-<style>
-   .page-ui a{
-      text-decoration: none;
-      color: #000;
-   }
-   
-   .page-ui a:hover{
-      text-decoration: underline;
-   }
-   
-   .page-ui a.active{
-      color: red;
-      font-weight: bold;
-   }
-   .page-ui ul{
-      list-style-type: none;
-      padding: 0;
-   }
-   
-   .page-ui ul > li{
-      float: left;
-      padding: 5px;
-   }
-   
-
-   
-</style>
+<title>Dream Adult</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
-<div class="container">
-	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/qna/private/myPage.jsp">글 </a>/<a href="${pageContext.request.contextPath}/qna/private/myComment.jsp">댓글</a></h1>
-	<table>
+<div class="form-page container">
+	<h1 class="main-tit">
+	  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&amp;opt=C72x72"> 
+	   	<span>내가쓴글</span>
+   </h1>
+	<ul class="tab">
+		<li class="tab-list active">
+			<a href="${pageContext.request.contextPath}/qna/private/myPage.jsp">글 </a>
+		</li>
+		<li class="tab-list">
+			<a href="${pageContext.request.contextPath}/qna/private/myComment.jsp">댓글</a>
+		</li>
+	</ul>
+	<table class="table">
 		<thead>
 			<th>글번호</th>
 			<th>카테고리</th>
@@ -113,29 +96,32 @@
 		</tbody>
 	</table>
 
-	<div class="page-ui clearfix">
-      <ul>
+	<nav class="pagination-wrap">
+      <ul class="pagination">
          <%if(startPageNum != 1){ %>
-            <li>
-               <a href="myPage.jsp?pageNum=<%=startPageNum-1 %>">Prev</a>
+            <li class="page-item">
+               <a class="page-link" href="myPage.jsp?pageNum=<%=startPageNum-1 %>">Prev</a>
             </li>   
          <%} %>
          <%for(int i=startPageNum; i<=endPageNum; i++){ %>
-            <li>
-               <%if(pageNum == i){ %>
-                  <a class="active" href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
-               <%}else{ %>
-                  <a href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
-               <%} %>
+            <%if(pageNum == i){ %>
+            <li class="page-item active">
+               <a class="page-link" href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
             </li>   
+            <%}else{ %>
+            <li>
+               <a class="page-link" href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
+            </li>
+            <%} %>
+            
          <%} %>
          <%if(endPageNum < totalPageCount){ %>
-            <li>
-               <a href="myPage.jsp?pageNum=<%=endPageNum+1 %>" >Next</a>
+            <li class="page-item">
+               <a class="page-link" href="myPage.jsp?pageNum=<%=endPageNum+1 %>" >Next</a>
             </li>
          <%} %>
       </ul>
-   </div>
+   </nav>
    
 </div>
 </body>

@@ -46,41 +46,12 @@
 	if(endPageNum > totalPageCount){
 	   endPageNum=totalPageCount; //보정해 준다.
 	}
-	
-	
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/file/private/myPage.jsp</title>
-<style>
-   .page-ui a{
-      text-decoration: none;
-      color: #000;
-   }
-   
-   .page-ui a:hover{
-      text-decoration: underline;
-   }
-   
-   .page-ui a.active{
-      color: red;
-      font-weight: bold;
-   }
-   .page-ui ul{
-      list-style-type: none;
-      padding: 0;
-   }
-   
-   .page-ui ul > li{
-      float: left;
-      padding: 5px;
-   }
-   
-
-   
-</style>
+<title>Dream Adult</title>
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp">
@@ -117,29 +88,31 @@
 		</tbody>
 	</table>
 
-	<div class="page-ui clearfix">
-      <ul>
+	<nav class="pagination-wrap">
+      <ul class="pagination">
          <%if(startPageNum != 1){ %>
-            <li>
-               <a href="myPage.jsp?pageNum=<%=startPageNum-1 %>">Prev</a>
+            <li class="page-item">
+               <a class="page-link" href="myPage.jsp?pageNum=<%=startPageNum-1 %>">Prev</a>
             </li>   
          <%} %>
          <%for(int i=startPageNum; i<=endPageNum; i++){ %>
-            <li>
-               <%if(pageNum == i){ %>
-                  <a class="active" href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
-               <%}else{ %>
-                  <a href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
-               <%} %>
-            </li>   
+            <%if(pageNum == i){ %>
+			<li class="page-item active">
+				<a class="page-link" href="myPage.jsp?pageNum=<%=i%>"><%=i%></a>
+			</li>
+			<%} else {%>
+				<li>
+                 <a class="page-link" href="myPage.jsp?pageNum=<%=i %>"><%=i %></a>
+                 </li>
+              <%} %>
          <%} %>
          <%if(endPageNum < totalPageCount){ %>
-            <li>
-               <a href="myPage.jsp?pageNum=<%=endPageNum+1 %>" >Next</a>
+            <li class="page-item">
+               <a class="page-link" href="myPage.jsp?pageNum=<%=endPageNum+1 %>" >Next</a>
             </li>
          <%} %>
       </ul>
-   </div>
+   </nav>
    
 </div>
 </body>

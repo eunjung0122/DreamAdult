@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/study/private/insertform.jsp</title>
+<title>Dream Adult</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <style>
    #content{
       height: 400px;
@@ -13,27 +14,30 @@
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
-<div class="container">
-   <h1>새 글 작성</h1>
+<div class="form-page container">
+   <h1 class="main-tit">
+	  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/…egory/322d2261017a00001.png?type=thumb&opt=C72x72"> 
+	   	<span>학습공부</span>
+   </h1>
    <form action="insert.jsp" method="post" id="insertForm">
       <div>
-         <label for="title">제목</label>
-         <input type="text" name="title" id="title" />
+         <label for="title" class="form-label">제목</label>
+         <input type="text" name="title" id="title" class="form-control"/>
       </div>
-      <div>
+      <div class="mt-3">
          <label for="category">말머리</label>
-         <select name="category">
-            <option value="">Please choose an option</option>
+         <select name="category" class="form-select">
+            <option selected>Please choose an option</option>
             <option value="java">Java</option>
             <option value="javascript">JavaScript</option>
             <option value="jsp">JSP</option>
          </select>
       </div>
-      <div>
-         <label for="content">내용</label>
-         <textarea id="content" name="content"></textarea>
+      <div class="mt-3">
+         <label for="content" class="form-label">내용</label>
+         <textarea id="content" name="content" class="form-control"></textarea>
       </div>
-      <button type="submit">저장</button>
+      <button type="submit" class="btn btn-m btn-custom-dark">저장</button>
    </form>
 </div>
 <!-- SmartEditor 에서 필요한 javascript 로딩  -->
