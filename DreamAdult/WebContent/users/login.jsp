@@ -47,23 +47,32 @@
 		//아무런 동작을 하지 않았을때 초 단위로 세션 유지시간을 설정할수 있다. (초단위)
 		session.setMaxInactiveInterval(60*30);
 	%>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
+	Swal.fire({
+		  position: 'top-50 start-50',
+		  icon: 'success',
+		  title: 'Welcome DreamAdult!',
+		  showConfirmButton: false,
+		  timer: 1500
+	}).then(function(){
 		location.href="<%=url%>";
+	});
 	</script>
-	<%}else{ %>
-		<div class="alert alert-danger d-flex align-items-center" role="alert">
-			<svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>
-			<div>
-				아이디 혹은 비밀 번호가 틀려요.
-				<a href="loginform.jsp?url=<%=encodedUrl%>">다시 시도</a> 해주세요!
-			</div>
-		</div>
-	<%} %>
+		<%}else{ %>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script>
+			Swal.fire({
+				  position: 'top-50 start-50',
+				  icon: 'error',
+				  title: 'Please check your ID or Password',
+				  showConfirmButton: false,
+				  timer: 1500
+			}).then(function(){
+				location.href="loginform.jsp?url=<%=encodedUrl%>";
+			});	
+		<%} %>
+		</script>
 </div>	
 </body>
 </html>
-
-
-
-
-
