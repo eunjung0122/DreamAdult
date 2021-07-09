@@ -35,7 +35,7 @@ public class FileDao {
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ " 	FROM"
 					+ " 		(SELECT DISTINCT board_file.num, count(*)OVER(PARTITION BY board_file.num) AS cnt,"
-					+ "			writer, title, nick, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate"
+					+ "			writer, title, nick, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, grade"
 					+ " 		FROM board_file"
 					+ " 		INNER JOIN users ON board_file.writer = users.id"
 					+ " 		INNER JOIN filelike ON board_file.num = filelike.num"
@@ -53,8 +53,7 @@ public class FileDao {
 				dto2.setTitle(rs.getString("title"));
 				dto2.setNick(rs.getString("nick"));
 				dto2.setRegdate(rs.getString("regdate"));
-				
-				
+				dto2.setGrade(rs.getString("grade"));
 				list.add(dto2);
 			}
 		} catch (Exception e) {

@@ -13,11 +13,12 @@ public class StudyDto {
 	private int endRowNum;
 	private int prevNum;
 	private int nextNum;
+	private String grade;
 	
 	public StudyDto() {}
 
 	public StudyDto(int num, String writer, String nick, String title, String content, int viewCount, String regdate,
-			String category, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+			String category, int startRowNum, int endRowNum, int prevNum, int nextNum, String grade) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -31,6 +32,7 @@ public class StudyDto {
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
+		this.grade = grade;
 	}
 
 	public int getNum() {
@@ -127,6 +129,14 @@ public class StudyDto {
 
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
 	}
 
 }
