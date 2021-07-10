@@ -34,113 +34,73 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/loginform.jsp</title>
-<style>
-html, body {
-	height: 100%;
-}
-
-body {
-	background-color: #f5f5f5;
-	align-items:center;
-}
-
-#top{
-	padding:200px;
-}
-
-.form-signin {
-	width: 330px;
-	padding: 15px;
-	margin: auto;
-}
-
-.form-signin .checkbox {
-	font-weight: 400;
-}
-
-.form-signin .form-floating:focus-within {
-	z-index: 2;
-}
-
-.form-signin input[type="email"] {
-	margin-bottom: -1px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-	margin-bottom: 10px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-}
-
-.btn-success {
-	background-color: #3c64ff;
-	border-color: #3c64ff;
-}
-
-.btn-success:hover {
-	background-color: #3258ed;
-	border-color: #3258ed;
-}
-
-.bd-placeholder-img {
-	font-size: 1.125rem;
-	text-anchor: middle;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
-}
-
-@media ( min-width : 768px) {
-	.bd-placeholder-img-lg {
-		font-size: 3.5rem;
-	}
-}
-</style>
+<title>Dream Adult</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" />
 </head>
 <body class="text-center">
 <jsp:include page="../include/navber.jsp"></jsp:include>
-<div id="top">
-	<main class="form-signin">
-	  	<form action="login.jsp" method="post">
-	  		<img class="mb-4" src="../images/logo2.png" alt="" width="100" height="80">
-	  		<input type="hidden" name="url" value="<%=url %>" />
-		    <h1 class="h3 mb-3 fw-normal">로그인 페이지</h1>
-		    <%if(savedId == null){ %>
-			    <div class="form-floating mb-2">
-		      		<input type="text" name="id" class="form-control" id="id" placeholder="아이디 입력...">
-		      		<label for="id">아이디</label>
-			    </div>
-			    <div class="form-floating">
-			    	<input type="password" name="pwd" class="form-control" id="pwd" placeholder="비밀번호 입력...">
-			      	<label for="pwd">비밀번호</label>
-			    </div>
-			    <div class="checkbox mb-3">
-			     	<label>
-			        	<input type="checkbox" name="isSave" value="yes"> 로그인 정보 저장
-			      	</label>
-			    </div>
-		    <%}else{ %>
-		    	<div class="form-floating">
-		      		<input value="<%=savedId %>" type="text" name="id" class="form-control" id="id" placeholder="아이디 입력...">
-		      		<label for="id">아이디</label>
-				</div>
-			    <div class="form-floating">
-			    	<input value="<%=savedPwd %>"  type="password" name="pwd" class="form-control" id="pwd" placeholder="비밀번호 입력...">
-			      	<label for="pwd">비밀번호</label>
-			    </div>
-			    <div class="checkbox mb-3">
-			     	<label>
-			        	<input type="checkbox" name="isSave" value="yes" checked> 로그인 정보 저장
-			      	</label>
-			    </div>
-		    <%} %>  
-		    <button class="w-100 btn btn-lg btn-success" type="submit">로그인</button>
-		    <p class="mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
-	  	</form>
-	</main>
+<div class="userform-page">
+	<div class="container">
+		<main class="form-signin">
+		  	<form action="login.jsp" method="post">
+		  		<svg id="ryan" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+		            <path d="M0,150 C0,65 120,65 120,150" fill="#e0a243" stroke="#000" stroke-width="2.5" />
+		            <g class="ears">
+		                <path d="M46,32 L46,30 C46,16 26,16 26,30 L26,32" fill="#e0a243" stroke="#000" stroke-width="2.5" stroke-linecap="round" transform="rotate(-10,38,24)" />
+		                <path d="M74,32 L74,30 C74,16 94,16 94,30 L94,32" fill="#e0a243" stroke="#000" stroke-width="2.5" stroke-linecap="round" transform="rotate(10,82,24)" />
+		            </g>
+		            <circle cx="60" cy="60" r="40" fill="#e0a243" stroke="#000" stroke-width="2.5" />
+		            <g class="eyes">
+		                <!-- left eye and eyebrow-->
+		                <line x1="37" x2="50" y1="46" y2="46" stroke="#000" stroke-width="3" stroke-linecap="round" />
+		                <circle cx="44" cy="55" r="3" fill="#000" />
+		                <!-- right eye and eyebrow -->
+		                <line x1="70" x2="83" y1="46" y2="46" stroke="#000" stroke-width="3" stroke-linecap="round" />
+		                <circle cx="76" cy="55" r="3" fill="#000" />
+		            </g>
+		            <g class="muzzle">
+		                <path d="M60,66 C58.5,61 49,63 49,69 C49,75 58,77 60,71 M60,66 C61.5,61 71,63 71,69 C71,75 62,77 60,71" fill="#fff" />
+		                <path d="M60,66 C58.5,61 49,63 49,69 C49,75 58,77 60,71 M60,66 C61.5,61 71,63 71,69 C71,75 62,77 60,71" fill="#fff" stroke="#000" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+		                <polygon points="59,63.5,60,63.4,61,63.5,60,65" fill="#000" stroke="#000" stroke-width="5" stroke-linejoin="round" />
+		            </g>
+		            <path d="M40,105 C10,140 110,140 80,105 L80,105 L70,111 L60,105 L50,111 L40,105" fill="#fff" />
+		        </svg>
+		  		<input type="hidden" name="url" value="<%=url %>" />
+			    <%if(savedId == null){ %>
+				    <div class="form-floating mb-3">
+			      		<input type="text" name="id" class="form-control" id="id" placeholder="아이디 입력...">
+			      		<label for="id">아이디</label>
+				    </div>
+				    <div class="form-floating mb-3">
+				    	<input type="password" name="pwd" class="form-control" id="pwd" placeholder="비밀번호 입력...">
+				      	<label for="pwd">비밀번호</label>
+				    </div>
+				    <div class="checkbox mb-3">
+				     	<label>
+				        	<input type="checkbox" name="isSave" value="yes"> 로그인 정보 저장
+				      	</label>
+				    </div>
+			    <%}else{ %>
+			    	<div class="form-floating mb-3">
+			      		<input value="<%=savedId %>" type="text" name="id" class="form-control" id="id" placeholder="아이디 입력...">
+			      		<label for="id">아이디</label>
+					</div>
+				    <div class="form-floating mb-3">
+				    	<input value="<%=savedPwd %>"  type="password" name="pwd" class="form-control" id="pwd" placeholder="비밀번호 입력...">
+				      	<label for="pwd">비밀번호</label>
+				    </div>
+				    <div class="checkbox mb-3">
+				     	<label>
+				        	<input type="checkbox" name="isSave" value="yes" checked> 로그인 정보 저장
+				      	</label>
+				    </div>
+			    <%} %>  
+			    <button class="w-100 btn btn-l btn-max btn-custom-dark" type="submit">로그인</button>
+			    <p class="mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
+		  	</form>
+		</main>
+	</div>
 </div>
+<script src="<%=request.getContextPath()%>/js/ryon.js"></script>
 </body>
 </html>
