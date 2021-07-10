@@ -94,7 +94,8 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>	
 							</span>
-							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(0).getNum()%>">
+							<%if(fileList.size()>0) {%>
+							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(0).getNum() %>">
 								<strong class="tit_card"><%=fileList.get(0).getTitle()%></strong>
 							</a>
 							<p>
@@ -102,6 +103,7 @@
 								<span><%=fileList.get(0).getGrade()%></span>
 								<span><%=fileList.get(0).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/79590191017a00001.jpg?type=thumb&opt=C630x472"/>
@@ -113,6 +115,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
+							<%if(studyList.size()>0) {%>
 							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">
 								<strong class="tit_card"><%=studyList.get(1).getTitle()%></strong>
 							</a>
@@ -121,6 +124,7 @@
 								<span><%=studyList.get(1).getGrade()%></span>
 								<span><%=studyList.get(1).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap">
 							<img src="https://images.unsplash.com/photo-1621416953228-87ad15716483?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"/>
@@ -132,6 +136,7 @@
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
+							<%if(qnaList.size()>0) {%>
 							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
 								<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
 							</a>
@@ -139,6 +144,7 @@
 								<span><%=qnaList.get(1).getNick() %></span>
 								<span><%=qnaList.get(1).getRegdate() %></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap">
 							<img src="images/cactusLine.png"/>
@@ -154,6 +160,7 @@
 								<span class="txt_cate">코드공유</span>
 								
 							</span>
+							<%if(fileList.size()>0) {%>
 							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(1).getNum()%>">
 								<strong class="tit_card"><%=fileList.get(1).getTitle()%></strong>
 							</a>
@@ -162,6 +169,7 @@
 								<span><%=fileList.get(1).getGrade()%></span>
 								<span><%=fileList.get(1).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap" style="background:#f77028; height:210px;"></div>
 					</li>
@@ -173,6 +181,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
+							<%if(studyList.size()>0) {%>
 							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">
 								<strong class="tit_card"><%=studyList.get(0).getTitle()%></strong>
 							</a>
@@ -181,6 +190,7 @@
 								<span><%=studyList.get(0).getGrade()%></span>
 								<span><%=studyList.get(0).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 					</li>
 					<li class="box box-m">
@@ -188,6 +198,7 @@
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
+								<%if(qnaList.size()>0) {%>
 								<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
 									<strong class="tit_card"><%=qnaList.get(0).getTitle() %></strong>
 								</a>
@@ -195,6 +206,7 @@
 									<span><%=qnaList.get(0).getNick() %></span>
 									<span><%=qnaList.get(0).getRegdate() %></span>
 								</p>
+								<%} %>
 							</span>
 						</span>
 						<div class="img-wrap">
@@ -207,6 +219,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
+							<%if(studyList.size()>0) {%>
 							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">
 								<strong class="tit_card"><%=studyList.get(2).getTitle()%></strong>
 							</a>
@@ -215,6 +228,7 @@
 								<span><%=studyList.get(2).getGrade()%></span>
 								<span><%=studyList.get(2).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap">
 							<img src="https://images.unsplash.com/photo-1540760938999-077b8231d890?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1951&q=80"/>
@@ -226,6 +240,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>
 							</span>
+							<%if(fileList.size()>1) {%>
 							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(2).getNum()%>">
 								<strong class="tit_card"><%=fileList.get(2).getTitle()%></strong>
 							</a>
@@ -234,6 +249,7 @@
 								<span><%=fileList.get(2).getGrade()%></span>
 								<span><%=fileList.get(2).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap" style="background:#801ee3; height:210px;"></div>
 					</li>
@@ -241,8 +257,10 @@
 						<span class="txt_wrap">
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<%if(qnaList.size()>1) {%>
 								<span class="txt_cate">QnA</span>
 								<a href="qna/private/detail.jsp?num=<%=qnaList.get(2).getNum()%>">확인</a>
+								<%} %>
 							</span>
 						</span>
 					</li>
