@@ -1,3 +1,4 @@
+<%@page import="test.users.dao.UsersDao"%>
 <%@page import="test.qna.dao.QnABookMarkDao"%>
 <%@page import="test.qna.dto.QnABookMarkDto"%>
 <%@page import="test.qna.dto.QnALikeDto"%>
@@ -128,6 +129,16 @@
    }
 
    
+	String grade=UsersDao.getInstance().getGrade(dto.getWriter());
+	String grade_mark=null;
+	if(grade.equals("child")){
+		grade_mark="♠";
+	}else if(grade.equals("student")){
+		grade_mark="♣";
+	}else if(grade.equals("adult")){
+		grade_mark="★";
+	}
+
 %>
 <!DOCTYPE html>
 <html>
@@ -215,11 +226,14 @@
    a{
        text-decoration:none;
    }
+   .grade{
+   		color:#777;
+   }
    
 </style>
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="qna" name="thisPage"/></jsp:include>
 <div class="detail_page container">
 	<h1 class="main-tit">
 		큐앤에이
@@ -287,8 +301,8 @@
 	</div>
 	<div class="detail-main">
 		<p style="text-align:right;">
-			<span>작성자  <%=dto.getNick()%></span>
-			<span style="margin-left:20px;">조회수 <%=dto.getViewCount() %></span>
+			<span><strong><%=dto.getNick()%></strong> <span class="grade">(<%=grade_mark %><%=grade %>) </span></span>
+			<span style="margin-left:10px;">조회수 <%=dto.getViewCount() %></span>
 		</p>
 		<div class="content">
 			<%=dto.getContent() %>
@@ -314,9 +328,11 @@
 	      </a>
 	   <%} %>
    </div>
-<div class="btn-wrap">
-      <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a>
-      <%if(dto.getWriter().equals(id)) {%>
+
+   <div class="btn-wrap">
+		<a class="btn btn-s btn-custom-dark" href="<%=request.getContextPath()%>/qna/list.jsp">목록보기</a>
+		<%if(dto.getWriter().equals(id)) {%>
+
             <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
             <a class="btn btn-custom-dark" id="postDelete">삭제 </a>
         <%} %>
@@ -325,12 +341,12 @@
    
 	<div class="comment-wrap">
 	   	<p>댓글 <strong><%=QnACommentDao.getInstance().getCount(num) %></strong>개</p>
-	   	<!-- 원글에 댓글 작성할 폼 -->
+
 	   <form class="comment-form insert-form" action="comment_insert.jsp" method="post">
 	         <input type="hidden" name="ref_group" value="<%=num %>" />
 	         <input type="hidden" name="target_nick" value="<%=dto.getNick() %>" />
 	         <textarea name="content"></textarea>
-	         <button type="submit" class="btn btn-custom-blue">등록</button>
+	         <button type="submit" class="btn btn-s btn-custom-blue">등록</button>
 	   </form>
 	   <div class="comments" style="margin-top:200px;">
 	         <ul>
@@ -419,7 +435,7 @@
    let isLoading=false;
    
    window.addEventListener("scroll",function(){
-      const isBottom=window.innerHeight + window.scrollY  == document.body.offsetHeight;
+      const isBottom=window.innerHeight + window.scrollY  >= document.body.offsetHeight;
       let isLast=currentPage==lastPage;
       if(isBottom&&!isLoading&&!isLast){
          document.querySelector(".loader").style.display="block";

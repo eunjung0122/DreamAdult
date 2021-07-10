@@ -1,3 +1,4 @@
+<%@page import="test.qna.dao.QnACommentDao"%>
 <%@page import="test.qna.dao.QnADao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -14,6 +15,7 @@
 	}
 	
 	boolean isSuccess=QnADao.getInstance().delete(num);
+	QnACommentDao.getInstance().deleteReal(num);
 %>
 <!DOCTYPE html>
 <html>

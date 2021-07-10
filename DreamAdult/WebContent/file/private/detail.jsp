@@ -1,3 +1,4 @@
+<%@page import="test.users.dao.UsersDao"%>
 <%@page import="test.file.dao.FileBookMarkDao"%>
 <%@page import="test.file.dto.FileBookMarkDto"%>
 <%@page import="test.file.dto.FileLikeDto"%>
@@ -95,7 +96,7 @@
 	int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
 	int endRowNum = pageNum * PAGE_ROW_COUNT;
 
-	//원글의 글번호를 이용해서 해당글에 달린 댓글목록을 얻어온다.
+
 	FileCommentDto commentDto = new FileCommentDto();
 	commentDto.setRef_group(num);
 	
@@ -122,6 +123,16 @@
 	if(dtoL.getLiked().equals("yes")){
 		isLike=true;
 	}
+	String grade=UsersDao.getInstance().getGrade(dto.getWriter());
+	String grade_mark=null;
+	if(grade.equals("child")){
+		grade_mark="♠";
+	}else if(grade.equals("student")){
+		grade_mark="♣";
+	}else if(grade.equals("adult")){
+		grade_mark="★";
+	}
+	
 %>    
 <!DOCTYPE html>
 <html>
@@ -129,19 +140,20 @@
 <meta charset="UTF-8">
 <title>detail.jsp</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <style>
 .content{
       border: 1px dotted gray;
    }
    
-   /* 댓글 프로필 이미지를 작은 원형으로 만든다. */
+
    .profile-image{
       width: 50px;
       height: 50px;
       border: 1px solid #cecece;
       border-radius: 50%;
    }
-   /* ul 요소의 기본 스타일 제거 */
+
    .comments ul{
       padding: 0;
       margin: 0;
@@ -170,11 +182,11 @@
       width: 14%;
       height: 100px;
    }
-   /* 댓글에 댓글을 다는 폼과 수정폼은 일단 숨긴다. */
+
    .comments .comment-form{
       display: none;
    }
-   /* .reply_icon 을 li 요소를 기준으로 배치 하기 */
+   
    .comments li{
       position: relative;
    }
@@ -198,9 +210,7 @@
      border-radius: 4px;
    }      
    .loader{
-   		/*로딩 이미지를 가운데 정렬*/
    		text-align:center;
-   		/*일단 숨겨 놓기*/
    		display:none;
    }
    .loader svg{
@@ -217,144 +227,206 @@
    }
    a{
    	 text-decoration:none;
-   }	  
+   }	
+    .grade{
+   		color:#777;
+   }  
 </style>
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
-	<div class="container">
-		<%if(dto.getPrevNum()!=0){ %>
-    		<a href="detail.jsp?num=<%=dto.getPrevNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>">이전글</a>
-   		<%} %>
-   		<%if(dto.getNextNum()!=0){ %>
-      		<a href="detail.jsp?num=<%=dto.getNextNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>">다음글</a>
-   		<%} %>
-	    <table>
-			<tr>
-				<th>글번호</th>
-				<td><%=dto.getNum() %></td>
-			</tr>
-			<tr>
-				<th>말머리</th>
-				<td><%=dto.getCategory() %></td>
-			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><%=dto.getNick() %> <span><%=dto.getGrade() %></span> </td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td><%=dto.getTitle() %></td>
-			</tr>
-			<tr>
-				<th>조회수</th>
-				<td><%=dto.getViewCount() %></td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-					<%if(dto.getContent()!=null) {
+<jsp:include page="../../include/navber.jsp"><jsp:param value="file" name="thisPage"/></jsp:include>
+	<div class="detail_page container">
+		<h1 class="main-tit">
+			자료실
+		</h1>
+		<% if(!keyword.equals("")&&!category.equals("whole")){ %>
+	      <p>   
+	          <strong><%=category %></strong> 분류,
+	         <strong><%=condition %></strong> 조건, 
+	         <strong><%=keyword %></strong> 검색어로 검색된 내용 자세히 보기 
+	      </p>
+	   <%}else if(keyword.equals("")&&!category.equals("whole")) {%>
+	         <p>
+	            <strong><%=category %></strong>로 분류된 내용 자세히 보기
+	         </p>
+	   <%}else if(category.equals("whole")&&!keyword.equals("")) {%>
+	         <p>   
+	         <strong><%=condition %></strong> 조건, 
+	         <strong><%=keyword %></strong> 검색어로 검색된 내용 자세히 보기 
+	         </p>
+	   <%} %>
+	   
+	   <div class="detail-header">
+			<span class="num"><%=dto.getNum() %></span>
+			<span class="category"><%=dto.getCategory() %></span>
+			<span class="tit"><%=dto.getTitle()%></span>
+			<span class="regdate"><%=dto.getRegdate() %></span>
+			<ul class="icons-wrap">
+				<%if(isMark){ %>
+		            <li>
+			            <a data-num="<%=num %>" href="javascript:" class="icon-link mark-link">
+			            	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-check-fill" viewBox="0 0 16 16">
+							  <path fill-rule="evenodd" d="M2 15.5V2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.74.439L8 13.069l-5.26 2.87A.5.5 0 0 1 2 15.5zm8.854-9.646a.5.5 0 0 0-.708-.708L7.5 7.793 6.354 6.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+							</svg>
+			            </a>
+		            </li>
+		        <%}else{ %>
+		            <li>
+		            	<a data-num="<%=num %>" href="javascript:" class="icon-link mark-link">
+			            	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-bookmark-check" viewBox="0 0 16 16">
+							  <path fill-rule="evenodd" d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+							  <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5V2zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1H4z"/>
+							</svg>
+		            	</a>
+		            </li>
+		        <%} %>
+				<%if(isLike){ %>
+		            <li>
+		            	<a data-num="<%=num %>" href="javascript:" class="icon-link like-link">
+		            	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+						  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+						</svg>
+		            	<span class="like-count"><%=likeCount%></span>
+		            	</a>
+		            </li>
+		        <%}else{ %>
+		            <li>
+		            	<a data-num="<%=num %>" href="javascript:" class="icon-link like-link">
+		            	<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+						  <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+						</svg>
+		            	<span class="like-count"><%=likeCount%></span>
+		            	</a>
+		            </li>
+		        <%} %> 				
+			</ul>
+	   </div>
+	   
+	   <div class="detail-main">
+			<p style="text-align:right;">
+				<span><strong><%=dto.getNick()%></strong> <span class="grade">(<%=grade_mark %><%=grade %>) </span></span>
+				<span style="margin-left:10px;">조회수 <%=dto.getViewCount() %></span>
+			</p>
+			<div class="content">
+				<%if(dto.getContent()!=null) {
 						dto.getContent();
 					} %>
-				</td>
-			</tr>
-				<%if(dto.getOrgFileName()!=null) {%>
-					<tr>
-						<th>첨부파일</th>
-						<td><a href="download.jsp?num=<%=dto.getNum() %>"><%=dto.getOrgFileName() %></a></td>
-					</tr>
-				<%} %>
-		</table>
-		<ul>
-			<li><a href="<%=request.getContextPath() %>/file/list.jsp">목록보기</a></li>
 
-			<%if(isMark){ %>
-            	<li><a data-num="<%=num %>" href="javascript:" class="mark-link">√ 북마크 된 글입니다.</a></li>
-         	<%}else{ %>
-            	<li><a data-num="<%=num %>" href="javascript:" class="mark-link">북마크</a></li>
-         	<%} %>
+			</div>	
+			<%if(dto.getOrgFileName()!=null) {%>
+				<p>
+					<span>첨부파일</span>
+					<span><a href="download.jsp?num=<%=dto.getNum() %>"><%=dto.getOrgFileName() %></a></span>
+				</p>
+			<%} %>	
+	   </div>
+	   <div class="order-wrap">
+		   	<%if(dto.getPrevNum()!=0){ %>
+		      <a class="prev-btn" href="detail.jsp?num=<%=dto.getPrevNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>&category=<%=category%>">
+		      	<span>이전글</span>
+		      	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+				</svg>
+				<span><%=FileDao.getInstance().getData(dto.getPrevNum()).getTitle() %></span>
+		      </a>
+		   <%} %>
+		   <%if(dto.getNextNum()!=0){ %>
+		      <a class="next-btn" href="detail.jsp?num=<%=dto.getNextNum() %>&keyword=<%=encodedK %>&condition=<%=condition%>&category=<%=category%>">
+		      	<span>다음글</span>
+		      	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-short" viewBox="0 0 16 16">
+				  <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5A.5.5 0 0 1 8 4z"/>
+				</svg>
+				<span><%=FileDao.getInstance().getData(dto.getNextNum()).getTitle() %></span>
+		      </a>
+		   <%} %>
+	   </div>
+		<div class="btn-wrap">
+			<a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/list.jsp">목록보기</a>
+			<%if(dto.getWriter().equals(id)) {%>
+	            <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
+	            <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/private/delete.jsp?num=<%=dto.getNum()%>"
+	                  onclick="return confirm('이 글 삭제를 원하시는 게 맞나요?');">삭제</a>
+	        <%} %>
+	   </div>
+   
+		<div class="comments-wrap">
+			<p>댓글 <strong><%=FileCommentDao.getInstance().getCount(num) %></strong>개</p>
+			
+			<form class="comment-form insert-form" action="comment_insert.jsp" method="post">
+				<input type="hidden" name="ref_group" value="<%=num %>" />
+				<input type="hidden" name="target_nick" value="<%=dto.getNick() %>" />
+				<textarea name="content"></textarea>
+				<button type="submit"  class="btn btn-custom-blue">등록</button>
+			</form>
+			<div class="comments" style="margin-top:200px;">
+				<ul>
+					<%for(FileCommentDto tmp: commentList){ %>
+						<%if(tmp.getDeleted().equals("yes")){ %>
+							<li>삭제된 댓글 입니다</li>
+						<%
+							continue; 
+						} %>
+						<%if(tmp.getNum() == tmp.getComment_group()){ %>
+						<li id="reli<%=tmp.getNum()%>" class="page-<%=pageNum%>">
+						<%}else{ %>
+						<li id="reli<%=tmp.getNum()%>" class="page-<%=pageNum%>" style="padding-left: 50px;">
+							<svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
+			                   	<path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
+			          		</svg>
+						<%} %>
 
-			<%if(isLike){ %>
-	   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♥<%=likeCount%></a></li>
-	   		<%}else{ %>
-	   			<li><a data-num="<%=num %>" href="javascript:" class="like-link">♡<%=likeCount%></a></li>
-	   		<%} %>
-
-			<%if(dto.getWriter().equals(id)){ %>
-	        <li><a href="<%=request.getContextPath() %>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a></li>
-			<li><a class="btn btn-custom-dark" id="postDelete">삭제</a></li> 
-		<%} %>
-		</ul>
-		<div class="comments">
-			<ul>
-				<%for(FileCommentDto tmp: commentList){ %>
-					<%if(tmp.getDeleted().equals("yes")){ %>
-						<li>삭제된 댓글 입니다</li>
-					<%continue; } %>
-					<%if(tmp.getNum() == tmp.getComment_group()){ %>
-					<li id="reli<%=tmp.getNum()%>" class="page-<%=pageNum%>">
-					<%}else{ %>
-					<li id="reli<%=tmp.getNum()%>" class="page-<%=pageNum%>" style="padding-left: 50px;">
-						<svg class="reply-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-return-right" viewBox="0 0 16 16">
-	                    	<path fill-rule="evenodd" d="M1.5 1.5A.5.5 0 0 0 1 2v4.8a2.5 2.5 0 0 0 2.5 2.5h9.793l-3.347 3.346a.5.5 0 0 0 .708.708l4.2-4.2a.5.5 0 0 0 0-.708l-4-4a.5.5 0 0 0-.708.708L13.293 8.3H3.5A1.5 1.5 0 0 1 2 6.8V2a.5.5 0 0 0-.5-.5z"/>
-	               		</svg>
-					<%} %>
 						<dl>
 							<dt>
 								<%if(tmp.getProfile() == null){%>
-								<svg class="profile-image" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-		                          	<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-		                          	<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-		                     	</svg>
+									<svg class="profile-image" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+				                       	<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+				                       	<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+				                  	</svg>
 								<%}else{ %>
-								<img class="profile-image" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
-								<%} %>
+									<img class="profile-image" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
+								<%}%>
 									<span><%=tmp.getWriter() %></span>
 								<%if(tmp.getNum() != tmp.getComment_group()){ %>
 									@<i><%=tmp.getTarget_nick() %></i>
 								<%} %>
-									<span><%=tmp.getRegdate() %></span>
-									<a data-num="<%=tmp.getNum() %>" href="javascript:" class="reply-link">답글</a>
+								</dt>
+							<dd>
+								<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
+								<span><%=tmp.getRegdate() %></span>
+								<a data-num="<%=tmp.getNum() %>" href="javascript:" class="reply-link">답글</a>
 								<%if(id != null && tmp.getWriter().equals(id)){ %>
 									<a data-num="<%=tmp.getNum() %>" class="update-link" href="javascript:">수정</a>
 									<a data-num="<%=tmp.getNum() %>" class="delete-link" href="javascript:">삭제</a>
 								<%} %>
-							</dt>
-							<dd>
-								<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
 							</dd>
 						</dl>
 						<form id="reForm<%=tmp.getNum() %>" class="animate__animated comment-form re-insert-form" action="comment_insert.jsp" method="post">
-	   						<input type="hidden" name="ref_group" value="<%=dto.getNum()%>"/>
-	   						<input type="hidden" name="target_nick" value="<%=tmp.getNick()%>"/>
-	   						<input type="hidden" name="comment_group" value="<%=tmp.getComment_group()%>"/>
-	   						<textarea name="content"></textarea>
-	   						<button type="submit">등록</button>
-	   					</form>
+		   					<input type="hidden" name="ref_group" value="<%=dto.getNum()%>"/>
+		   					<input type="hidden" name="target_nick" value="<%=tmp.getNick()%>"/>
+		   					<input type="hidden" name="comment_group" value="<%=tmp.getComment_group()%>"/>
+		   					<textarea name="content"></textarea>
+		   					<button type="submit">등록</button>
+		   				</form>
 						<%if(tmp.getWriter().equals(id)) {%>
-   						<form id="updateForm<%=tmp.getNum() %>" class="comment-form update-form" action="comment_update.jsp" method="post">
-		                  <input type="hidden" name="num" value="<%=tmp.getNum() %>" />
-		                  <textarea class="form-control" name="content"><%=tmp.getContent() %></textarea>
-		                  <button type="submit">수정</button>
-		               </form>
-   					<%} %>
-					</li>
-				<%} %>
-			</ul>
+	   						<form id="updateForm<%=tmp.getNum() %>" class="comment-form update-form" action="comment_update.jsp" method="post">
+			                	<input type="hidden" name="num" value="<%=tmp.getNum() %>" />
+			                	<textarea class="form-control" name="content"><%=tmp.getContent() %></textarea>
+			                	<button type="submit">수정</button>
+			             	</form>
+	   					<%} %>
+						</li>
+					<%} %>
+				</ul>
+			</div>		
 		</div>
+		
 		<div class="loader">
 		   	<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
 			  <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
 			  <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
 			</svg>
-	   </div>
-		<form class="comment-form insert-form" action="comment_insert.jsp" method="post">
-			<input type="hidden" name="ref_group" value="<%=num %>" />
-			<input type="hidden" name="target_nick" value="<%=dto.getNick() %>" />
-			
-			<textarea name="content"></textarea>
-			<button type="submit">등록</button>
-		</form>
+	   	</div>
+		
 	</div>
 	<script src="${pageContext.request.contextPath}/js/gura_util.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

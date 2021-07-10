@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/signup_form.jsp</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <style>
+
 	.btn-primary{
 	  	background-color: #3c64ff;
 	  	    border-color: #3c64ff;
@@ -30,6 +32,11 @@
 	.container {
 		max-width: 960px;
 	  }
+	  
+	 #signupForm{
+	 	text-align:center;
+	 }
+
 </style>
     
 </head>
@@ -41,57 +48,63 @@
 		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입 폼</h1>
 	</div>
 	
-	<form action="signup.jsp" method="post" id="myForm">
-		<div class="col-12">
-			<label class="control-label" for="id">아이디
-				<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
-			</label>
-			<input class="form-control" type="text" name="id" id="id"/>
-			<div class="invalid-feedback">사용할수 없는 아이디 입니다.</div>
-		</div>
-		<div class="col-12 mt-2">
-			<label class="control-label" for="nick">닉네임</label>
-			<input class="form-control" type="text" name="nick" id="nick"/>
-			<div class="invalid-feedback">사용할수 없는 닉네임 입니다.</div>
-		</div>
-		<div class="col-12 mt-2">
-			<label class="control-label" for="pwd">비밀번호
-				<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
-			</label>
-			<input class="form-control" type="password" name="pwd" id="pwd"/>
-			<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
-		</div>
-		<div class="col-12 mt-2">
-			<label class="control-label" for="pwd2">비밀번호 확인</label>
-			<input class="form-control" type="password" name="pwd2" id="pwd2"/>
-		</div>
-		<div class="col-12 mt-2">
-			<label class="control-label form-label" for="email">이메일</label>
-			<input class="form-control" type="text" name="email" id="email" placeholder="you@example.com"/>
-			<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
-		</div> 
 
-		<fieldset>
-			<legend class="mt-4">관심있는 언어 선택</legend>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" name="language" id="lan1" value="Java"/>
-				<label class="form-check-label" for="lan1">자바</label>
+		<form action="signup.jsp" method="post" id="signupForm">
+			<div class="col-6">
+				<label class="control-label" for="id">아이디
+					<small class="form-text text-muted">영문자 소문자로 시작하고 5글자~10글자 이내로 입력하세요.</small>
+				</label>
+				<input class="form-control" type="text" name="id" id="id"/>
+				<div class="invalid-feedback">사용할수 없는 아이디 입니다.</div>
 			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" name="language" id="lan2" value="Javascript"/>
-				<label class="form-check-label" for="lan2">자바스크립트</label>
+			<div class="col-6 mt-2">
+				<label class="control-label" for="nick">닉네임</label>
+				<input class="form-control" type="text" name="nick" id="nick"/>
+				<div class="invalid-feedback">사용할수 없는 닉네임 입니다.</div>
 			</div>
-			<div class="form-check form-check-inline">
-				<input class="form-check-input" type="checkbox" name="language" id="lan3" value="JSP"/>
-				<label class="form-check-label" for="lan3">JSP</label>
+			<div class="col-6 mt-2">
+				<label class="control-label" for="pwd">비밀번호
+					<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
+				</label>
+				<input class="form-control" type="password" name="pwd" id="pwd"/>
+				<div class="invalid-feedback">비밀번호를 확인 하세요.</div>
 			</div>
-		</fieldset>
+			<div class="col-6 mt-2">
+				<label class="control-label" for="pwd2">비밀번호 확인</label>
+				<input class="form-control" type="password" name="pwd2" id="pwd2"/>
+			</div>
+			<div class="col-6 mt-2">
+				<label class="control-label form-label" for="email">이메일</label>
+				<input class="form-control" type="text" name="email" id="email" placeholder="you@example.com"/>
+				<div class="invalid-feedback">이메일 형식을 확인 하세요.</div>
+			</div> 
+	
+			<fieldset>
+				<legend class="mt-4">관심있는 언어 선택</legend>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" name="language" id="lan1" value="Java"/>
+					<label class="form-check-label" for="lan1">자바</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" name="language" id="lan2" value="Javascript"/>
+					<label class="form-check-label" for="lan2">자바스크립트</label>
+				</div>
+				<div class="form-check form-check-inline">
+					<input class="form-check-input" type="checkbox" name="language" id="lan3" value="JSP"/>
+					<label class="form-check-label" for="lan3">JSP</label>
+				</div>
+			</fieldset>
+			
+			<hr class="my-4">
+			<button class="w-50 btn btn-primary btn-lg" type="submit">가입</button>
+
+		</form>
+	</div>
 		
-		<hr class="my-4">
-		<button class="w-100 btn btn-primary btn-lg" type="submit">가입</button>
 		<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
-	</form>
-</div>
+
+	
+
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>
 <script>
 	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입

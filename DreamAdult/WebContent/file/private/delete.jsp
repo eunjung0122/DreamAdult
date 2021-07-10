@@ -1,3 +1,4 @@
+<%@page import="test.file.dao.FileCommentDao"%>
 <%@page import="test.file.dao.FileDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -5,6 +6,7 @@
 	int num=Integer.parseInt(request.getParameter("num"));
 
 	boolean isSuccess=FileDao.getInstance().delete(num);
+	FileCommentDao.getInstance().deleteReal(num);
 %>    
 <!DOCTYPE html>
 <html>

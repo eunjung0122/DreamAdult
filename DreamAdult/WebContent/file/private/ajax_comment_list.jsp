@@ -49,15 +49,16 @@
 				<%if(tmp.getNum() != tmp.getComment_group()){ %>
 					@<i><%=tmp.getTarget_nick() %></i>
 				<%} %>
-					<span><%=tmp.getRegdate() %></span>
+
+			</dt>
+			<dd>
+				<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
+				<span><%=tmp.getRegdate() %></span>
 					<a data-num="<%=tmp.getNum() %>" href="javascript:" class="reply-link">답글</a>
 				<%if(id != null && tmp.getWriter().equals(id)){ %>
 					<a data-num="<%=tmp.getNum() %>" class="update-link" href="javascript:">수정</a>
 					<a data-num="<%=tmp.getNum() %>" class="delete-link" href="javascript:">삭제</a>
 				<%} %>
-			</dt>
-			<dd>
-				<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
 			</dd>
 		</dl>
 		<form id="reForm<%=tmp.getNum() %>" class="animate__animated comment-form re-insert-form" action="comment_insert.jsp" method="post">

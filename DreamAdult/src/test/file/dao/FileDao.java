@@ -318,7 +318,7 @@ public class FileDao {
 		try {
 			conn = new DbcpBean().getConn();
 			// 실행할 SELECT 문.
-			String sql = "SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize" + 
+			String sql = "SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, board_file.regdate" + 
 					" FROM board_file INNER JOIN users" + 
 					" ON board_file.writer = users.id" + 
 					" WHERE num = ?";
@@ -340,6 +340,7 @@ public class FileDao {
 				dto.setOrgFileName(rs.getString("orgFileName"));
 				dto.setSaveFileName(rs.getString("saveFileName"));
 				dto.setFileSize(rs.getLong("fileSize"));
+				dto.setRegdate(rs.getString("regdate"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -369,7 +370,7 @@ public class FileDao {
 	         //실행할 sql 문 작성
 	         String sql = "SELECT *" + 
 	               " FROM" + 
-	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, board_file.regdate," + 
 	               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
@@ -399,6 +400,7 @@ public class FileDao {
 	            dto2.setFileSize(rs.getLong("fileSize"));
 	            dto2.setPrevNum(rs.getInt("prevNum"));
 	            dto2.setNextNum(rs.getInt("nextNum"));
+	            dto2.setRegdate(rs.getString("regdate"));
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -427,7 +429,7 @@ public class FileDao {
 	         //실행할 sql 문 작성
 	         String sql = "SELECT *" + 
 	               " FROM" + 
-	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 	               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
@@ -459,6 +461,7 @@ public class FileDao {
 	            dto2.setFileSize(rs.getLong("fileSize"));
 	            dto2.setPrevNum(rs.getInt("prevNum"));
 	            dto2.setNextNum(rs.getInt("nextNum"));
+	            dto2.setRegdate(rs.getString("regdate"));
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -487,7 +490,7 @@ public class FileDao {
 	         //실행할 sql 문 작성
 	         String sql = "SELECT *" + 
 	               " FROM" + 
-	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 	               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
@@ -518,6 +521,7 @@ public class FileDao {
 	            dto2.setFileSize(rs.getLong("fileSize"));
 	            dto2.setPrevNum(rs.getInt("prevNum"));
 	            dto2.setNextNum(rs.getInt("nextNum"));
+	            dto2.setRegdate(rs.getString("regdate"));
 	         }
 	      } catch (Exception e) {
 	         e.printStackTrace();
@@ -546,7 +550,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -577,6 +581,7 @@ public class FileDao {
 		            dto2.setFileSize(rs.getLong("fileSize"));
 		            dto2.setPrevNum(rs.getInt("prevNum"));
 		            dto2.setNextNum(rs.getInt("nextNum"));
+		            dto2.setRegdate(rs.getString("regdate"));
 		         }
 		      } catch (Exception e) {
 		         e.printStackTrace();
@@ -605,7 +610,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -637,6 +642,7 @@ public class FileDao {
 		            dto2.setFileSize(rs.getLong("fileSize"));
 		            dto2.setPrevNum(rs.getInt("prevNum"));
 		            dto2.setNextNum(rs.getInt("nextNum"));
+		            dto2.setRegdate(rs.getString("regdate"));
 		         }
 		      } catch (Exception e) {
 		         e.printStackTrace();
@@ -665,7 +671,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -697,6 +703,7 @@ public class FileDao {
 		            dto2.setFileSize(rs.getLong("fileSize"));
 		            dto2.setPrevNum(rs.getInt("prevNum"));
 		            dto2.setNextNum(rs.getInt("nextNum"));
+		            dto2.setRegdate(rs.getString("regdate"));
 		         }
 		      } catch (Exception e) {
 		         e.printStackTrace();
@@ -725,7 +732,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -757,6 +764,7 @@ public class FileDao {
 		            dto2.setFileSize(rs.getLong("fileSize"));
 		            dto2.setPrevNum(rs.getInt("prevNum"));
 		            dto2.setNextNum(rs.getInt("nextNum"));
+		            dto2.setRegdate(rs.getString("regdate"));
 		         }
 		      } catch (Exception e) {
 		         e.printStackTrace();
@@ -785,7 +793,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -818,6 +826,7 @@ public class FileDao {
 		            dto2.setFileSize(rs.getLong("fileSize"));
 		            dto2.setPrevNum(rs.getInt("prevNum"));
 		            dto2.setNextNum(rs.getInt("nextNum"));
+		            dto2.setRegdate(rs.getString("regdate"));
 		         }
 		      } catch (Exception e) {
 		         e.printStackTrace();
@@ -1612,9 +1621,7 @@ public class FileDao {
       }
         return count;
    }
-	///////////////////////////////////////////////////////////////
-	
-	
+
 	
 	
 	
