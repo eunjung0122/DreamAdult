@@ -14,40 +14,44 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/private/updateform.jsp</title>
+<title>Dream Adult</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
-<div class="container">
-   <h1>글 수정</h1>
+<div class="form-page container">
+   <h1 class="main-tit">
+  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&amp;opt=C72x72"> 
+   	<span>큐앤에이</span>
+   </h1>
    <form action="update.jsp" method="post" id="updateForm">
-	   <input type="hidden" name="num" value="<%=num %>" />
+	   <input type="hidden" name="num" value="<%=num %>" class="form-control"/>
 	   <div>
-	      <label for="writer">작성자</label>
-	      <input type="text" id="writer" value="<%=dto.getWriter() %>" disabled/>
+	      <label for="writer" class="form-label">작성자</label>
+	      <input type="text" id="writer" class="form-control" value="<%=dto.getWriter() %>" disabled/>
 	   </div>
-	   <div>
-	      <label for="nick">닉네임</label>
-	      <input type="text" id="nick" value="<%=dto.getNick() %>" disabled/>
+	   <div class="mt-3">
+	      <label for="nick" class="form-label">닉네임</label>
+	      <input type="text" id="nick" class="form-control" value="<%=dto.getNick() %>" disabled/>
 	   </div>
-	   <div>
-	         <label for="title">제목</label>
-	         <input type="text" id="title" name="title" value="<%=dto.getTitle()%>"/>
+	   <div class="mt-3">
+	         <label for="title" class="form-label">제목</label>
+	         <input type="text" id="title" class="form-control" name="title" value="<%=dto.getTitle()%>"/>
 	    </div>
-	    <div>
+	    <div class="mt-3">
 	         <label for="category">말머리</label>
-	         <select name="category">
+	         <select name="category" class="form-select">
 	            <option value="">Please choose an option</option>
 	            <option value="java" <%=category.equals("java") ? "selected": "" %> >Java</option>
 	            <option value="javascript" <%=category.equals("javascript") ? "selected": "" %>>JavaScript</option>
 	            <option value="jsp" <%=category.equals("jsp") ? "selected": "" %>>JSP</option>
 	         </select>
 	    </div>
-	   <div>
+	   <div class="mt-3">
 	      <label for="content">내용</label>
-	      <textarea id="content" name="content"><%=dto.getContent() %></textarea>
+	      <textarea id="content" name="content" class="form-control"><%=dto.getContent() %></textarea>
 	   </div>
-	    <button type="submit">수정하기</button>
+	    <button type="submit"  class="btn btn-m btn-custom-dark">수정하기</button>
    </form>
 </div>
 <!-- SmartEditor 에서 필요한 javascript 로딩  -->
