@@ -180,6 +180,9 @@ a {
 	line-height: 1.4;
 }
 /*btn-design*/
+button.btn{
+	padding:0 !important;
+}
 .btn{
 	vertical-align: top;
 	display: inline-block;
