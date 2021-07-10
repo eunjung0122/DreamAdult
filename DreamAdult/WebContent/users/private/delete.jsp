@@ -18,11 +18,19 @@
 </head>
 <body>
 <div class="container">
-	<h1>알림</h1>
-	<p>
-		<strong><%=id %></strong> 님 탈퇴 처리 되었습니다.
-		<a href="<%=request.getContextPath()%>/index.jsp">인덱스로 가기</a>
-	</p>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<script>
+	Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 title: '회원탈퇴가 완료 되었습니다.',
+		 text: '그동안 DreamAdult 를 이용해 주셔서 감사합니다.',
+		 showConfirmButton: false,
+		 timer: 2100
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/index.jsp";
+	});
+</script>
 </div>
 </body>
 </html>
