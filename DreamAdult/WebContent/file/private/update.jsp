@@ -66,16 +66,31 @@
 </head>
 <body>
 	<%if(isSuccess){ %>
-      <script>
-         alert("글이 수정 되었습니다");
-         location.href="<%=request.getContextPath() %>/file/list.jsp";
-      </script>
-   <%}else{ %>
-      <h1>알림</h1>
-      <p>
-	   글 수정 실패!
-         <a href="<%=request.getContextPath() %>/file/private/updateform.jsp?num=<%=dto.getNum()%>">다시 시도</a>
-      </p>
-   <%} %>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+    Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 text: '정상적으로 글이 수정 되었습니다.',
+		 showConfirmButton: false,
+		 timer: 1500
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/file/private/detail.jsp?num=<%=dto.getNum()%>";
+	});    
+    </script>
+	   <%}else{ %>
+	   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	   <script>
+	      Swal.fire({
+			  position: 'top-50 start-50',
+			  icon: 'error',
+			  text: '글이 수정되지 않았습니다.',
+			  showConfirmButton: false,
+			  timer: 1500
+		}).then(function(){
+			location.href="${pageContext.request.contextPath}/file/private/updateform.jsp?num=<%=dto.getNum()%>";
+		});	
+	   </script>   
+	   <%} %>
 </body>
 </html>

@@ -30,12 +30,13 @@ public class QnADao {
 			String sql = "SELECT *" + 
 					" FROM" + 
 					"	(SELECT result1.*, ROWNUM AS rnum" + 
-					"		FROM" + 
+					"	 FROM" + 
 					"		(SELECT DISTINCT board_qna.num, count(*)OVER(PARTITION BY board_qna.num) AS cnt," + 
 					"		 writer, board_qna.nick, title, TO_CHAR(board_qna.regdate,'YYYY.MM.DD')regdate" + 
 					"		 FROM board_qna" + 
 					"		 INNER JOIN users ON board_qna.writer = users.id" + 
 					"		 INNER JOIN qnalike ON board_qna.num = qnalike.num" + 
+					"		 WHERE liked='yes'" + 
 					"		 ORDER BY cnt DESC" + 
 					"		 )result1)" + 
 					" WHERE rnum <= ?";

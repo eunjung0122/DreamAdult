@@ -34,16 +34,30 @@
 </head>
 <body>
    <%if(isSuccess){ %>
-      <script>
-         alert("작성하신 글이 추가 되었습니다.");
-         location.href="${pageContext.request.contextPath}/study/list.jsp";
-         
-      </script>
-   <%}else{ %>
-      <script>
-         alert("글 저장 실패!");
-         location.href="${pageContext.request.contextPath}/study/private/insertform.jsp";
-      </script>
-   <%} %>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+   <script>
+   Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 text: '정상적으로 글이 등록 되었습니다.',
+		 showConfirmButton: false,
+		 timer: 1500
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/study/list.jsp";
+	});    
+   </script>
+	   <%}else{ %>
+	   <script>
+		   Swal.fire({
+				  position: 'top-50 start-50',
+				  icon: 'error',
+				  text: '글이 등록되지 않았습니다.',
+				  showConfirmButton: false,
+				  timer: 1500
+			}).then(function(){
+				location.href="${pageContext.request.contextPath}/study/private/insertform.jsp";
+			});	
+	   </script>
+	   <%} %>
 </body>
 </html>

@@ -32,15 +32,31 @@
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<%if(isValid){ %>
-		<p>
-			<strong><%=id %></strong> 님 비밀번호를 수정하고 로그 아웃되었습니다.
-			<a href="<%=request.getContextPath()%>/users/loginform.jsp">다시 로그인 하러 가기</a>
-		</p>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+	Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 text: '새로운 비밀번호로 변경되어, 재로그인이 필요합니다.',
+		 showConfirmButton: false,
+		 timer: 2100
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/users/loginform.jsp";
+	});    
+	</script>
 	<%}else{ %>
-		<p>
-			이전 비밀번호가 일치하지 않습니다.
-			<a href="pwd_updateform.jsp">다시 시도</a>
-		</p>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+	      Swal.fire({
+			  position: 'top-50 start-50',
+			  icon: 'error',
+			  text: '기존 비밀번호가 일치하지 않습니다.',
+			  showConfirmButton: false,
+			  timer: 1500
+		}).then(function(){
+			location.href="${pageContext.request.contextPath}/users/private/pwd_updateform.jsp";
+		});	
+	</script>
 	<%} %>
 </div>
 </body>

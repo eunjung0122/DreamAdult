@@ -201,6 +201,7 @@
 	</div>
 </div>
 	<script src="${pageContext.request.contextPath}/js/gura_util.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
 	addReplyListener(".reply-link");
 	addUpdateListener(".update-link");
@@ -310,26 +311,38 @@
 		}
 	}
 	
-	function addDeleteListener(sel){
-		let deleteLinks=document.querySelectorAll(sel);
-		for(let i=0; i<deleteLinks.length; i++){
-			deleteLinks[i].addEventListener("click", function(){
-	            const num=this.getAttribute("data-num"); 
-	            const isDelete=confirm("댓글을 삭제 하시겠습니까?");
-	            if(isDelete){
-	               ajaxPromise("comment_delete.jsp", "post", "num="+num)
-	               .then(function(response){
-	                  return response.json();
-	               })
-	               .then(function(data){
-	                  if(data.isSuccess){
-	                     document.querySelector("#reli"+num).innerText="삭제된 댓글입니다.";
-	                  }
-	               });
-	            }
-	         });
-		}
-	}
+	   function addDeleteListener(sel){
+		      let deleteLinks=document.querySelectorAll(sel);
+		      for(let i=0; i<deleteLinks.length; i++){
+		         deleteLinks[i].addEventListener("click", function(){
+		               const num=this.getAttribute("data-num"); 
+		               Swal.fire({
+		        		   text: '댓글을 삭제하시겠습니까?',
+		        		   icon: 'warning',
+		        		   showDenyButton: true,
+		        		   showCancelButton: true,
+		        		   confirmButtonColor: '#000',
+		        		   cancelButtonColor: '#f77028',
+		        		   confirmButtonText: `Yes`,
+		        		   denyButtonText: `Cancel`,
+		        		 }).then((result) => {
+		        		   if (result.isConfirmed) {
+		        			   ajaxPromise("comment_delete.jsp", "post", "num="+num)
+		 	                  .then(function(response){
+		 	                     return response.json();
+		 	                  })
+		 	                  .then(function(data){
+		 	                     if(data.isSuccess){
+		 	                        document.querySelector("#reli"+num).innerText="삭제된 댓글입니다.";
+		 	                     }
+		 	                  });	        			 	        			   
+		        		   } else if (result.isDenied) {
+		        			   location.href="${pageContext.request.contextPath}/file/private/detail.jsp?num=<%=dto.getNum()%>";
+		        		   }
+		        		 })
+		            });
+		      }
+		   } 
 </script>
 </body>
 </html>

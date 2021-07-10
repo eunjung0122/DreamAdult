@@ -56,6 +56,7 @@
 		</form>
 	</div>
 <script src="<%=request.getContextPath()%>/SmartEditor/js/HuskyEZCreator.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	var oEditors = [];
 	
@@ -104,13 +105,31 @@
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
 		if(!title && !category){
-			alert("제목 또는 카테고리를 확인하세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '제목 또는 카테고리를 확인하세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}else if(!category){
-			alert("카테고리를 선택해주세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '카테고리를 선택해 주세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}else if(!title){
-			alert("제목을 입력해주세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '제목을 입력해 주세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}
 	});	   

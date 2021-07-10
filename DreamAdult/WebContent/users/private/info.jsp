@@ -86,16 +86,30 @@
 		</tr>
 	</table>
 	<a href="pwd_checkform.jsp">개인정보 수정</a>
-	<a href="javascript:deleteConfirm()">탈퇴</a>
+	<a class="btn btn-custom-dark" id="deleteConfirm">탈퇴</a>
 	<a href="../../index.jsp">인덱스로 가기</a>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-	function deleteConfirm(){
-		const isDelete=confirm("<%=id%> 님 탈퇴 하시겠습니까?");
-		if(isDelete){
-			location.href="delete.jsp";
-		}
-	}
+document.querySelector("#deleteConfirm").addEventListener("click", function(){
+	   Swal.fire({
+		   title: '회원탈퇴',
+		   text: '탈퇴 시 회원님의 모든 정보가 삭제되고, 복구하실 수 없습니다. 정말 탈퇴하시겠습니까?',
+		   icon: 'warning',
+		   showDenyButton: true,
+		   showCancelButton: true,
+		   confirmButtonColor: '#000',
+		   cancelButtonColor: '#f77028',
+		   confirmButtonText: `Yes`,
+		   denyButtonText: `Cancel`,
+		 }).then((result) => {
+		   if (result.isConfirmed) {
+			   location.href="${pageContext.request.contextPath}/users/private/delete.jsp"
+		   } else if (result.isDenied) {
+			   location.href="${pageContext.request.contextPath}/users/private/info.jsp";
+		   }
+		 })
+	   });
 </script>
 </body>
 </html>

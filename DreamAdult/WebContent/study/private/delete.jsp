@@ -23,15 +23,31 @@
 </head>
 <body>
    <%if(isSuccess){%>
-      <script>
-         alert("삭제 했습니다.");
-         location.href="${pageContext.request.contextPath }/study/list.jsp";
-      </script>
-   <%}else{%>
-      <script>
-         alert("삭제 실패!");
-         location.href="detail.jsp?num=<%=num%>";
-      </script>
-   <%} %>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+   <script>
+	   Swal.fire({
+			 position: 'top-50 start-50',
+			 icon: 'success',
+			 title: '',
+			 showConfirmButton: false,
+			 timer: 1500
+		}).then(function(){
+			location.href="${pageContext.request.contextPath }/study/list.jsp";
+		});
+   </script>
+	   <%}else{%>
+	   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	   <script>
+		   Swal.fire({
+				  position: 'top-50 start-50',
+				  icon: 'error',
+				  title: '',
+				  showConfirmButton: false,
+				  timer: 1500
+			}).then(function(){
+				location.href="${pageContext.request.contextPath}/study/private/detail.jsp?num=<%=num%>";
+			});	
+	   </script>
+	   <%} %>
 </body>
 </html>

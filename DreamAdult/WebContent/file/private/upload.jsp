@@ -58,15 +58,31 @@
 </head>
 <body>
 	<%if(isSuccess){ %>
-      <script>
-         alert("새글이 추가 되었습니다");
-         location.href="<%=request.getContextPath()%>/file/list.jsp";
-      </script>
-   <%}else{ %>
-      <script>
-         alert("글 저장 실패");
-         location.href="<%=request.getContextPath()%>/file/private/uploadform.jsp";
-      </script>
-   <%} %>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script>
+   	Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 text: '정상적으로 업로드 되었습니다.',
+		 showConfirmButton: false,
+		 timer: 1500
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/file/list.jsp";
+	});    
+   </script>
+	   <%}else{ %>
+	   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	   <script>
+		 Swal.fire({
+			 position: 'top-50 start-50',
+		 	 icon: 'error',
+			 text: '파일이 정상적으로 업로드 되지 않았습니다.',
+			 showConfirmButton: false,
+		     timer: 1500
+		}).then(function(){
+				location.href="${pageContext.request.contextPath}/file/private/uploadform.jsp";
+		});	
+	   </script>
+	   <%} %>
 </body>
 </html>

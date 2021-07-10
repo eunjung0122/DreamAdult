@@ -30,9 +30,17 @@
 <title>/users/private/update.jsp</title>
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-	alert("<%=id%> 님 정보가 수정 되었습니다.");
-	location.href="info.jsp";
+	Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 text: '<%=id%> 님 회원정보가 정상적으로 수정 되었습니다.',
+		 showConfirmButton: false,
+		 timer: 2000
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/users/private/info.jsp";
+	});
 </script>
 </body>
 </html>
