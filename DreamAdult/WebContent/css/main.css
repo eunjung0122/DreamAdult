@@ -504,15 +504,44 @@ a {
 #signupForm>div{
 	display:inline-block;
 }
+/*form-page*/
+.form-page{
+	min-height:1000px;
+}
+.form-page .main-tit{
+	margin: 80px 0 60px;
+	font-size: 2.8rem;
+	line-height: 1.4;
+	text-align:center;
+}
+.form-page .main-tit>img,
+.form-page .main-tit>span{
+	display:inline-block;
+	vertical-align:middle;
+}
+.form-page .tab{
+	display:flex;
+	flex-wrap:wrap;
+	align-items:center;
+	justify-content:center;
+}
 
-
-
-
-
-
-
-
-
+.form-page .tab .tab-list>a{
+    display: block;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 30px;
+    font-size: 16px;
+    line-height: 43px;
+    letter-spacing: -.5px;
+    background:#ddd;
+    color:#222;
+    margin-right:10px;
+}
+.form-page .tab .tab-list.active>a{
+	background:#222;
+	color:#fff;
+}
 
 
 
