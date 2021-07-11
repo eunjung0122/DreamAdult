@@ -157,7 +157,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
-							<a href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">확인</a>
+							<a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a>
 						</span>
 					</li>
 					<li class="box box-m">
