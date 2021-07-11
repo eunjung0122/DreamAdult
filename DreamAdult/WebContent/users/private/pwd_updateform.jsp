@@ -95,8 +95,8 @@ let isNewPwdValid=false;
 	
 	document.querySelector("#changePwdForm").addEventListener("submit", function(e){
 		let isFormNotValid= isNewPwdValid;
-		if(isFormNotValid){
-			e.preventDefault();	
+		if(!isFormNotValid){
+			e.preventDefault();
 		}
 	});
 </script>
