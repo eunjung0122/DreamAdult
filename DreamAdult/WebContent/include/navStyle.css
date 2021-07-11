@@ -6,16 +6,6 @@ ul{
 }
 
 
-.title-font{
-	font-family:'Montserrat', 'Noto Sans KR', sans-serif;
-	font-size: 18px;
-	font-weight: 700;
-}
-
-
-.navbar-toggler{
-	border:0;
-}
 .navbar-toggler-icon{
 	width:28px;
 	height:28px;
@@ -23,7 +13,7 @@ ul{
 }
 .mbMnImage{
 		display:none;
-	}
+}
 .nav-item {
 	margin: 0 28px;
 }
@@ -31,82 +21,17 @@ ul{
 	width:48px;
 	height:48px;
 }
-.pcMem{
-	color:#333; 
-	margin:8px;
-}
-.pcMemSub{
-	position:absolute;
-}
-.pcMemHover:hover{
-	background:rgb(239, 239, 239);
-	border-radius:50%;
-}
-.pcMemBook{
-	display:block;
-}
-.pcMemBook>svg{
-	margin:10px;
-}
-.pcSub{
-	display:flex;
-	/*position:absolute;*/
-	width:172px;
-	height:48px;
-	font-size:16px;
-	font-weight:400;
-	list-style:none;
-	align-items:center;
-	background:#000;
-	border-radius: 24px;
-	margin-top:-4px;
-	margin-left:-16px;
-	padding:0 24.5px;
-}
-.mbSubList{
-	color:#eee;
-}
-.mbSubList:hover{
-	font-weight:500;
-	color:#fff;
-}
-.mbSubListL{
-	margin-left:auto;
-}
-.pcSubScript{
-	display:none;
-}
 .mbMnMem{
 	display:none;
 }
 @media (max-width: 991.98px) {
-	#menuBer{
-		/*position:relative;
-		top:0;*/
-		
-		
-	}
-	.mbContainer{
-		width:412px;
-		/*height:968px;
-		
-		padding-bottom:36px;*/
-		
-	}
-	.mbMnHeader{
-		display:flex;
-		/*width:412px;*/
-		align-items:center;
-		padding:8px 0;
-	}
 	.navbar-toggler{
 		margin-left:auto;
 	}
 	.nav-link{
 		display:flex;
 		align-items:center;
-		flex-direction: row;
-		
+		flex-direction: row;	
 	}
 	.mbMnHeader, .nav-link{
 		padding-bottom:36px;
@@ -120,30 +45,23 @@ ul{
 		font-weight:600;
 		color:#000;
 	}
-	.pcMemList{
-		display:none;
-	}
 	.mbMnMem{
 		display:block;
 	}
-	.mbMnMembers{
-		/*position:absolute;
-		bottom:0;*/
-		display:flex;
-		flex-decoration:column;
-		font-size:14px;
-		padding-left:0;
-		/*margin-top:528px;*/
+	.mbHdLeft{
+		margin-left:6px;
 	}
-	.mbMnMemList{
-		justify-content: flex-start;
-		margin-right:18px;
+	.mbHdBottom{
+	 	margin-top:24px;
 	}
-	#menuIcon{
-		display:block;
+	.MbDrMem{
+		margin-left:10px;
+	}
+	.MbDrBook{
+		margin-top:10px;
+		margin-left:24px;
 	}
 }
-
 
 
 
@@ -151,10 +69,3 @@ ul{
 	color: black;
 }
 
-#fixedMenuBer {
-	height: 73px;
-	background: #fff;
-	border-bottom: 1px solid #eee;
-	display: none;
-	padding: 14px 0;
-}
