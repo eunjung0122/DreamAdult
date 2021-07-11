@@ -17,6 +17,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/private/info.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
 	/* 프로필 이미지를 작은 원형으로 만든다 */
@@ -29,7 +30,6 @@
 </style>
 </head>
 <body>
-<jsp:include page="../../include/resource.jsp"></jsp:include>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
 	<h1>가입 정보</h1>

@@ -107,6 +107,7 @@
 <meta charset="UTF-8">
 <title>Dream Adult</title>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 </head>
 <body>
 <jsp:include page="../include/navber.jsp">
