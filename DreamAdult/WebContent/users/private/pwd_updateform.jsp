@@ -92,6 +92,13 @@ let isNewPwdValid=false;
 	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
 	document.querySelector("#newPwd").addEventListener("input", checkNewPwd);
 	document.querySelector("#newPwd2").addEventListener("input", checkNewPwd);
+	
+	document.querySelector("#changePwdForm").addEventListener("submit", function(e){
+		let isFormNotValid= isNewPwdValid;
+		if(isFormNotValid){
+			e.preventDefault();	
+		}
+	});
 </script>
 </body>
 </html>
