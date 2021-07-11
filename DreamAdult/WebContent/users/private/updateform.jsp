@@ -46,17 +46,17 @@
 	<form action="update.jsp" method="post">
 		<input type="hidden" name="profile" 
 			value="<%=dto.getProfile()==null ? "empty" : dto.getProfile()%>"/>
-		<div>
+		<div class="mb-3">
 			<label for="id">아이디</label>
-			<input type="text" id="id" value="<%=id %>" disabled/>
+			<input class="form-control" type="text" id="id" value="<%=id %>" disabled/>
 		</div>
-		<div>
+		<div class="mb-3">
 			<label for="nick">닉네임</label>
-			<input type="text" name="nick" id="nick" value="<%=dto.getNick() %>" />
+			<input class="form-control" type="text" name="nick" id="nick" value="<%=dto.getNick() %>" />
 		</div>
-		<div>
+		<div class="mb-3">
 			<label for="email">이메일</label>
-			<input type="text" name="email" id="email" value="<%=dto.getEmail()%>"/>
+			<input class="form-control" type="text" name="email" id="email" value="<%=dto.getEmail()%>"/>
 		</div>
 		<button class="btn btn-s btn-custom-dark" type="submit">수정반영</button>
 	</form>
