@@ -325,6 +325,7 @@
 		}
 	}
 %>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
 <%if(isPopup){ %>
 	window.open("popup.jsp", "웰컴팝업창", "width=500,height=450,top=100,left=100");
@@ -332,6 +333,20 @@
 <%if(isUpgrade){%>
 	window.open("grade_popup.jsp", "등급 업 팝업창", "width=500,height=450,top=100,left=600");
 <%}%>
+
+$( document ).ready( function() {
+    $( window ).scroll( function() {
+      if ( $( this ).scrollTop() > 200 ) {
+        $( '.link-top' ).fadeIn();
+      } else {
+        $( '.link-top' ).fadeOut();
+      }
+    } );
+    $( '.link-top' ).click( function() {
+      $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+      return false;
+    } );
+  } );
 </script>
 </body>
 </html>
