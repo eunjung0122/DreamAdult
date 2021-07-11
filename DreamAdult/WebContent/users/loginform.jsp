@@ -35,6 +35,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Adult</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" />
 </head>
 <body class="text-center">

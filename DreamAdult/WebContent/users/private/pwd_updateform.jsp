@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/private/pwd_updateform.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
