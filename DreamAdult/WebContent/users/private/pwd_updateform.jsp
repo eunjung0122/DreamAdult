@@ -5,39 +5,93 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/private/pwd_updateform.jsp</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<style>
+
+.container {
+	max-width: 960px;
+}
+
+#changePwdForm{
+	width: 100%;
+	text-align: center;
+}
+
+#one{
+	margin-left: 500px;
+}
+
+#two{
+	margin-left: 500px; 	
+} 
+
+#three{
+	margin-left: 500px; 
+} 
+
+</style>
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
-	<h1>비밀 번호 수정 폼</h1>
-	<form action="pwd_update.jsp" method="post" id="myForm">
-		<div>
-			<label for="pwd">기존 비밀 번호</label>
-			<input type="password" name="pwd" id="pwd"/>
+	<div class="mt-4 text-center">
+		<img  src="<%=request.getContextPath() %>/images/logo2.png" width="100" height="80">
+		<h1 class="h3 mt-3 mb-3 fw-normal">비밀번호 변경</h1>
+	</div>
+	
+	<form action="pwd_update.jsp" method="post" id="changePwdForm">
+		<div class="col-3" id="one">
+			<label class="control-label" for="pwd">현재 비밀 번호</label>
+			<input class="form-control" type="password" name="pwd" id="pwd"/>
 		</div>
-		<div>
-			<label for="newPwd">새 비밀번호</label>
-			<input type="password" name="newPwd" id="newPwd"/>
+		<div class="col-3 mt-2" id="two">
+			<label class="control-label" for="newPwd">새 비밀번호</label>
+			<small class="form-text text-muted">5글자~10글자 이내로 입력하세요.</small>
+			<input class="form-control" type="password" name="newPwd" id="newPwd"/>
+			<div class="invalid-feedback">입력하신 비밀번호를 확인 하세요.</div>
 		</div>
-		<div>
-			<label for="newPwd2">새 비밀번호 확인</label>
-			<input type="password" id="newPwd2"/>
+		<div class="col-3 mt-2" id="three">
+			<label class="control-label" for="newPwd2">새 비밀번호 확인</label>
+			<input class="form-control" type="password" id="newPwd2"/>
 		</div>
-		<button type="submit">수정하기</button>
-		<button type="reset">리셋</button>
+		
+		<hr class="my-4">
+		<button class="btn btn-lg btn-custom-yellow" type="submit">비밀번호 변경</button>&nbsp;&nbsp;&nbsp;
+		<button class="btn btn-lg btn-custom-gray" type="reset">Reset</button>
 	</form>
 </div>
+<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 <script>
-	//폼에 submit 이벤트가 일어났을때 실행할 함수를 등록하고 
-	document.querySelector("#myForm").addEventListener("submit", function(e){
-		let pwd1=document.querySelector("#newPwd").value;
-		let pwd2=document.querySelector("#newPwd2").value;
-		//새 비밀번호와 비밀번호 확인이 일치하지 않으면 폼 전송을 막는다.
-		if(pwd1 != pwd2){
-			alert("비밀번호를 확인 하세요!");
-			e.preventDefault();//폼 전송 막기 
+let isNewPwdValid=false;
+
+	function checkNewPwd(){
+		document.querySelector("#newPwd").classList.remove("is-valid");
+		document.querySelector("#newPwd").classList.remove("is-invalid");
+		
+		const newPwd=document.querySelector("#newPwd").value;
+		const newPwd2=document.querySelector("#newPwd2").value;
+		
+		// 최소5글자 최대 10글자인지를 검증할 정규표현식
+		const reg_newPwd=/^.{5,10}$/;
+		if(!reg_newPwd.test(newPwd)){
+			isNewPwdValid=false;
+			document.querySelector("#newPwd").classList.add("is-invalid");
+			return; //함수를 여기서 종료
 		}
-	});
+		
+		if(newPwd != newPwd2){//비밀번호와 비밀번호 확인란이 다르면
+			//비밀번호를 잘못 입력한것이다.
+			isNewPwdValid=false;
+			document.querySelector("#newPwd").classList.add("is-invalid");
+		}else{
+			isNewPwdValid=true;
+			document.querySelector("#newPwd2").classList.add("is-valid");
+		}
+	}
+	
+	//비밀번호 입력란에 input 이벤트가 일어 났을때 실행할 함수 등록
+	document.querySelector("#newPwd").addEventListener("input", checkNewPwd);
+	document.querySelector("#newPwd2").addEventListener("input", checkNewPwd);
 </script>
 </body>
 </html>

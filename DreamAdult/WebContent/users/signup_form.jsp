@@ -45,7 +45,7 @@
 <div class="container">
 	<div class="mt-4 text-center">
 		<img  src="../images/logo2.png" width="100" height="80">
-		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입 폼</h1>
+		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입</h1>
 	</div>
 	
 
