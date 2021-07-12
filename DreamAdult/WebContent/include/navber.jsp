@@ -14,11 +14,6 @@
 <meta charset="UTF-8">
 <title>navber.jsp</title>
 <jsp:include page="resource.jsp"></jsp:include>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Nerko+One&family=Noto+Sans:wght@700&display=swap"
-	rel="stylesheet">
 <style>
 .bd-placeholder-img {
 	font-size: 1.125rem;
@@ -59,6 +54,32 @@ body {
 	border-bottom: 1px solid #eee;
 	display: none;
 	padding: 14px 0;
+}
+
+
+/* top 버튼 */
+.link-top>svg{
+    display:none;
+}
+
+@media (min-width: 992px) {
+    .link-top>svg{
+        display:block;
+	    color:#fff;
+    }
+    .link-top{
+	    background:#000;
+        border-radius:50%;
+        width:50px;
+        height:50px;
+        position:fixed;
+        bottom:40px;
+        right:34px;
+        display:none;
+    }
+    .link-top:hover{
+        background:#555;
+    }
 }
 </style>
 </head>
@@ -129,7 +150,13 @@ body {
 			</button>
 		</div>
 	</nav>
-	<script>
+	<a class="link-top" href="">
+		<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
+		  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
+		</svg>
+	</a>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
 		window.addEventListener("scroll", function() {
 			const menuBer = document.querySelector("#menuBer");
 			const fixedMenuBer = document.querySelector("#fixedMenuBer");
@@ -144,7 +171,22 @@ body {
 				fixedMenuBer.classList.remove("fixed-top");
 			}
 		});
-	</script>
+	
+	/* top 버튼 */
+	$( document ).ready( function() {
+		$( window ).scroll( function() {
+			if ( $( this ).scrollTop() > 0 ) {
+		    	$( '.link-top' ).fadeIn();
+		    } else {
+		    	$( '.link-top' ).fadeOut();
+		    }
+		} );
+		$( '.link-top' ).click( function() {
+		    $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
+		    return false;
+		} );
+	} );
+</script>
 
 </body>
 </html>

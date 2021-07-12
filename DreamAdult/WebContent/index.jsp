@@ -302,11 +302,6 @@
 			</div>
 		</div>
 	</div>
-	<a class="link-top" href="">
-		<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
-		  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-		</svg>
-	</a>
 </div>
 <footer style="height:400px; border-top:1px solid #ddd;">
 	<div class="container">
@@ -333,20 +328,6 @@
 <%if(isUpgrade){%>
 	window.open("grade_popup.jsp", "등급 업 팝업창", "width=500,height=450,top=100,left=600");
 <%}%>
-
-$( document ).ready( function() {
-    $( window ).scroll( function() {
-      if ( $( this ).scrollTop() > 200 ) {
-        $( '.link-top' ).fadeIn();
-      } else {
-        $( '.link-top' ).fadeOut();
-      }
-    } );
-    $( '.link-top' ).click( function() {
-      $( 'html, body' ).animate( { scrollTop : 0 }, 400 );
-      return false;
-    } );
-  } );
 </script>
 </body>
 </html>
