@@ -348,6 +348,9 @@
 
             <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
             <a class="btn btn-custom-dark" id="postDelete">삭제 </a>
+        <%}else{%>
+        	<a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/qna/private/updateform.jsp?num=<%=dto.getNum()%>" style="display:none;">수정</a>
+            <a class="btn btn-custom-dark" id="postDelete" style="display:none;">삭제 </a>        
         <%} %>
    </div>
    
