@@ -89,7 +89,7 @@ public class FileDao {
 					+ " FROM"
 					+ "	(SELECT result1.*, ROWNUM AS rnum"
 					+ " FROM"
-					+ "	(SELECT num,title,nick,viewCount,B.regdate,category" + 
+					+ "	(SELECT num,title,nick,viewCount,TO_CHAR(B.regdate,'YYYY.MM.DD')regdate,category" + 
 					"	FROM BOARD_FILE B,USERS U" + 
 					"	WHERE B.WRITER=U.ID AND WRITER=?"
 					+ " ORDER BY num DESC) result1)"
@@ -370,7 +370,7 @@ public class FileDao {
 	         //실행할 sql 문 작성
 	         String sql = "SELECT *" + 
 	               " FROM" + 
-	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, board_file.regdate," + 
+	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 	               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
@@ -429,7 +429,7 @@ public class FileDao {
 	         //실행할 sql 문 작성
 	         String sql = "SELECT *" + 
 	               " FROM" + 
-	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 	               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
@@ -490,7 +490,7 @@ public class FileDao {
 	         //실행할 sql 문 작성
 	         String sql = "SELECT *" + 
 	               " FROM" + 
-	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+	               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 	               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 	               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 	               "   FROM board_file INNER JOIN users" +
@@ -550,7 +550,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -610,7 +610,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -671,7 +671,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -732,7 +732,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -793,7 +793,7 @@ public class FileDao {
 		         //실행할 sql 문 작성
 		         String sql = "SELECT *" + 
 		               " FROM" + 
-		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize,board_file.regdate," + 
+		               "   (SELECT num, category, writer, nick, grade, title, viewCount, content, orgFileName, saveFileName, fileSize, TO_CHAR(board_file.regdate,'YYYY.MM.DD HH:MI')regdate," + 
 		               "   LAG(num, 1, 0) OVER(ORDER BY num DESC) AS prevNum," + 
 		               "   LEAD(num, 1, 0) OVER(ORDER BY num DESC) nextNum" + 
 		               "   FROM board_file INNER JOIN users" +
@@ -854,7 +854,7 @@ public class FileDao {
 			//실행할 sql 문 작성
 			String sql = "INSERT INTO board_file" + 
 					" (num, writer, category, title, content, regdate, viewCount, orgFileName, saveFileName, fileSize)" + 
-					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, TO_CHAR(SYSDATE, 'YYYY-MM-DD'), 0, ?, ?, ?)";
+					" VALUES(board_file_seq.NEXTVAL, ?, ?, ?, ?, SYSDATE, 0, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			//?에 바인딩할 내용이 있으면 여기서 바인딩
 			pstmt.setString(1, dto.getWriter());
@@ -941,7 +941,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, viewCount, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "			ORDER BY num DESC)result1)"
@@ -990,7 +990,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE title LIKE '%'||?||'%' OR content LIKE '%'||?||'%'"
@@ -1045,7 +1045,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE title LIKE '%'||?||'%'"
@@ -1098,7 +1098,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE nick LIKE '%'||?||'%'"
@@ -1151,7 +1151,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE category LIKE ?"
@@ -1204,7 +1204,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
@@ -1259,7 +1259,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
@@ -1313,7 +1313,7 @@ public class FileDao {
 					+ "FROM"
 					+ "		(SELECT result1.*, ROWNUM AS rnum"
 					+ "		FROM"
-					+ "			(SELECT num, nick, category, title, board_file.regdate, viewCount"  
+					+ "			(SELECT num, nick, category, title, TO_CHAR(board_file.regdate,'YYYY.MM.DD')regdate, viewCount"  
 					+ " 		FROM board_file INNER JOIN users"  
 					+ " 		ON board_file.writer = users.id"
 					+ "	 		WHERE nick LIKE '%'||?||'%' AND category LIKE ?"
