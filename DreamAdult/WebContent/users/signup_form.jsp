@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/signup_form.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <style>
 
@@ -45,7 +46,7 @@
 <div class="container">
 	<div class="mt-4 text-center">
 		<img  src="../images/logo2.png" width="100" height="80">
-		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입 폼</h1>
+		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입</h1>
 	</div>
 	
 

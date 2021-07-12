@@ -10,11 +10,18 @@
       height: 500px;
    }
 </style>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="qna" name="thisPage"/></jsp:include>
 <div class="form-page container">
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  	<ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">QnA</li>
+	  </ol>
+	</nav>
    <h1 class="main-tit">
   	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&amp;opt=C72x72"> 
    	<span>큐앤에이</span>
@@ -26,7 +33,7 @@
       </div>
       <div class="mt-3">
          <label for="category">말머리</label>
-         <select name="category" class="form-select">
+         <select name="category" id="category" class="form-select">
             <option value="">Please choose an option</option>
             <option value="java">Java</option>
             <option value="javascript">JavaScript</option>
@@ -42,6 +49,7 @@
 </div>
 <!-- SmartEditor 에서 필요한 javascript 로딩  -->
 <script src="${pageContext.request.contextPath }/SmartEditor/js/HuskyEZCreator.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
    var oEditors = [];
    
@@ -85,20 +93,43 @@
    }
    
    //폼에 submit 이벤트가 일어났을 때 실행할 함수 등록
-   document.querySelector("#insertForm")
-         .addEventListener("submit", function(e){
+   document.querySelector("#insertForm").addEventListener("submit", function(e){
           //에디터에 입력한 내용이 textarea 의 value 값이 될 수 있도록 변환한다.
           oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
           //textarea 이외에 입력한 내용을 여기서 검증하고
           const title=document.querySelector("#title").value;
-          
+          const category=document.querySelector("#category").value;
           //만일 폼 제출을 막고 싶으면
           //e.preventDefault();
           //을 수행하게 해서 폼 제출을 막아준다.
-          if(title.length < 1){
-             alert("제목은 5글자 이상 입력하세요!"); //테스트 중이라 length < 1로 설정해 둔 상황입니다.
-             e.preventDefault();
-          }
+          if(title=="" && category==""){
+        	  	e.preventDefault();
+	  			Swal.fire({
+	  				 position: 'top-50 start-50',
+	  			 	 icon: 'warning',
+	  				 text: '제목 또는 카테고리를 확인하세요.',
+	  				 showConfirmButton: false,
+	  			     timer: 1500
+	  			})
+	  		}else if(category==""){
+	  			e.preventDefault();
+	  			Swal.fire({
+	  				 position: 'top-50 start-50',
+	  			 	 icon: 'warning',
+	  				 text: '카테고리를 선택해 주세요.',
+	  				 showConfirmButton: false,
+	  			     timer: 1500
+	  			})	
+	  		}else if(title==""){
+	  			e.preventDefault();
+	  			Swal.fire({
+	  				 position: 'top-50 start-50',
+	  			 	 icon: 'warning',
+	  				 text: '제목을 입력해 주세요.',
+	  				 showConfirmButton: false,
+	  			     timer: 1500
+	  			})
+	  		}
          });
 </script>
 </body>

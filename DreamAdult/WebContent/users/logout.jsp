@@ -9,6 +9,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/logout.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 </head>
 <body>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

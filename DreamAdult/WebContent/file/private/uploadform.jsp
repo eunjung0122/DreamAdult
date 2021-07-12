@@ -5,11 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Adult</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="file" name="thisPage"/></jsp:include>
 	<div class="form-page container">
+		<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">File</li>
+		  </ol>
+		</nav>
 		<h1 class="main-tit">
 		  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"> 
 		   	<span>코드공유</span>
@@ -18,7 +25,7 @@
 			<div>
 				<label for="category">카테고리</label>
 				<select name="category" id="category" class="form-select">
-					<option value="whole">선택</option>
+					<option value="">선택</option>
 					<option value="java">java</option>
 					<option value="javascript">javascript</option>
 					<option value="jsp">jsp</option>
@@ -87,7 +94,7 @@
 		oEditors.getById["fileContent"].exec("UPDATE_CONTENTS_FIELD", []); 
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
-		if(!title && !category){
+		if(title=="" && category==""){
 			Swal.fire({
 				 position: 'top-50 start-50',
 			 	 icon: 'warning',
@@ -96,7 +103,7 @@
 			     timer: 1500
 			})
 			e.preventDefault();
-		}else if(!category){
+		}else if(category==""){
 			Swal.fire({
 				 position: 'top-50 start-50',
 			 	 icon: 'warning',
@@ -105,7 +112,7 @@
 			     timer: 1500
 			})
 			e.preventDefault();
-		}else if(!title){
+		}else if(title==""){
 			Swal.fire({
 				 position: 'top-50 start-50',
 			 	 icon: 'warning',

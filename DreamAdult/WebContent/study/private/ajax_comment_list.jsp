@@ -4,7 +4,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	Thread.sleep(2000);
 	String id=(String)session.getAttribute("id");
 	int pageNum=Integer.parseInt(request.getParameter("pageNum"));
 	int num=Integer.parseInt(request.getParameter("num"));

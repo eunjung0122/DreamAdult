@@ -50,7 +50,7 @@
 	      Swal.fire({
 			  position: 'top-50 start-50',
 			  icon: 'error',
-			  text: '기존 비밀번호가 일치하지 않습니다.',
+			  text: '비밀번호를 확인하세요.',
 			  showConfirmButton: false,
 			  timer: 1500
 		}).then(function(){
