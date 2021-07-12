@@ -23,15 +23,40 @@
 		border: 1px solid #cecece;
 		border-radius: 50%;
 	}
+	
 	#imageForm{
 		display: none;
 	}
+	
+	#updateForm{
+	width: 100%;
+	text-align: center;
+	}
+			
+	#profileImage{
+		margin-left: 630px;	
+	}
+	
+	#one{
+		margin-left: 500px;	
+	}
+	
+	#two{
+		margin-left: 500px;	
+	}
+		
+	#three{
+		margin-left: 500px;	
+	}	
 </style>
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
-	<h1 class="mb-3">개인정보 수정</h1>
+	<div class="mt-4 text-center">
+		<img  src="<%=request.getContextPath() %>/images/logo2.png" width="100" height="80">
+		<h1 class="h3 mt-3 mb-4 fw-normal">개인정보 수정</h1>
+	</div>
 	<a class="mb-3" id="profileLink" href="javascript:">
 		<%if(dto.getProfile()==null){ %>
 			<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-sunglasses" viewBox="0 0 16 16">
@@ -43,22 +68,24 @@
 				src="<%=request.getContextPath() %><%=dto.getProfile() %>" />
 		<%} %>
 	</a>
-	<form action="update.jsp" method="post">
+	<form action="update.jsp" method="post" id="updateForm">
 		<input type="hidden" name="profile" 
 			value="<%=dto.getProfile()==null ? "empty" : dto.getProfile()%>"/>
-		<div class="mb-3">
+		<div class="col-3 mb-3" id="one">
 			<label for="id">아이디</label>
 			<input class="form-control" type="text" id="id" value="<%=id %>" disabled/>
 		</div>
-		<div class="mb-3">
+		<div class="col-3 mb-3" id="two">
 			<label for="nick">닉네임</label>
 			<input class="form-control" type="text" name="nick" id="nick" value="<%=dto.getNick() %>" />
+			<div class="invalid-feedback">사용할수 없는 닉네임 입니다.</div>
 		</div>
-		<div class="mb-3">
+		<div class="col-3 mb-3" id="three">
 			<label for="email">이메일</label>
 			<input class="form-control" type="text" name="email" id="email" value="<%=dto.getEmail()%>"/>
 		</div>
-		<button class="btn btn-s btn-custom-dark" type="submit">수정반영</button>
+		<hr class="my-4">
+		<button class="btn btn-lg btn-custom-yellow" type="submit">수정반영</button>
 	</form>
 	
 	<form action="ajax_profile_upload.jsp" method="post" 
@@ -67,8 +94,13 @@
 			accept=".jpg, .jpeg, .png, .JPG, .JPEG, .gif"/>
 	</form>
 </div>
+<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>
 <script>
+let isNickValid=false;
+let isEmailValid=false;
+let isFormNotValid=false;
+
 	//프로필 이미지 링크를 클릭하면 
 	document.querySelector("#profileLink").addEventListener("click", function(){
 		// input type="file" 을 강제 클릭 시킨다. 
@@ -92,27 +124,56 @@
 			// input name="profile" 요소의 value 값으로 이미지 경로 넣어주기
 			document.querySelector("input[name=profile]").value=data.imagePath;
 		});
-		/*  util 을 사용하지 않는 코드는 아래와 같다  
+	});
+	
+	function checkNick(){
+		document.querySelector("#nick").classList.remove("is-valid");
+		document.querySelector("#nick").classList.remove("is-invalid");
 		
-		let form=document.querySelector("#imageForm");
-		const url=form.getAttribute("action");
-		const method=form.getAttribute("method");
-		//폼에 입력한 데이터를 FormData 에 담고 
-		let data=new FormData(form);
-		// fetch() 함수가 리턴하는 Promise 객체를 
-		fetch(url,{
-			method:method,
-			body:data
-		})
+		const inputNick=document.querySelector("#nick").value;
+		
+		ajaxPromise("checknick.jsp", "get", "inputNick="+inputNick)
 		.then(function(response){
 			return response.json();
 		})
 		.then(function(data){
-			console.log(data);
-			
-		});
-		*/
+			if(data.isExist){
+				isNickValid=false;
+				document.querySelector("#nick").classList.add("is-invalid");
+			}else{
+				isNickValid=true;
+				document.querySelector("#nick").classList.add("is-valid");
+			}
+		});		
+	}
+	
+	document.querySelector("#nick").addEventListener("input", checkNick);
+
+	function checkEmail(){
+		document.querySelector("#email").classList.remove("is-valid");
+		document.querySelector("#email").classList.remove("is-invalid");
+		
+		const inputEmail=document.querySelector("#email").value;
+		const reg_email=/@/;
+		
+		if(reg_email.test(inputEmail)){
+			isEmailValid=true;
+			document.querySelector("#email").classList.add("is-valid");
+		}else{
+			isEmailValid=false;
+			document.querySelector("#email").classList.add("is-invalid");
+		}
+	}
+	
+	document.querySelector("#email").addEventListener("input", checkEmail);
+	
+	document.querySelector("#updateForm").addEventListener("submit", function(e){
+		let isFormNotValid= isNickValid && isEmailValid;
+		if(!isFormNotValid){
+			e.preventDefault();
+		}
 	});
+	
 </script>
 </body>
 </html>
