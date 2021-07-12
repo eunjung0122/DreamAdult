@@ -230,7 +230,7 @@
 	
 	
 	//폼에 submit 이벤트가 발생했을때 실행할 함수 등록
-	document.querySelector("#myForm").addEventListener("submit", function(e){
+	document.querySelector("#signupForm").addEventListener("submit", function(e){
 		//console.log(e);
 		/*
 			입력한 아이디, 비밀번호, 이메일의 유효성 여부를 확인해서 하나라도 유효 하지 않으면
