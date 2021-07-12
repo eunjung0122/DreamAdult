@@ -300,11 +300,7 @@
 		</svg>
 	</a>
 </div>
-<footer style="height:400px; border-top:1px solid #ddd;">
-	<div class="container">
-		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
-	</div>
-</footer>
+<jsp:include page="include/footer.jsp"></jsp:include>
 <%
 	Cookie[] cookies=request.getCookies();
 	
