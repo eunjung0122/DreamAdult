@@ -15,7 +15,7 @@
 		return this;
 	}
 	
-	function setHeight(column){
+	function setHeight(column, height){
 		box_wrap.style.height = ((box.length-column)*MARGIN)/column + (height)/column + "px";
 	}
 	function setLeft(reset, column){
@@ -42,7 +42,7 @@
 	function line1(height){
 		let one = new set(0, 0, 0);
 		
-		setHeight(1);
+		setHeight(1, height);
 		setLeft(0, 1);
 		setTop(one.count, one.s, one.m);
 	}
@@ -51,7 +51,7 @@
 		let left = new set(0, 0, 0);
 		let right = new set(0, 0, 0);
 		
-		setHeight(2);
+		setHeight(2, height);
 		setLeft(1, 2);
 		setLeft(0, 2);
 		setTop2(0, left.count, left.s, left.m);
