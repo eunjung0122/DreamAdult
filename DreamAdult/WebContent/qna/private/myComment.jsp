@@ -144,7 +144,7 @@
          <%} %>
       </ul>
    </div>
-   
 </div>
+<jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
 </html>

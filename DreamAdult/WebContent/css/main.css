@@ -1,6 +1,7 @@
 /*setting*/
 *{padding:0; margin:0; box-sizing:border-box;}
 html, body {font-family: 'Montserrat', 'Noto Sans KR', sans-serif !important; color:#222;}
+body{min-height:1000px;}
 ul,li{list-style:none; list-style-position:inside;}
 a {display:block; text-decoration: none !important;}
 
@@ -262,7 +263,8 @@ a {display:block; text-decoration: none !important;}
 }
 /*btn-design*/
 button.btn{
-	padding:0 !important;
+	padding-left:0 !important;
+	padding-right:0 !important;
 }
 .btn{
 	vertical-align: top;
@@ -358,9 +360,6 @@ button.btn{
 }
 
 /*detail-page*/
-.detail_page{
-	min-height: 1000px;
-}
 .detail_page .main-tit{
 	margin: 80px 0 60px;
 }
@@ -487,9 +486,6 @@ button.btn{
 
 
 /*sub-page*/
-.sub_page{
-	min-height:1000px;
-}
 .sub_page .main_tit {
 	margin: 80px 0 0;
 	font-size: 2.8rem;
@@ -587,9 +583,6 @@ button.btn{
 	display:inline-block;
 }
 /*form-page*/
-.form-page{
-	min-height:1000px;
-}
 .form-page .main-tit{
 	margin: 80px 0 60px;
 	font-size: 2.8rem;
