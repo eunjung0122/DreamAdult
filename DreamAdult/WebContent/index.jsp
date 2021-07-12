@@ -115,7 +115,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
-							<%if(studyList.size()>0) {%>
+							<%if(studyList.size()>1) {%>
 							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">
 								<strong class="tit_card"><%=studyList.get(1).getTitle()%></strong>
 							</a>
@@ -136,7 +136,7 @@
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
-							<%if(qnaList.size()>0) {%>
+							<%if(qnaList.size()>1) {%>
 							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
 								<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
 							</a>
@@ -160,7 +160,7 @@
 								<span class="txt_cate">코드공유</span>
 								
 							</span>
-							<%if(fileList.size()>0) {%>
+							<%if(fileList.size()>1) {%>
 							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(1).getNum()%>">
 								<strong class="tit_card"><%=fileList.get(1).getTitle()%></strong>
 							</a>
@@ -221,7 +221,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
-							<%if(studyList.size()>0) {%>
+							<%if(studyList.size()>2) {%>
 							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">
 								<strong class="tit_card"><%=studyList.get(2).getTitle()%></strong>
 							</a>
@@ -242,7 +242,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>
 							</span>
-							<%if(fileList.size()>1) {%>
+							<%if(fileList.size()>2) {%>
 							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(2).getNum()%>">
 								<strong class="tit_card"><%=fileList.get(2).getTitle()%></strong>
 							</a>
@@ -259,7 +259,7 @@
 						<span class="txt_wrap">
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
-								<%if(qnaList.size()>1) {%>
+								<%if(qnaList.size()>2) {%>
 								<span class="txt_cate">QnA</span>
 								<a href="qna/private/detail.jsp?num=<%=qnaList.get(2).getNum()%>">확인</a>
 								<%} %>
