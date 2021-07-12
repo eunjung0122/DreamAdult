@@ -20,14 +20,26 @@
 	.btn.btn-s {
 		margin-top:0;
 	}
+	
+	#checkPwdForm{
+		margin-left: 380px;
+	}
+	
+	
 </style>
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 
 <div class="container">
-	<h1>비밀번호 확인</h1>
-  	<form class="row g-3" action="updateform.jsp" method="post" id="myForm">
+	<div class="mt-4 text-center">
+		<img  src="<%=request.getContextPath() %>/images/logo2.png" width="100" height="80">
+		<h1 class="h3 mt-3 mb-3 fw-normal">비밀번호 확인</h1>
+		<span><%=id %>님의 회원정보를 안전하게 보호하기 위해 비밀번호를 한번 더 확인해 주세요.</span>
+	</div>
+	<br />
+	<br />
+  	<form class="row g-3" action="updateform.jsp" method="post" id="checkPwdForm">
 	  <div class="col-auto">
 	    <label for="Pwd" class="col-form-label">비밀번호</label>
 	  </div>
@@ -39,9 +51,10 @@
 	  </div>
 	</form> 
 </div>
+<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
-	document.querySelector("#myForm").addEventListener("submit", function(e){
+	document.querySelector("#checkPwdForm").addEventListener("submit", function(e){
 		let pwd=<%=pwd%>;
 		let pwd1=document.querySelector("#Pwd").value;
 		
