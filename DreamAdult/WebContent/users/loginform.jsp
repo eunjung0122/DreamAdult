@@ -103,6 +103,5 @@
 	</div>
 </div>
 <script src="<%=request.getContextPath()%>/js/ryon.js"></script>
-<jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
 </html>
