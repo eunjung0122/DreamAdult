@@ -97,8 +97,8 @@
 <p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>
 <script>
-let isNickValid=false;
-let isEmailValid=false;
+let isNickValid=true;
+let isEmailValid=true;
 let isFormNotValid=false;
 
 	//프로필 이미지 링크를 클릭하면 

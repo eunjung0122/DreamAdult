@@ -27,6 +27,9 @@
 		border: 1px solid #cecece;
 		border-radius: 50%;
 	}
+	.container>a{
+		display:inline-block;
+	}
 </style>
 </head>
 <body>
@@ -62,7 +65,7 @@
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-			<td><a href="pwd_updateform.jsp">수정하기</a></td>
+			<td><a href="pwd_updateform.jsp" class="btn btn-custom-yellow">수정하기</a></td>
 		</tr>
 		<tr>
 			<th>관심언어</th>
@@ -87,8 +90,8 @@
 			<td><%=dto.getRegdate() %></td>
 		</tr>
 	</table>
-	<a href="pwd_checkform.jsp">개인정보 수정</a>
-
+	
+	<a href="pwd_checkform.jsp" class="btn btn-custom-purple">개인정보 수정</a>
 	<a class="btn btn-custom-dark" id="deleteConfirm">탈퇴</a>
 
 </div>
@@ -113,6 +116,8 @@ document.querySelector("#deleteConfirm").addEventListener("click", function(){
 		   }
 		 })
 	   });
+	   
+
 </script>
 </body>
 </html>
