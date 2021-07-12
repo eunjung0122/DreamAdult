@@ -31,7 +31,15 @@
 	   </h1>
 		<form action="<%=request.getContextPath() %>/file/private/update.jsp" method="post" id="updateForm" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
-			<div>
+			<div> 
+				<label for="writer" class="form-label">작성자</label>
+				<input type="text" name="writer" id="writer"  class="form-control" value="<%=dto.getWriter() %>" disabled/>
+			</div>
+			<div class="mt-3">
+				<label for="nick" class="form-label">닉네임</label>
+				<input type="text" name="nick" id="nick" class="form-control" value="<%=dto.getNick() %>" disabled/>
+			</div>
+			<div class="mt-3">
 				<label for="category">카테고리</label>
 				<select name="category" id="category" class="form-select">
 					<option value="whole">선택</option>
@@ -41,21 +49,13 @@
 				</select>
 			</div>
 			<div class="mt-3"> 
-				<label for="writer" class="form-label">작성자</label>
-				<input type="text" name="writer" id="writer"  class="form-control" value="<%=dto.getWriter() %>" disabled/>
-			</div>
-			<div class="mt-3"> 
 				<label for="title" class="form-label">제목</label>
 				<input type="text" name="title" id="title"  class="form-control" value="<%=dto.getTitle() %>" />
 			</div>
-			<div class="mt-3"> 
-				<label for="content" class="form-label">내용</label>
-				<textarea name="contnet" id="content" cols="30" rows="10" class="form-control">
-				<%if(dto.getContent()!=null) {
-					dto.getContent();
-				} %>
-				</textarea>
-			</div>
+	   <div class="mt-3">
+	      <label for="content">내용</label>
+	      <textarea id="content" name="content" class="form-control"><%=dto.getContent() %></textarea>
+	   </div>
 			<div class="mt-3"> 
 				<label for="myFile" class="form-label">첨부 파일</label>
 				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getOrgFileName()%>" />

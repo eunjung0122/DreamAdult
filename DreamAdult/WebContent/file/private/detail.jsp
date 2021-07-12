@@ -322,10 +322,7 @@
 				<span style="margin-left:10px;">조회수 <%=dto.getViewCount() %></span>
 			</p>
 			<div class="content">
-				<%if(dto.getContent()!=null) {
-						dto.getContent();
-					} %>
-
+				<%=dto.getContent() %>
 			</div>	
 			<%if(dto.getOrgFileName()!=null) {%>
 				<p>
@@ -355,13 +352,13 @@
 		   <%} %>
 	   </div>
 		<div class="btn-wrap">
-			<a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/list.jsp">목록보기</a>
+			<a class="btn btn-s btn-custom-dark" href="<%=request.getContextPath()%>/file/list.jsp">목록보기</a>
 			<%if(dto.getWriter().equals(id)) {%>
-	            <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
-	            <a class="btn btn-custom-dark" id="postDelete">삭제</a>
+	            <a class="btn btn-s btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
+	            <a class="btn btn-s btn-custom-dark" id="postDelete">삭제</a>
 	        <%}else{%>
-        	<a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>" style="display:none;">수정</a>
-            <a class="btn btn-custom-dark" id="postDelete" style="display:none;">삭제 </a>        
+        	<a class="btn btn-s btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>" style="display:none;">수정</a>
+            <a class="btn btn-s btn-custom-dark" id="postDelete" style="display:none;">삭제 </a>        
         	<%} %>
 	   </div>
    
