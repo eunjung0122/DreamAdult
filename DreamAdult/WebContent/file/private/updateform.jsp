@@ -13,49 +13,55 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>uploadform.jsp</title>
+<title>Dream Adult</title>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
-	<div class="container">
+	<div class="form-page container">
+		<h1 class="main-tit">
+		  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"> 
+		   	<span>코드공유</span>
+	   </h1>
 		<form action="<%=request.getContextPath() %>/file/private/update.jsp" method="post" id="updateForm" enctype="multipart/form-data">
 			<input type="hidden" name="num" value="<%=dto.getNum() %>"/>
 			<div>
 				<label for="category">카테고리</label>
-				<select name="category" id="category">
+				<select name="category" id="category" class="form-select">
 					<option value="whole">선택</option>
 					<option value="java" <%=dto.getCategory().equals("java") ? "selected" : "" %>>java</option>
 					<option value="javascript" <%=dto.getCategory().equals("javascript") ? "selected" : "" %>>javascript</option>
 					<option value="jsp" <%=dto.getCategory().equals("jsp") ? "selected" : "" %>>jsp</option>
 				</select>
 			</div>
-			<div>
-				<label for="writer">작성자</label>
-				<input type="text" name="writer" id="writer" value="<%=dto.getWriter() %>" disabled/>
+			<div class="mt-3"> 
+				<label for="writer" class="form-label">작성자</label>
+				<input type="text" name="writer" id="writer"  class="form-control" value="<%=dto.getWriter() %>" disabled/>
 			</div>
-			<div>
-				<label for="title">제목</label>
-				<input type="text" name="title" id="title" value="<%=dto.getTitle() %>"/>
+			<div class="mt-3"> 
+				<label for="title" class="form-label">제목</label>
+				<input type="text" name="title" id="title"  class="form-control" value="<%=dto.getTitle() %>" />
 			</div>
-			<div>
-				<label for="content">내용</label>
-				<textarea name="contnet" id="content" cols="30" rows="10">
+			<div class="mt-3"> 
+				<label for="content" class="form-label">내용</label>
+				<textarea name="contnet" id="content" cols="30" rows="10" class="form-control">
 				<%if(dto.getContent()!=null) {
 					dto.getContent();
 				} %>
 				</textarea>
 			</div>
-			<div>
-				<label for="myFile">첨부 파일</label>
+			<div class="mt-3"> 
+				<label for="myFile" class="form-label">첨부 파일</label>
 				<input type="hidden" name="myFile2" id="myFile2" value="<%=dto.getOrgFileName()%>" />
 				<input type="hidden" name="myFileSize" id="myFileSize" value="<%=dto.getFileSize()%>" />
-				<input type="file" name="myFile" id="myFile"/>
+				<input type="file" name="myFile" id="myFile" class="form-control"/>
 				<p><%=dto.getOrgFileName()%></p>
 			</div>
-			<button type="submit" >수정 확인</button>
+			<button type="submit" class="btn btn-s btn-custom-dark">수정 확인</button>
 		</form>
 	</div>
 <script src="<%=request.getContextPath()%>/SmartEditor/js/HuskyEZCreator.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	var oEditors = [];
 	
@@ -104,13 +110,31 @@
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
 		if(!title && !category){
-			alert("제목 또는 카테고리를 확인하세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '제목 또는 카테고리를 확인하세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}else if(!category){
-			alert("카테고리를 선택해주세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '카테고리를 선택해 주세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}else if(!title){
-			alert("제목을 입력해주세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '제목을 입력해 주세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}
 	});	   

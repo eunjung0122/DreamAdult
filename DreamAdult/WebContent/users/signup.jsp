@@ -36,20 +36,39 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/signup.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 </head>
 <body>
 <div class="container">
 	<%if(isSuccess){ %>
-		<p> 
-			<strong><%=id %></strong> 회원님 가입 되었습니다.
-			<a href="loginform.jsp">로그인 하러가기</a>
-		</p>
-	<%}else{ %>
-		<p>
-			가입 실패!
-			<a href="signup_form.jsp">다시 작성하러 가기</a>
-		</p>
-	<%} %>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	<script>
+   	Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 title: 'Welcome ours new member',
+		 text: '<%=id%> 님, 로그인 페이지로 이동됩니다.',
+		 showConfirmButton: false,
+		 timer: 2000
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/users/loginform.jsp";
+	});
+   	</script>
+		<%}else{ %>
+		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+		<script>
+			Swal.fire({
+				  position: 'top-50 start-50',
+				  icon: 'error',
+				  title: 'Your membership has not been processed.',
+				  text: '회원가입 페이지로 이동됩니다.',
+				  showConfirmButton: false,
+				  timer: 1500
+			}).then(function(){
+				location.href="${pageContext.request.contextPath}/users/signup_form.jsp";
+			});
+		</script>	
+		<%} %>
 </div>	
 </body>
 </html>

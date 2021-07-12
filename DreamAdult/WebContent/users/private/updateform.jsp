@@ -14,6 +14,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/private/updateform.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <style>
 	/* 프로필 이미지를 작은 원형으로 만든다 */
 	#profileImage{
@@ -30,12 +31,12 @@
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="container">
-	<h1>가입 정보 수정 폼 입니다.</h1>
-	<a id="profileLink" href="javascript:">
+	<h1 class="mb-3">개인정보 수정</h1>
+	<a class="mb-3" id="profileLink" href="javascript:">
 		<%if(dto.getProfile()==null){ %>
-			<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-				  <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-				  <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+			<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-emoji-sunglasses" viewBox="0 0 16 16">
+				  <path d="M4.968 9.75a.5.5 0 1 0-.866.5A4.498 4.498 0 0 0 8 12.5a4.5 4.5 0 0 0 3.898-2.25.5.5 0 1 0-.866-.5A3.498 3.498 0 0 1 8 11.5a3.498 3.498 0 0 1-3.032-1.75zM7 5.116V5a1 1 0 0 0-1-1H3.28a1 1 0 0 0-.97 1.243l.311 1.242A2 2 0 0 0 4.561 8H5a2 2 0 0 0 1.994-1.839A2.99 2.99 0 0 1 8 6c.393 0 .74.064 1.006.161A2 2 0 0 0 11 8h.438a2 2 0 0 0 1.94-1.515l.311-1.242A1 1 0 0 0 12.72 4H10a1 1 0 0 0-1 1v.116A4.22 4.22 0 0 0 8 5c-.35 0-.69.04-1 .116z"/>
+				  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0z"/>
 			</svg>
 		<%}else{ %>
 			<img id="profileImage" 
@@ -45,19 +46,19 @@
 	<form action="update.jsp" method="post">
 		<input type="hidden" name="profile" 
 			value="<%=dto.getProfile()==null ? "empty" : dto.getProfile()%>"/>
-		<div>
+		<div class="mb-3">
 			<label for="id">아이디</label>
-			<input type="text" id="id" value="<%=id %>" disabled/>
+			<input class="form-control" type="text" id="id" value="<%=id %>" disabled/>
 		</div>
-		<div>
+		<div class="mb-3">
 			<label for="nick">닉네임</label>
-			<input type="text" name="nick" id="nick" value="<%=dto.getNick() %>" />
+			<input class="form-control" type="text" name="nick" id="nick" value="<%=dto.getNick() %>" />
 		</div>
-		<div>
+		<div class="mb-3">
 			<label for="email">이메일</label>
-			<input type="text" name="email" id="email" value="<%=dto.getEmail()%>"/>
+			<input class="form-control" type="text" name="email" id="email" value="<%=dto.getEmail()%>"/>
 		</div>
-		<button type="submit">수정반영</button>
+		<button class="btn btn-s btn-custom-dark" type="submit">수정반영</button>
 	</form>
 	
 	<form action="ajax_profile_upload.jsp" method="post" 

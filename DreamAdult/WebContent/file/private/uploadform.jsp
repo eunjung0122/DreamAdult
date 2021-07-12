@@ -4,38 +4,45 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>uploadform.jsp</title>
+<title>Dream Adult</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
-	<div class="container">
+	<div class="form-page container">
+		<h1 class="main-tit">
+		  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"> 
+		   	<span>코드공유</span>
+	   </h1>
 		<form action="<%=request.getContextPath() %>/file/private/upload.jsp" method="post" id="uploadForm" enctype="multipart/form-data">
 			<div>
 				<label for="category">카테고리</label>
-				<select name="category" id="category">
+				<select name="category" id="category" class="form-select">
 					<option value="whole">선택</option>
 					<option value="java">java</option>
 					<option value="javascript">javascript</option>
 					<option value="jsp">jsp</option>
 				</select>
 			</div>
-			<div>
-				<label for="title">제목</label>
-				<input type="text" name="title" id="title"/>
+			<div class="mt-3">
+				<label for="title" class="form-label">제목</label>
+				<input type="text" name="title" id="title" class="form-control"/>
 			</div>
-			<div>
-				<label for="fileContent">내용</label>
-				<textarea name="fileContent" id="fileContent" cols="30" rows="10"></textarea>
+			<div class="mt-3">
+				<label for="fileContent" class="form-label">내용</label>
+				<textarea name="fileContent" id="fileContent" class="form-control" cols="30" rows="10"></textarea>
 			</div>
-			<div>
-				<label for="myFile">첨부 파일</label>
-				<input type="file" name="myFile" id="myFile"/>
+			<div class="mt-3">
+				<label for="myFile" class="form-label">첨부 파일</label>
+				<input type="file" name="myFile" id="myFile" class="form-control"/>
 			</div>
-			<button type="submit">업로드</button>
+			<button type="submit" class="btn btn-m btn-custom-dark">업로드</button>
 			<img id="myImage" />
 		</form>
 	</div>
 <script src="<%=request.getContextPath() %>/SmartEditor/js/HuskyEZCreator.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	var oEditors = [];
 	
@@ -82,17 +89,34 @@
 		const title=document.querySelector("#title").value;
 		const category=document.querySelector("#category").value;
 		if(!title && !category){
-			alert("제목 또는 카테고리를 확인하세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '제목 또는 카테고리를 확인하세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}else if(!category){
-			alert("카테고리를 선택해주세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '카테고리를 선택해 주세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}else if(!title){
-			alert("제목을 입력해주세요");
+			Swal.fire({
+				 position: 'top-50 start-50',
+			 	 icon: 'warning',
+				 text: '제목을 입력해 주세요.',
+				 showConfirmButton: false,
+			     timer: 1500
+			})
 			e.preventDefault();
 		}
 	});	   
 </script>
-
 </body>
 </html>

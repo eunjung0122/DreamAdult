@@ -10,28 +10,43 @@
 <head>
 <meta charset="UTF-8">
 <title>grade_popup.jsp</title>
+<jsp:include page="include/resource.jsp"></jsp:include>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Nerko+One&family=Noto+Sans:wght@700&display=swap"
+	rel="stylesheet">
 <style>
+	.btn-custom-dark{
+		margin-top:-20px;
+	}
+	body {
+	font-family: 'Noto Sans KR', sans-serif;
+	font-size: 16px;
+	}	
+
 	img {
-		width: 300px;
+		width: 200px;
 		height: 200px;
+	}
+	strong {
+		color: #0d6efd;
 	}
 </style>
 </head>
 <body>
-<h1><%=id %> 회원님의 등급 업그레이드!</h1>
-<p>
-	<img src="images/pngwing.com.png"/>
-	<br />
-	<%=grade %> 등급이 되신걸 환영합니다~! 
-	<br />
-	앞으로도 잘 부탁드립니다! 
-</p>
-<form action="nopopup.jsp" method="post">
-	<label>
-		<input type="checkbox" name="gradePopup" value="no" />
-		확인
-	</label>
-	<button type="submit">닫기</button>
+<h1 class="modal-title text-center mt-3">
+	<strong><%=id %></strong>님의 등급 업그레이드!
+</h1>
+<div class="modal-body text-center">
+	<p>
+		<img src="images/grade_img1.gif"/>
+		<br />
+		<strong><%=grade %></strong> 등급이 되신걸 환영합니다! 
+	</p>
+</div>
+<form class="text-center" action="nopopup.jsp" method="post">
+	<button type="submit" class="btn btn-s btn-custom-dark" data-bs-dismiss="modal">닫기</button>
 </form>
 </body>
 </html>

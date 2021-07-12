@@ -111,6 +111,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Dream Adult</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
@@ -147,9 +148,9 @@
 	<div class="table-info">
 		<p><strong><%=totalRow %></strong>개의 글이 검색 되었습니다. </p>
 		<div>
-			<a href="<%=request.getContextPath()%>/qna/private/insertform.jsp" class="btn btn-custom-blue">새글 작성</a>
+			<a href="<%=request.getContextPath()%>/qna/private/insertform.jsp" class="btn btn-s btn-custom-dark">새글 작성</a>
 			<%if(id!=null) {%>
-		  		<a href="private/myPage.jsp" class="btn btn-custom-dark">내가 쓴 글 보기</a>
+		  		<a href="private/myPage.jsp" class="btn btn-s btn-custom-gray">내가 쓴 글 보기</a>
 		 	<%} %>
 	 	</div>
 	</div>

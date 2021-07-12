@@ -19,9 +19,9 @@
 	int pageNum=1;
 	int endRowNum=pageNum*PAGE_ROW_COUNT;
 	
-	StudyDto dto = new StudyDto();
-	dto.setEndRowNum(endRowNum);
-	List<StudyDto> studyList=StudyDao.getInstance().getLikeMaxList(dto);
+	StudyDto studydto = new StudyDto();
+	studydto.setEndRowNum(endRowNum);
+	List<StudyDto> studyList=StudyDao.getInstance().getLikeMaxList(studydto);
 	
 	FileDto filedto = new FileDto();
 	List<FileDto> fileList = FileDao.getInstance().getLikeMaxList(filedto);
@@ -94,13 +94,16 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>	
 							</span>
-							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(0).getNum()%>">
+							<%if(fileList.size()>0) {%>
+							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(0).getNum() %>">
 								<strong class="tit_card"><%=fileList.get(0).getTitle()%></strong>
 							</a>
 							<p>
 								<span><%=fileList.get(0).getNick()%></span>
+								<span><%=fileList.get(0).getGrade()%></span>
 								<span><%=fileList.get(0).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/79590191017a00001.jpg?type=thumb&opt=C630x472"/>
@@ -112,8 +115,20 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
-							<a href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">확인</a>
+							<%if(studyList.size()>0) {%>
+							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>">
+								<strong class="tit_card"><%=studyList.get(1).getTitle()%></strong>
+							</a>
+							<p>
+								<span><%=studyList.get(1).getNick()%></span>
+								<span><%=studyList.get(1).getGrade()%></span>
+								<span><%=studyList.get(1).getRegdate()%></span>
+							</p>
+							<%} %>
 						</span>
+						<div class="img-wrap">
+							<img src="https://images.unsplash.com/photo-1621416953228-87ad15716483?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"/>
+						</div>
 					</li>
 					<li class="box box-m">
 						<span class="txt_wrap">
@@ -121,6 +136,7 @@
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
 							</span>
+							<%if(qnaList.size()>0) {%>
 							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
 								<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
 							</a>
@@ -128,10 +144,15 @@
 								<span><%=qnaList.get(1).getNick() %></span>
 								<span><%=qnaList.get(1).getRegdate() %></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap">
 							<img src="images/cactusLine.png"/>
 						</div>
+	
+					</li>
+
+						
 					<li class="box box-m">
 						<span class="txt_wrap">
 							<span class="info_cate">
@@ -139,13 +160,16 @@
 								<span class="txt_cate">코드공유</span>
 								
 							</span>
+							<%if(fileList.size()>0) {%>
 							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(1).getNum()%>">
 								<strong class="tit_card"><%=fileList.get(1).getTitle()%></strong>
 							</a>
 							<p>
 								<span><%=fileList.get(1).getNick()%></span>
+								<span><%=fileList.get(1).getGrade()%></span>
 								<span><%=fileList.get(1).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap" style="background:#f77028; height:210px;"></div>
 					</li>
@@ -157,7 +181,18 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
-							<a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a>
+
+							<%if(studyList.size()>0) {%>
+							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">
+								<strong class="tit_card"><%=studyList.get(0).getTitle()%></strong>
+							</a>
+							<p>
+								<span><%=studyList.get(0).getNick()%></span>
+								<span><%=studyList.get(0).getGrade()%></span>
+								<span><%=studyList.get(0).getRegdate()%></span>
+							</p>
+							<%} %>
+
 						</span>
 					</li>
 					<li class="box box-m">
@@ -165,6 +200,7 @@
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 								<span class="txt_cate">QnA</span>
+								<%if(qnaList.size()>0) {%>
 								<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
 									<strong class="tit_card"><%=qnaList.get(0).getTitle() %></strong>
 								</a>
@@ -172,6 +208,7 @@
 									<span><%=qnaList.get(0).getNick() %></span>
 									<span><%=qnaList.get(0).getRegdate() %></span>
 								</p>
+								<%} %>
 							</span>
 						</span>
 						<div class="img-wrap">
@@ -184,8 +221,20 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
-							<a href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">확인</a>
+							<%if(studyList.size()>0) {%>
+							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>">
+								<strong class="tit_card"><%=studyList.get(2).getTitle()%></strong>
+							</a>
+							<p>
+								<span><%=studyList.get(2).getNick()%></span>
+								<span><%=studyList.get(2).getGrade()%></span>
+								<span><%=studyList.get(2).getRegdate()%></span>
+							</p>
+							<%} %>
 						</span>
+						<div class="img-wrap">
+							<img src="https://images.unsplash.com/photo-1540760938999-077b8231d890?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1951&q=80"/>
+						</div>
 					</li>
 					<li class="box box-m">
 						<span class="txt_wrap">
@@ -193,13 +242,16 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">코드공유</span>
 							</span>
+							<%if(fileList.size()>1) {%>
 							<a class="card-main-tit" href="file/private/detail.jsp?num=<%=fileList.get(2).getNum()%>">
 								<strong class="tit_card"><%=fileList.get(2).getTitle()%></strong>
 							</a>
 							<p>
 								<span><%=fileList.get(2).getNick()%></span>
+								<span><%=fileList.get(2).getGrade()%></span>
 								<span><%=fileList.get(2).getRegdate()%></span>
 							</p>
+							<%} %>
 						</span>
 						<div class="img-wrap" style="background:#801ee3; height:210px;"></div>
 					</li>
@@ -207,8 +259,10 @@
 						<span class="txt_wrap">
 							<span class="info_cate">
 								<img src="https://www.kakaocorp.com/page/ico_customer.png" style="width:36px;" alt="" />
+								<%if(qnaList.size()>1) {%>
 								<span class="txt_cate">QnA</span>
 								<a href="qna/private/detail.jsp?num=<%=qnaList.get(2).getNum()%>">확인</a>
+								<%} %>
 							</span>
 						</span>
 					</li>
@@ -223,7 +277,7 @@
 							사람과 기술로 일상을 돕는<br>
 							코린이 게시판을 볼려면?
 						</h4>
-						<a class="btn btn-custom-dark" href="${pageContext.request.contextPath}/users/loginform.jsp">
+						<a class="btn btn-s btn-custom-dark" href="${pageContext.request.contextPath}/users/loginform.jsp">
 						로그인 하러가기
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
 						  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
@@ -239,7 +293,7 @@
 							항상 발전하는 코린이와<br>
 							함께 하고싶다면?
 						</h4>
-						<a class="btn btn-custom-dark" href="${pageContext.request.contextPath}/users/signup_form.jsp">
+						<a class="btn btn-s btn-custom-dark" href="${pageContext.request.contextPath}/users/signup_form.jsp">
 						회원가입 하러가기
 						<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
 						  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
@@ -250,8 +304,6 @@
 			</div>
 		</div>
 	</div>
-
-
 	<a class="link-top" href="">
 		<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
 		  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
@@ -277,10 +329,10 @@
 %>
 <script>
 <%if(isPopup){ %>
-	window.open("popup.jsp", "웰컴팝업창", "width=500,height=400,top=100,left=100");
+	window.open("popup.jsp", "웰컴팝업창", "width=500,height=450,top=100,left=100");
 <%} %>
 <%if(isUpgrade){%>
-	window.open("grade_popup.jsp", "등급 업 팝업창", "width=600,height=450,top=100,left=600");
+	window.open("grade_popup.jsp", "등급 업 팝업창", "width=500,height=450,top=100,left=600");
 <%}%>
 </script>
 </body>

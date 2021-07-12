@@ -8,31 +8,26 @@
 	String id=(String)session.getAttribute("id");
 	int pageNum=Integer.parseInt(request.getParameter("pageNum"));
 	int num=Integer.parseInt(request.getParameter("num"));
-	 /*
-	    [ 댓글 페이징 처리에 관련된 로직 ]
-	 */
-	 //한 페이지에 몇개씩 표시할 것인지
+
 	 final int PAGE_ROW_COUNT=10;
 	 
-	 //보여줄 페이지의 시작 ROWNUM
+
 	 int startRowNum=1+(pageNum-1)*PAGE_ROW_COUNT;
-	 //보여줄 페이지의 끝 ROWNUM
 	 int endRowNum=pageNum*PAGE_ROW_COUNT;
 	 
-	 //원글의 글번호를 이용해서 해당글에 달린 댓글 목록을 얻어온다.
+
 	 QnACommentDto commentDto=new QnACommentDto();
 	 commentDto.setRef_group(num);
-	 //1페이지에 해당하는 startRowNum 과 endRowNum 을 dto 에 담아서  
+
 	 commentDto.setStartRowNum(startRowNum);
 	 commentDto.setEndRowNum(endRowNum);
 	 
-	 //pageNum에 해당하는 댓글 목록만 select 되도록 한다. 
+
 	 List<QnACommentDto> commentList=
 	       QnACommentDao.getInstance().getList(commentDto);
 	 
-	 //원글의 글번호를 이용해서 댓글 전체의 갯수를 얻어낸다.
+
 	 int totalRow=QnACommentDao.getInstance().getCount(num);
-	 //댓글 전체 페이지의 갯수
 	 int totalPageCount=(int)Math.ceil(totalRow/(double)PAGE_ROW_COUNT);
 %>
 <%for(QnACommentDto tmp: commentList){ %>
@@ -63,15 +58,15 @@
 	        <%if(tmp.getNum() != tmp.getComment_group()){ %>
             	@<i><%=tmp.getTarget_nick() %></i>
             <%} %>
+		</dt>
+	   	<dd>
+   			<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
             <span><%=tmp.getRegdate() %></span>
             <a data-num="<%=tmp.getNum() %>" href="javascript:" class="reply-link">답글</a>
 	        <%if(id!=null && tmp.getWriter().equals(id)) {%>
 	        	<a data-num="<%=tmp.getNum() %>" href="javascript:" class="update-link">수정</a>
 	            <a data-num="<%=tmp.getNum() %>" href="javascript:" class="delete-link">삭제</a>
-	        <%} %>
-	    </dt>
-	   	<dd>
-   			<pre id="pre<%=tmp.getNum()%>"><%=tmp.getContent() %></pre>
+	        <%} %>	
    		</dd>
    	</dl>
    	<form id="reForm<%=tmp.getNum() %>" class="animate__animated comment-form re-insert-form" action="comment_insert.jsp" method="post">

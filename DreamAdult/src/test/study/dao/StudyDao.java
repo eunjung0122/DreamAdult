@@ -32,10 +32,13 @@ public class StudyDao {
 					"FROM" + 
 					"	(SELECT result1.*, ROWNUM AS rnum" + 
 					"	FROM" + 
-					"		(SELECT num, COUNT(*) AS cnt" + 
-					"		FROM studylike" + 
+					"		(SELECT DISTINCT board_study.num, count(*)OVER(PARTITION BY board_study.num) AS cnt, title," + 
+					"		board_study.nick, TO_CHAR(board_study.regdate,'YYYY.MM.DD')regdate, grade" + 
+					"		FROM board_study INNER JOIN studylike" + 
+					"		ON studylike.num = board_study.num" + 
+					"		INNER JOIN users" + 
+					"		ON board_study.writer = users.id" + 
 					"		WHERE liked ='yes'" + 
-					"		GROUP BY num" + 
 					"		ORDER BY cnt DESC) result1)" + 
 					" WHERE rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -48,6 +51,10 @@ public class StudyDao {
 			while (rs.next()) {
 				StudyDto dto2=new StudyDto();
 				dto2.setNum(rs.getInt("num"));
+				dto2.setTitle(rs.getString("title"));
+				dto2.setNick(rs.getString("nick"));
+				dto2.setRegdate(rs.getString("regdate"));
+				dto2.setGrade(rs.getString("grade"));
 				list.add(dto2);
 			}
 		} catch (Exception e) {

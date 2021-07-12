@@ -79,6 +79,7 @@ body {
                <li style="" class="nav-item ms-2 mbHdBottom">
                		<a
 						class="nav-link <%=thisPage.equals("study") ? "active" : "" %>"
+
 						href="<%=request.getContextPath() %>/study/list.jsp">
 						<img class="mbMnImage" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 						<span class="mbMnName">개념쌓기</span>
@@ -144,6 +145,7 @@ body {
          </div>
       </div>
    </nav>
+
 	<nav id="fixedMenuBer" class="navbar navbar-light navbar-expand-lg title-font">
 		<div class="container">
 			<a class="navbar-brand" href="<%=request.getContextPath()%>/"> 

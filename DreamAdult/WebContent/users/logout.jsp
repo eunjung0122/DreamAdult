@@ -9,12 +9,20 @@
 <head>
 <meta charset="UTF-8">
 <title>/users/logout.jsp</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 </head>
 <body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 	<script>
-		alert("로그 아웃 되었습니다.");
-		//javascript 를 활용해서 index.jsp 페이지로 redirect 시키기
+	Swal.fire({
+		  position: 'top-50 start-50',
+		  icon: 'success',
+		  title: 'Bye bye!',
+		  showConfirmButton: false,
+		  timer: 1500
+	}).then(function(){
 		location.href="<%=request.getContextPath()%>/index.jsp";
+	});
 	</script>
 </body>
 </html>

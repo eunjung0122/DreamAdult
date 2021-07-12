@@ -25,17 +25,32 @@
 <title>/qna/private/update.jsp</title>
 </head>
 <body>
-   <%if(isSuccess){%>
-      <script>
-         alert("수정 완료 입니다.");
-         location.href="${pageContext.request.contextPath}/qna/private/detail.jsp?num=<%=dto.getNum()%>";
-      </script>
-   <%}else{%>
-      <script>
-         alert("수정실패 !");
-         location.href="${pageContext.request.contextPath}/qna/private/detail.jsp?num=<%=dto.getNum()%>";
-      </script>
-   <%}%>
-
+<%if(isSuccess){ %>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+   <script>
+   Swal.fire({
+		 position: 'top-50 start-50',
+		 icon: 'success',
+		 text: '정상적으로 글이 수정 되었습니다.',
+		 showConfirmButton: false,
+		 timer: 1500
+	}).then(function(){
+		location.href="${pageContext.request.contextPath}/qna/private/detail.jsp?num=<%=dto.getNum()%>";
+	});    
+   </script>
+	   <%}else{ %>
+	   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+	   <script>
+	      Swal.fire({
+			  position: 'top-50 start-50',
+			  icon: 'error',
+			  text: '글이 수정되지 않았습니다.',
+			  showConfirmButton: false,
+			  timer: 1500
+		}).then(function(){
+			location.href="${pageContext.request.contextPath}/qna/private/updateform.jsp?num=<%=dto.getNum()%>";
+		});	
+	   </script>
+	   <%} %>
 </body>
 </html>
