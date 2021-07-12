@@ -398,7 +398,7 @@
 								<%}else{ %>
 									<img class="profile-image" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
 								<%}%>
-									<span><%=tmp.getWriter() %></span>
+									<span><%=tmp.getNick() %></span>
 								<%if(tmp.getNum() != tmp.getComment_group()){ %>
 									@<i><%=tmp.getTarget_nick() %></i>
 								<%} %>
