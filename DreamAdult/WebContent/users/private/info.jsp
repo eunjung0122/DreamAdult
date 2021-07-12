@@ -89,7 +89,7 @@
 	</table>
 	<a href="pwd_checkform.jsp">개인정보 수정</a>
 
-	<a  class="btn btn-custom-dark" href="javascript:deleteConfirm()">탈퇴</a>
+	<a class="btn btn-custom-dark" id="deleteConfirm">탈퇴</a>
 
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
