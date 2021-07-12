@@ -1,0 +1,71 @@
+a{
+	text-decoration:none;
+}
+ul{
+	list-style:none;
+}
+
+
+.navbar-toggler-icon{
+	width:28px;
+	height:28px;
+	color:#333;
+}
+.mbMnImage{
+		display:none;
+}
+.nav-item {
+	margin: 0 28px;
+}
+.mbMnImage{
+	width:48px;
+	height:48px;
+}
+.mbMnMem{
+	display:none;
+}
+@media (max-width: 991.98px) {
+	.navbar-toggler{
+		margin-left:auto;
+	}
+	.nav-link{
+		display:flex;
+		align-items:center;
+		flex-direction: row;	
+	}
+	.mbMnHeader, .nav-link{
+		padding-bottom:36px;
+	}
+	.mbMnImage{
+		display:block;
+	}
+	.mbMnName{
+		margin-left:16px;
+		font-size:34px;
+		font-weight:600;
+		color:#000;
+	}
+	.mbMnMem{
+		display:block;
+	}
+	.mbHdLeft{
+		margin-left:6px;
+	}
+	.mbHdBottom{
+	 	margin-top:24px;
+	}
+	.MbDrMem{
+		margin-left:10px;
+	}
+	.MbDrBook{
+		margin-top:10px;
+		margin-left:24px;
+	}
+}
+
+
+
+.dropdown svg {
+	color: black;
+}
+

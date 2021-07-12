@@ -181,6 +181,7 @@
 								<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 								<span class="txt_cate">학습공부</span>
 							</span>
+
 							<%if(studyList.size()>0) {%>
 							<a class="card-main-tit" href="study/private/detail.jsp?num=<%=studyList.get(0).getNum()%>">
 								<strong class="tit_card"><%=studyList.get(0).getTitle()%></strong>
@@ -191,6 +192,7 @@
 								<span><%=studyList.get(0).getRegdate()%></span>
 							</p>
 							<%} %>
+
 						</span>
 					</li>
 					<li class="box box-m">
