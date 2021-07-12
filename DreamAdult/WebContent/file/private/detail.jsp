@@ -359,7 +359,10 @@
 			<%if(dto.getWriter().equals(id)) {%>
 	            <a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>">수정</a>
 	            <a class="btn btn-custom-dark" id="postDelete">삭제</a>
-	        <%} %>
+	        <%}else{%>
+        	<a class="btn btn-custom-dark" href="<%=request.getContextPath()%>/file/private/updateform.jsp?num=<%=dto.getNum()%>" style="display:none;">수정</a>
+            <a class="btn btn-custom-dark" id="postDelete" style="display:none;">삭제 </a>        
+        	<%} %>
 	   </div>
    
 		<div class="comments-wrap">
