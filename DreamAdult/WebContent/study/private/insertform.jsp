@@ -28,17 +28,17 @@
    </h1>
    <form action="insert.jsp" method="post" id="insertForm">
       <div>
-         <label for="title" class="form-label">제목</label>
-         <input type="text" name="title" id="title" class="form-control"/>
+         <label for="category">카테고리</label>
+         <select id="category" name="category" class="form-select">
+            <option value="">선택 </option>
+            <option value="java">java</option>
+            <option value="javascript">javascript</option>
+            <option value="jsp">jsp</option>
+         </select>
       </div>
       <div class="mt-3">
-         <label for="category">말머리</label>
-         <select id="category" name="category" class="form-select">
-            <option value="">Please choose an option</option>
-            <option value="java">Java</option>
-            <option value="javascript">JavaScript</option>
-            <option value="jsp">JSP</option>
-         </select>
+         <label for="title" class="form-label">제목</label>
+         <input type="text" name="title" id="title" class="form-control"/>
       </div>
       <div class="mt-3">
          <label for="content" class="form-label">내용</label>

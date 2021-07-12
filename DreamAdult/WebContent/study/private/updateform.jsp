@@ -40,17 +40,17 @@
 	      <input type="text" id="nick" class="form-control" value="<%=dto.getNick() %>" disabled/>
 	   </div>
 	   <div class="mt-3">
+	         <label for="category">카테고리</label>
+	         <select name="category" class="form-select">
+	            <option value="">선택</option>
+	            <option value="java" <%=category.equals("java") ? "selected": "" %> >java</option>
+	            <option value="javascript" <%=category.equals("javascript") ? "selected": "" %>>javascript</option>
+	            <option value="jsp" <%=category.equals("jsp") ? "selected": "" %>>jsp</option>
+	         </select>
+	   </div>
+	   <div class="mt-3">
 	         <label for="title" class="form-label">제목</label>
 	         <input type="text" id="title" name="title" class="form-control" value="<%=dto.getTitle()%>"/>
-	    </div>
-	    <div class="mt-3">
-	         <label for="category">말머리</label>
-	         <select name="category" class="form-select">
-	            <option value="">Please choose an option</option>
-	            <option value="java" <%=category.equals("java") ? "selected": "" %> >Java</option>
-	            <option value="javascript" <%=category.equals("javascript") ? "selected": "" %>>JavaScript</option>
-	            <option value="jsp" <%=category.equals("jsp") ? "selected": "" %>>JSP</option>
-	         </select>
 	    </div>
 	   <div class="mt-3">
 	      <label for="content" class="form-label">내용</label>
