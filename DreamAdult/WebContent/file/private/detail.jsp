@@ -628,7 +628,7 @@
 	         .then(function(data){
 	            if(data.isSuccess){
 	               markCount--; 
-	               document.querySelector(".mark-link").innerHTML = bookmarked;
+	               document.querySelector(".mark-link").innerHTML = bookmark;
 	            }
 	         });
 	         isMark=false;
@@ -640,7 +640,7 @@
 	         .then(function(data){
 	            if(data.isSuccess){
 	               markCount++;
-	               document.querySelector(".mark-link").innerHTML = bookmark;
+	               document.querySelector(".mark-link").innerHTML = bookmarked;
 	            }
 	         });
 	         isMark=true;
