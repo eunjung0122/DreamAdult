@@ -17,11 +17,17 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="study" name="thisPage"/></jsp:include>
 <div class="form-page container">
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Study</li>
+	  </ol>
+	</nav>
    <h1 class="main-tit">
-	  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/…egory/322d2261017a00001.png?type=thumb&opt=C72x72"> 
-	   	<span>학습공부</span>
+	  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/category/322d2261017a00001.png?type=thumb&opt=C72x72">
+		<span>학습공부</span>
    </h1>
    <form action="update.jsp" method="post" id="updateForm">
 	   <input type="hidden" name="num" value="<%=num %>" />

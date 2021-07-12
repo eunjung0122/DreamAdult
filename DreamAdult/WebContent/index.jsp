@@ -51,7 +51,7 @@
 <head>
 <meta charset="UTF-8">
 
-<title>index.jsp</title>
+<title>DreamAdult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="css/main.css" />
 </head>

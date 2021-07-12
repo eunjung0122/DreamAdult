@@ -17,8 +17,14 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="file" name="thisPage"/></jsp:include>
 	<div class="form-page container">
+		<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+		  <ol class="breadcrumb">
+		    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+		    <li class="breadcrumb-item active" aria-current="page">File</li>
+		  </ol>
+		</nav>
 		<h1 class="main-tit">
 		  	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"> 
 		   	<span>코드공유</span>
