@@ -268,7 +268,7 @@
 						사람과 기술로 일상을 돕는<br>
 						코린이 게시판을 볼려면?
 					</h4>
-					<a class="btn btn-s btn-custom-dark" href="${pageContext.request.contextPath}/users/loginform.jsp">
+					<a id="login_link" class="btn btn-s btn-custom-dark" href="${pageContext.request.contextPath}/users/loginform.jsp">
 					로그인 하러가기
 					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
 					  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
@@ -284,7 +284,7 @@
 						항상 발전하는 코린이와<br>
 						함께 하고싶다면?
 					</h4>
-					<a class="btn btn-s btn-custom-dark" href="${pageContext.request.contextPath}/users/signup_form.jsp">
+					<a id="signup_link" class="btn btn-s btn-custom-dark" href="${pageContext.request.contextPath}/users/signup_form.jsp">
 					회원가입 하러가기
 					<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-arrow-right-short" viewBox="0 0 16 16">
 					  <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z"/>
@@ -317,6 +317,8 @@
 		}
 	}
 %>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	<%if(isPopup){ %>
 		window.open("popup.jsp", "웰컴팝업창", "width=500,height=450,top=100,left=100");
@@ -324,6 +326,42 @@
 	<%if(isUpgrade){%>
 		window.open("grade_popup.jsp", "등급 업 팝업창", "width=500,height=450,top=100,left=600");
 	<%}%>
+	
+	
+	
+		
+	let id='<%=id%>';
+	if(id!='null'){
+		document.querySelector("#signup_link").addEventListener("click",function(e){
+			Swal.fire({
+ 				 position: 'top-50 start-50',
+ 			 	 icon: 'warning',
+ 				 text: '이미 회원입니다.',
+ 				 showConfirmButton: false,
+ 			     timer: 1500
+ 			})
+			e.preventDefault();
+		});
+		document.querySelector("#login_link").addEventListener("click",function(e){
+			Swal.fire({
+ 				 position: 'top-50 start-50',
+ 			 	 icon: 'warning',
+ 				 text: '이미 로그인 했습니다.',
+ 				 showConfirmButton: false,
+ 			     timer: 1500
+ 			})
+			e.preventDefault();
+		});
+	}
+	
+		
+		
+	
+	
+	
+		
+	
+	
 </script>
 <script src="${pageContext.request.contextPath}/js/grid.js"></script>
 </body>
