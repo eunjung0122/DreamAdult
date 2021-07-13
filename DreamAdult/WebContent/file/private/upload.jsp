@@ -54,7 +54,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>upload.jsp</title>
+<title>Dream Adult</title>
 </head>
 <body>
 	<%if(isSuccess){ %>

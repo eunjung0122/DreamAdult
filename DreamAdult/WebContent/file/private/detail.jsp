@@ -138,7 +138,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>DreamAdult</title>
+<title>Dream Adult</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
@@ -146,7 +147,7 @@
 <jsp:include page="../../include/navber.jsp"><jsp:param value="file" name="thisPage"/></jsp:include>
 	<div class="detail_page container">
 		<h1 class="main-tit">
-			자료실
+			코드드림
 		</h1>
 		<% if(!keyword.equals("")&&!category.equals("whole")){ %>
 	      <p>   

@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/popup.jsp</title>
+<title>Dream Adult</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
+
 <jsp:include page="include/resource.jsp"></jsp:include>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -20,7 +20,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>nopopup.jsp</title>
+<title>Dream Adult</title>
 </head>
 <body>
 	nopopup.jsp 페이지

@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/private/updateform.jsp</title>
+<title>Dream Adult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <style>
 	/* 프로필 이미지를 작은 원형으로 만든다 */

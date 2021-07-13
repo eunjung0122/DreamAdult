@@ -30,7 +30,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/study/private/insert.jsp</title>
+<title>Dream Adult</title>
 </head>
 <body>
    <%if(isSuccess){ %>
