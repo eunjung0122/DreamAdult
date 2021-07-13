@@ -155,7 +155,8 @@
 						<p class="card-tag">#코딩초보 #코린이 #자바 #스터디</p>
 					</span>
 					<div class="img-wrap">
-						<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/5ae1aabe017a00001.png?type=thumb&opt=C630x472"/>
+						<img src="images/00.jpg"/>
+						<img src="images/11.jpg"/>
 					</div>
 				</li>
 			</ul>
