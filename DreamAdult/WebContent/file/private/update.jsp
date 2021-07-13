@@ -62,7 +62,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>update.jsp</title>
+<title>Dream Adult</title>
 </head>
 <body>
 	<%if(isSuccess){ %>

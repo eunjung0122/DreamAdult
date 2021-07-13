@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/signup_form.jsp</title>
+<title>Dream Adult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <style>

@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>navber.jsp</title>
+<title>Dream Adult</title>
 <jsp:include page="resource.jsp"></jsp:include>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

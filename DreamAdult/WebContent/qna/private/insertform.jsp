@@ -19,12 +19,12 @@
 	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   	<ol class="breadcrumb">
 	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
-	    <li class="breadcrumb-item active" aria-current="page">QnA</li>
+	    <li class="breadcrumb-item active" aria-current="page">묻고답하기</li>
 	  </ol>
 	</nav>
    <h1 class="main-tit">
   	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&amp;opt=C72x72"> 
-   	<span>큐앤에이</span>
+   	<span>묻고답하기</span>
    </h1>
    <form action="insert.jsp" method="post" id="insertForm">
       <div>

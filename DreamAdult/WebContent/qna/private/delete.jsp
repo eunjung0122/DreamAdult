@@ -21,7 +21,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/private/delete.jsp</title>
+<title>Dream Adult</title>
 </head>
 <body>
    <%if(isSuccess){%>

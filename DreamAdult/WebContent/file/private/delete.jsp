@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>delete.jsp</title>
+<title>Dream Adult</title>
 </head>
 <body>
 	<%if(isSuccess){%>

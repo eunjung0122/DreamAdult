@@ -35,7 +35,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/users/signup.jsp</title>
+<title>Dream Adult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 </head>
 <body>
