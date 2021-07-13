@@ -322,9 +322,6 @@
 	<%if(isUpgrade){%>
 		window.open("grade_popup.jsp", "등급 업 팝업창", "width=500,height=450,top=100,left=600");
 	<%}%>
-	
-	
-	
 		
 	let id='<%=id%>';
 	if(id!='null'){
@@ -349,15 +346,6 @@
 			e.preventDefault();
 		});
 	}
-	
-		
-		
-	
-	
-	
-		
-	
-	
 </script>
 <script src="${pageContext.request.contextPath}/js/grid.js"></script>
 </body>
