@@ -344,6 +344,7 @@ button.btn{
 	color: #fff;
 	background-color: #801ee3;
 }
+
 .link-top{
 	display:inline-block;
 	background:#000;
@@ -358,6 +359,7 @@ button.btn{
 .link-top:hover{
 	background:#555;
 }
+
 
 /*detail-page*/
 .detail_page .main-tit{

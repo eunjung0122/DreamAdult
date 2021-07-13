@@ -388,11 +388,6 @@
 			</div>
 		</div>
 	</div>
-	<a class="link-top" href="">
-		<svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-arrow-up-short" viewBox="0 0 16 16">
-		  <path fill-rule="evenodd" d="M8 12a.5.5 0 0 0 .5-.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 .5.5z"/>
-		</svg>
-	</a>
 </div>
 <jsp:include page="include/footer.jsp"></jsp:include>
 <%
@@ -408,7 +403,9 @@
 	}
 %>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
 <script>
 	<%if(isPopup){ %>
 		window.open("popup.jsp", "웰컴팝업창", "width=500,height=450,top=100,left=100");
