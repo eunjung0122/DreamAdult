@@ -121,7 +121,7 @@
 <div class="sub_page container">
 	<h1 class="main_tit">
 		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72">
-		<span>큐앤에이</span>
+		<span>묻고답하기</span>
 	</h1>
 	<!--  <p class="main_txt">
 		모르는게 있어도 괜찮아요! 우린 여러명이니까요~
