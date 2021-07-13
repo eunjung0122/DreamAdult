@@ -314,7 +314,7 @@
 								<%}%>
 								<p style="display:inline-block; vertical-align:middle; margin-left:10px; margin-bottom:0;">
 									<span class="nick"><%=tmp.getNick() %></span>
-									<%if(tmp.getWriter().equals(id)) {%>
+									<%if(tmp.getWriter().equals(dto.getWriter())){%>
 		                  				<span class="writer_nick">
 			                     			<i>글쓴이</i>
 				   						</span>
