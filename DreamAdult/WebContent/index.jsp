@@ -166,7 +166,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
-							<span class="txt_cate">코드공유</span>
+							<span class="txt_cate">코드드림</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=FileLikeDao.getInstance().getCount(fileList.get(0).getNum())%></span>	
 						</span>
 						<%if(fileList.size()>0) {%>
@@ -188,7 +188,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
-							<span class="txt_cate">학습공부</span>
+							<span class="txt_cate">개념쌓기</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=StudyLikeDao.getInstance().getCount(studyList.get(0).getNum())%></span>
 						</span>
 						<%if(studyList.size()>0) {%>
@@ -207,7 +207,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
-							<span class="txt_cate">학습공부</span>
+							<span class="txt_cate">개념쌓기</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=StudyLikeDao.getInstance().getCount(studyList.get(1).getNum())%></span>
 						</span>
 						<%if(studyList.size()>1) {%>
@@ -229,7 +229,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
-							<span class="txt_cate">QnA</span>
+							<span class="txt_cate">묻고답하기</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(1).getNum())%></span>	
 						</span>
 						<%if(qnaList.size()>1) {%>
@@ -251,7 +251,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
-							<span class="txt_cate">코드공유</span>
+							<span class="txt_cate">코드드림</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=FileLikeDao.getInstance().getCount(fileList.get(1).getNum())%></span>	
 						</span>
 						<%if(fileList.size()>1) {%>
@@ -272,7 +272,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
-							<span class="txt_cate">QnA</span>
+							<span class="txt_cate">묻고답하기</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(0).getNum())%></span>	
 							<%if(qnaList.size()>0) {%>
 							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
@@ -294,7 +294,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
-							<span class="txt_cate">학습공부</span>
+							<span class="txt_cate">개념쌓기</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=StudyLikeDao.getInstance().getCount(studyList.get(2).getNum())%></span>
 						</span>
 						<%if(studyList.size()>2) {%>
@@ -316,7 +316,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72"/>
-							<span class="txt_cate">코드공유</span>
+							<span class="txt_cate">코드드림</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=FileLikeDao.getInstance().getCount(fileList.get(2).getNum())%></span>	
 						</span>
 						<%if(fileList.size()>2) {%>
@@ -336,7 +336,7 @@
 					<span class="txt_wrap">
 						<span class="info_cate">
 							<img src="https://www.kakaocorp.com/page/ico_customer.png" />
-							<span class="txt_cate">QnA</span>
+							<span class="txt_cate">묻고답하기</span>
 							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(2).getNum())%></span>
 							<%if(qnaList.size()>2) {%>	
 							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(2).getNum()%>">

@@ -117,7 +117,7 @@
 <div class="sub_page container">
 	<h1 class="main_tit">
 		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6564a0f6017800001.png?type=thumb&opt=C72x72">
-		<span>코드공유</span>
+		<span>코드드림</span>
 	</h1>
 
    <form action="list.jsp" method="get" id="myForm" class="search-bar">
