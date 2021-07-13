@@ -97,11 +97,15 @@
 				    </div>
 			    <%} %>  
 			    <button class="w-100 btn btn-l btn-max btn-custom-dark" type="submit">로그인</button>
-			    <p class="mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 		  	</form>
 		</main>
 	</div>
 </div>
+<footer style="text-align:left;height:400px; border-top:1px solid #ddd;">
+	<div class="container">
+		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
+	</div>
+</footer>
 <script src="<%=request.getContextPath()%>/js/ryon.js"></script>
 </body>
 </html>
