@@ -8,7 +8,24 @@
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 <style>
-
+.userform-page{
+	background: #f8d348;
+	padding: 60px 0 80px;
+	text-align:center;
+}
+.logo-wrap{
+	background:#fff;
+	border-radius:50%;
+	width:200px;
+	height:200px;
+	margin:0 auto;
+	margin-bottom:40px;
+}
+.logo-wrap img{
+	position:relative;
+	top:50%;
+	transform:translateY(-50%);
+}
 	.btn-primary{
 	  	background-color: #3c64ff;
 	  	    border-color: #3c64ff;
@@ -37,19 +54,16 @@
 	 #signupForm{
 	 	text-align:center;
 	 }
-
 </style>
     
 </head>
-<body class="bg-light">
+<body>
 <jsp:include page="../include/navber.jsp"></jsp:include>
+<div class="userform-page">
 <div class="container">
-	<div class="mt-4 text-center">
-		<img  src="../images/logo2.png" width="100" height="80">
-		<h1 class="h3 mt-3 mb-3 fw-normal">회원 가입</h1>
-	</div>
-	
-
+		<div class="logo-wrap">
+			<img  src="../images/logo2.png" width="100" height="80">
+		</div>
 		<form action="signup.jsp" method="post" id="signupForm">
 			<div class="col-6">
 				<label class="control-label" for="id">아이디
@@ -96,10 +110,13 @@
 				</div>
 			</fieldset>
 			<hr class="my-4">
-			<button class="w-50 btn btn-primary btn-lg" type="submit">가입</button>
-
+			<button class="w-50 btn btn-lg btn-custom-dark " type="submit">가입</button>
 		</form>
 	</div>
+
+
+</div>
+
 	
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>
 <script>
@@ -240,11 +257,13 @@
 		}	
 	});
 </script>
+
 <footer style="height:400px; border-top:1px solid #ddd; margin-top:80px;">
 	<div class="container">
 		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
 	</div>
 </footer>
+
 </body>
 </html>
 
