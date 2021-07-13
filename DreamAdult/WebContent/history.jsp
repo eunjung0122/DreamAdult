@@ -31,6 +31,7 @@
 	/*display:inline-block;*/
 }
 .tit_header>span{
+	color:#000000;
 	padding-top:4px;
 	padding-left:10px;
 }
@@ -50,6 +51,7 @@
 	font-size:26px;
 	font-weight:600;
 	color:#000000;
+	margin-bottom:16px;
 }
 .section-history>ul{
 	/*display:block;*/
@@ -70,7 +72,7 @@
 	border-left:1px solid #eeeeee;
 	padding-bottom:48px;
 }
-.list_history>div>a{
+.list_history>div>div{
 	/*display:block;*/
 	display:flex;
 }
@@ -82,6 +84,11 @@
 	
 	width:126px;
 }
+.team_img{
+		height:95px;
+		background-image: url("images/KakaoTalk_20210713_164611260_01.png");
+  		background-size: cover;
+	}
 .wrap_cont{
 	width:100%;
 	
@@ -132,9 +139,15 @@
 	.section-history{
 		margin-top:34px;
 	}
+	.section-history>h2{
+		margin-bottom:20px;
+	}
 	
 	.thumb_img{
 		width:192px;
+	}
+	.team_img{
+		height:144px;
 	}
 	
 	.list_circle{
@@ -196,6 +209,9 @@
 	.thumb_img{
 		width:216px;
 	}
+	.team_img{
+		height:162px;
+	}
 	
 	.txt_date{
 		font-size:18px;
@@ -211,6 +227,9 @@
 	}
 }
 
+.last_list{
+	margin-bottom:100px;
+}
 
 @media (min-width: 1400px) {
 	.contain_align{
@@ -233,13 +252,17 @@
 	}
 	
 	.section-history{
-		margin-top:40px;
+		margin-top:50px;
 	}
 	.section-history>h2{
 		font-size:30px;
+		margin-bottom:26px;
 	}
 	.thumb_img{
 		width:240px;
+	}
+	.team_img{
+		height:180px;
 	}
 	.list_circle{
 		width:12px;
@@ -275,7 +298,7 @@
 	<h1 class="page_tit">
 	    <span class="tit_header">
 	    	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6562b710017800001.png?type=thumb&opt=C72x72" alt="">
-	    	<span>히스토리</span>
+	    	<span>탄생스토리</span>
 	    </span>
 	    <span class="txt_tit">
 	        더 나은 세상을 만드는 Dream Adult
@@ -287,9 +310,9 @@
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
+					<div>
 						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/21c43c50017900001.png?type=thumb&opt=C480x360" alt="" />
+							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/21b3cbd9017900001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 6월 18일</span>
@@ -300,15 +323,15 @@
 								<span class="txt_tag">#3조가짱이지</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
+					<div>
 						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/21e919a9017900001.png?type=thumb&opt=C480x360" alt="" />
+							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/21c43c50017900001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 6월 30일</span>
@@ -319,79 +342,73 @@
 								<span class="txt_tag">#순로로운출발</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
+					<div>
 						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
+							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/638e6e54017800001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 7월 1일</span>
 							<strong class="tit_item">Chapter 1, PROJECT 회의</strong>
-							<span>-사이트의 전체적인 구조 및 기능들에 대한 구성 계획</span>
 							<span class="tag_item">
 								<span class="txt_tag">#뼛속까지개발자</span>
 								<span class="txt_tag">#아니?처음본거맞아?</span>
 								<span class="txt_tag">#분위기무엇?</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
+					<div>
 						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
+							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/21d2825e017900001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 7월 5일</span>
 							<strong class="tit_item">Chapter 2, 사이트의 기본 뼈대 구축</strong>
-							<span>-회원관리를 위한 기능들(회원가입, 로그인, 로그아웃, servlet 등), 기본틀이되는 게시판 기능(글 추가, 수정, 삭제, 리스트, 디테일 등), 댓글 기능 구현</span>
 							<span class="tag_item">
 								<span class="txt_tag">#Unbelievable!</span>
 								<span class="txt_tag">#열정의3조</span>
 								<span class="txt_tag">#빨간색</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
+					<div>
 						<span class="wrap_thumb">
 							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 7월 8일</span>
 							<strong class="tit_item">Chapter 3, 좋아요 & 북마크 기능 구현</strong>
-							<sapan>
-								좋아요&북마크 기능, index 페이지에 좋아요 많은 순으로 나열되는 리스트 기능, 회원들을 위한 글모아보기 기능 등의 
-								추가적인 기능들 구현
-							</sapan>
 							<span class="tag_item">
 								<span class="txt_tag">#해내다니</span>
 								<span class="txt_tag">#우리도몰랐다</span>
 								<span class="txt_tag">#뿌듯</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
-						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
-						</span>
+					<div>
+						<div class="wrap_thumb">
+							<div class="team_img thumb_img"></div>
+						</div>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 7월 9일</span>
 							<strong class="tit_item">찰칵! 그녀들의 소소한 단합대회</strong>
@@ -401,35 +418,34 @@
 								<span class="txt_tag">#정호쌤짱짱</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 			<li class="list_history">
 				<span class="list_circle"></span>
 				<div class="list_line">
-					<a href="">
+					<div>
 						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
+							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/21e919a9017900001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 7월 14일</span>
 							<strong class="tit_item">Chapter 4, 기능 테스트 및 수정 & 디자인 구현</strong>
-							<span>전체적인 디자인</span>
 							<span class="tag_item">
 								<span class="txt_tag">#해내다니</span>
 								<span class="txt_tag">#우리도몰랐다</span>
 								<span class="txt_tag">#뿌듯</span>
 							</span>
 						</div>
-					</a>
+					</div>
 				</div>
 			</li>
-			<li class="list_history">
+			<li class="list_history last_list">
 				<span class="list_circle"></span>
-				<div class="list_line">
-					<a href="">
+				<div>
+					<div>
 						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
+							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6392eed2017800001.png?type=thumb&opt=C480x360" alt="" />
 						</span>
 						<div class="wrap_cont">
 							<span class="txt_date">2021년 7월 16일</span>
@@ -440,118 +456,11 @@
 								<span class="txt_tag">#광고받아요</span>
 							</span>
 						</div>
-					</a>
-				</div>
-			</li>
-			<li class="list_history">
-				<span class="list_circle"></span>
-				<div class="list_line">
-					<a href="">
-						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
-						</span>
-						<div class="wrap_cont">
-							<!--  <span class="txt_date">2020년 11월</span>-->
-							<strong class="tit_item">프로젝트를 마치며...</strong>
-							<span class="tag_item">
-								<span class="txt_tag">#프로젝트 시작전엔</span>
-								<span class="txt_tag">#지금까지 배운걸로</span>
-								<span class="txt_tag">#무언가를 만들수 있긴 할까 의심이 들었었는데</span>
-								<span class="txt_tag">#막상시작하고보니</span>
-								<span class="txt_tag">#지금까지 배운범주로</span>
-								<span class="txt_tag">#왠만한것이 모두 구현 가능했다</span>
-								<span class="txt_tag">#DreamAult를제작하면서</span>
-								<span class="txt_tag">#배웠던것들이 진짜 내것이 되는것같은느낌에</span>
-								<span class="txt_tag">#이번 세미프로젝트 우리에게 큰의미가 있었다</span>
-								<!--  
-								<span class="txt_tag">#시작하기전에</span>
-								<span class="txt_tag">#배운게많다라는</span>
-								<span class="txt_tag">#생각을못해서</span>
-								<span class="txt_tag">#버벅거리기만하는거아닌가</span>
-								<span class="txt_tag">#뭐가될까생각했었는데</span>
-								<span class="txt_tag">#새로운기능을만들때</span>
-								<span class="txt_tag">#지금까지로배운것으로</span>
-								<span class="txt_tag">#구현이가능했던부분이신기하였다</span>
-								<span class="txt_tag">#프로젝트라는게</span>
-								<span class="txt_tag">#큰의미가있지않았나</span>
-								-->
-								<!--  
-								<span class="txt_tag">#끝나도</span>
-								<span class="txt_tag">#끝이아니다</span>
-								<span class="txt_tag">#우린계속달린다</span>
-								<span class="txt_tag">#선생님</span>
-								<span class="txt_tag">#3조이대로</span>
-								<span class="txt_tag">#행복하게해주세요</span>
-								<span class="txt_tag">#우리함께forever</span>
-								<span class="txt_tag">#다른조도</span>
-								<span class="txt_tag">#화이팅</span>
-								<span class="txt_tag">#멋있다!이쁘다!</span>-->
-							</span>
-						</div>
-					</a>
-				</div>
-			</li>
-			
-			<li class="list_history">
-				<span class="list_circle"></span>
-				<div class="list_line">
-					<a href="">
-						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
-						</span>
-						<div class="wrap_cont">
-							<span class="txt_date">2027년 7월 16일</span>
-							<strong class="tit_item">DERAM ADULT, 세계에 발을 내딛다</strong>
-							<span class="tag_item">
-								<span class="txt_tag">#접속량폭팔</span>
-								<span class="txt_tag">#사이트다운</span>
-								<span class="txt_tag">#광고받아요</span>
-							</span>
-						</div>
-					</a>
-				</div>
-			</li>
-			<li class="list_history">
-				<span class="list_circle"></span>
-				<div class="list_line">
-					<a href="">
-						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
-						</span>
-						<div class="wrap_cont">
-							<span class="txt_date">2027년 7월 16일</span>
-							<strong class="tit_item">DERAM ADULT, 세계에 발을 내딛다</strong>
-							<span class="tag_item">
-								<span class="txt_tag">#접속량폭팔</span>
-								<span class="txt_tag">#사이트다운</span>
-								<span class="txt_tag">#광고받아요</span>
-							</span>
-						</div>
-					</a>
-				</div>
-			</li>
-			<li class="list_history">
-				<span class="list_circle"></span>
-				<div class="list_line">
-					<a href="">
-						<span class="wrap_thumb">
-							<img class="thumb_img" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/history/41f0c3c0017a00001.png?type=thumb&opt=C480x360" alt="" />
-						</span>
-						<div class="wrap_cont">
-							<span class="txt_date">2027년 7월 16일</span>
-							<strong class="tit_item">DERAM ADULT, 세계에 발을 내딛다</strong>
-							<span class="tag_item">
-								<span class="txt_tag">#접속량폭팔</span>
-								<span class="txt_tag">#사이트다운</span>
-								<span class="txt_tag">#광고받아요</span>
-							</span>
-						</div>
-					</a>
+					</div>
 				</div>
 			</li>
 		</ul>
 	</section>
 </div>
-
 </body>
 </html>

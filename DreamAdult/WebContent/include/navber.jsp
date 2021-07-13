@@ -83,6 +83,7 @@ body {
         bottom:40px;
         right:34px;
         display:none;
+        z-index:3;
     }
     .link-top:hover{
         background:#555;
@@ -102,9 +103,18 @@ body {
             data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
          </button>
-         <div class="collapse navbar-collapse" id="navbarNav">
+         <div style="margin-top:22px;" class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav m-auto ">
-               <li style="" class="nav-item ms-2 mbHdBottom">
+               <li class="nav-item ms-2 mbHdBottom">
+               		<a
+						class="nav-link"
+
+						href="<%=request.getContextPath() %>/history.jsp">
+						<img class="mbMnImage" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6562b710017800001.png?type=thumb&opt=C72x72"/>
+						<span class="mbMnName">탄생스토리</span>
+					</a>
+			   </li>
+               <li class="nav-item ms-2">
                		<a
 						class="nav-link <%=thisPage.equals("study") ? "active" : "" %>"
 
