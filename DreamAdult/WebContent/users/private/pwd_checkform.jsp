@@ -51,7 +51,6 @@
 	  </div>
 	</form> 
 </div>
-<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script>
 	document.querySelector("#checkPwdForm").addEventListener("submit", function(e){

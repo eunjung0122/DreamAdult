@@ -9,6 +9,7 @@ public class QnADto {
 	private int viewCount;
 	private String regdate;
 	private String category;
+	private String grade;
 	private int startRowNum;
 	private int endRowNum;
 	private int prevNum;
@@ -17,7 +18,7 @@ public class QnADto {
 	public QnADto() {}
 
 	public QnADto(int num, String writer, String nick, String title, String content, int viewCount, String regdate,
-			String category, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+			String category, String grade, int startRowNum, int endRowNum, int prevNum, int nextNum) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -27,6 +28,7 @@ public class QnADto {
 		this.viewCount = viewCount;
 		this.regdate = regdate;
 		this.category = category;
+		this.grade = grade;
 		this.startRowNum = startRowNum;
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
@@ -97,6 +99,14 @@ public class QnADto {
 		this.category = category;
 	}
 
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
 	public int getStartRowNum() {
 		return startRowNum;
 	}
@@ -128,5 +138,4 @@ public class QnADto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
-
 }

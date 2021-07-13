@@ -32,7 +32,7 @@ public class QnADao {
 					"	(SELECT result1.*, ROWNUM AS rnum" + 
 					"	 FROM" + 
 					"		(SELECT DISTINCT board_qna.num, count(*)OVER(PARTITION BY board_qna.num) AS cnt," + 
-					"		 writer, board_qna.nick, title, TO_CHAR(board_qna.regdate,'YYYY.MM.DD')regdate" + 
+					"		 writer, board_qna.nick, title, TO_CHAR(board_qna.regdate,'YYYY.MM.DD')regdate, grade" + 
 					"		 FROM board_qna" + 
 					"		 INNER JOIN users ON board_qna.writer = users.id" + 
 					"		 INNER JOIN qnalike ON board_qna.num = qnalike.num" + 
@@ -50,6 +50,7 @@ public class QnADao {
 				dto2.setNick(rs.getString("nick"));
 				dto2.setTitle(rs.getString("title"));
 				dto2.setRegdate(rs.getString("regdate"));
+				dto2.setGrade(rs.getString("grade"));
 				list.add(dto2);
 			}
 		} catch (Exception e) {

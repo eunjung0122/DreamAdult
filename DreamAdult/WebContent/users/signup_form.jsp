@@ -95,17 +95,12 @@
 					<label class="form-check-label" for="lan3">JSP</label>
 				</div>
 			</fieldset>
-			
 			<hr class="my-4">
 			<button class="w-50 btn btn-primary btn-lg" type="submit">가입</button>
 
 		</form>
 	</div>
-		
-		<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
-
 	
-
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>
 <script>
 	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
@@ -245,7 +240,11 @@
 		}	
 	});
 </script>
-<jsp:include page="../../include/footer.jsp"></jsp:include>
+<footer style="height:400px; border-top:1px solid #ddd; margin-top:80px;">
+	<div class="container">
+		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
+	</div>
+</footer>
 </body>
 </html>
 
