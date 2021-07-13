@@ -64,7 +64,6 @@
 		<button class="btn btn-lg btn-custom-gray" type="reset">Reset</button>
 	</form>
 </div>
-<p class="text-center mt-5 mb-3 text-muted">&copy; 2021-DreamAdult</p>
 <script>
 let isNewPwdValid=false;
 

@@ -113,14 +113,11 @@
 			<button class="w-50 btn btn-lg btn-custom-dark " type="submit">가입</button>
 		</form>
 	</div>
-</div>
-<footer style="height:400px; border-top:1px solid #ddd;">
-	<div class="container">
-		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
-	</div>
-</footer>
-	
 
+
+</div>
+
+	
 <script src="<%=request.getContextPath() %>/js/gura_util.js"></script>
 <script>
 	//아이디, 비밀번호, 이메일의 유효성 여부를 관리한 변수 만들고 초기값 대입
@@ -260,6 +257,13 @@
 		}	
 	});
 </script>
+
+<footer style="height:400px; border-top:1px solid #ddd; margin-top:80px;">
+	<div class="container">
+		<p style="padding-top:60px;">© dream adult. All rights reserved.</p>
+	</div>
+</footer>
+
 </body>
 </html>
 
