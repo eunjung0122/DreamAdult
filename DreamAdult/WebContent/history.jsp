@@ -16,7 +16,7 @@
 }
 
 .page_tit{
-	padding-top:48px;
+	margin:80px 0;
 }
 .tit_header{
 	display:flex;
@@ -415,7 +415,8 @@
 							<span class="tag_item">
 								<span class="txt_tag">#이상한사람아니예요</span>
 								<span class="txt_tag">#잊지못할추억</span>
-								<span class="txt_tag">#정호쌤짱짱</span>
+								<span class="txt_tag">#정호쌤짱짱</span> 
+								<span class="txt_tag">#에듀윌포토존</span>
 							</span>
 						</div>
 					</div>
