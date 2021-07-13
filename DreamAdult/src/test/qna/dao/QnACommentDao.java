@@ -109,7 +109,7 @@ public class QnACommentDao {
 					+ "	FROM"
 					+ "	(SELECT result1.*,ROWNUM AS rnum"
 					+ " 	FROM"
-					+ "		(SELECT num,B.nick,content,ref_group,B.regdate" + 
+					+ "		(SELECT num,B.nick,content,ref_group,TO_CHAR(B.regdate,'YYYY.MM.DD')regdate" + 
 					"		FROM board_qna_comment B,users U" + 
 					"		WHERE B.WRITER=U.ID AND WRITER=? AND deleted='no')result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -299,7 +299,7 @@ public class QnACommentDao {
 					+ "	FROM"
 					+ "	(SELECT result1.*,ROWNUM AS rnum"
 					+ " 	FROM"
-					+ "		(SELECT num, writer, board_qna_comment.nick, content, target_nick, ref_group, comment_group, deleted, profile, board_qna_comment.regdate" + 
+					+ "		(SELECT num, writer, board_qna_comment.nick, content, target_nick, ref_group, comment_group, deleted, profile, TO_CHAR(board_qna_comment.regdate,'YYYY.MM.DD HH:MI')regdate" + 
 					" 		FROM board_qna_comment" + 
 					" 		INNER JOIN users" + 
 					" 		ON board_qna_comment.writer = users.id" +

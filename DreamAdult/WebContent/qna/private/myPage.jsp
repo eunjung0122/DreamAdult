@@ -51,7 +51,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/qna/private/myPage.jsp</title>
+<title>DreamAdult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <style>
    .page-ui a{
@@ -77,20 +77,29 @@
       padding: 5px;
    }
    
-
+	h1 > a{
+		display:inline-block;
+	}
    
 </style>
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="qna" name="thisPage"/></jsp:include>
 <div class="container">
-	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/qna/private/myPage.jsp">글 </a>/<a href="${pageContext.request.contextPath}/qna/private/myComment.jsp">댓글</a></h1>
-	<table>
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">QnA</li>
+	  </ol>
+	</nav>
+	<h1> <a href="${pageContext.request.contextPath}/qna/private/myPage.jsp" class="btn btn-s btn-custom-dark me-2">내가 쓴 글 </a><a href="${pageContext.request.contextPath}/qna/private/myComment.jsp" class="btn btn-s btn-custom-gray">댓글</a></h1>
+	<table class="table table-hover">
+
 		<thead>
 			<th>글번호</th>
 			<th>카테고리</th>
-			<th>작성자</th>
 			<th>제목</th>
+			<th>작성자</th>
 			<th>조회수</th>
 			<th>등록일</th>
 			<th>삭제</th>
@@ -100,10 +109,10 @@
          <tr>
             <td><%=tmp.getNum() %></td>
             <td><%=tmp.getCategory() %></td>
-            <td><%=tmp.getNick() %></td>
             <td>
                <a href="detail.jsp?num=<%=tmp.getNum()%>"><%=tmp.getTitle() %></a>
             </td>
+            <td><%=tmp.getNick() %></td>
             <td><%=tmp.getViewCount() %></td>
             <td><%=tmp.getRegdate() %></td>
             <td>
@@ -137,7 +146,7 @@
          <%} %>
       </ul>
    </div>
-   
 </div>
+<jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
 </html>

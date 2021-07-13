@@ -18,8 +18,17 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="qna" name="thisPage"/></jsp:include>
+
 <div class="form-page container">
+
+<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">QnA</li>
+  </ol>
+</nav>
+
    <h1 class="main-tit">
   	<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&amp;opt=C72x72"> 
    	<span>큐앤에이</span>
@@ -35,17 +44,17 @@
 	      <input type="text" id="nick" class="form-control" value="<%=dto.getNick() %>" disabled/>
 	   </div>
 	   <div class="mt-3">
+	         <label for="category">카테고리</label>
+	         <select name="category" class="form-select">
+	            <option value="">선택</option>
+	            <option value="java" <%=category.equals("java") ? "selected": "" %> >java</option>
+	            <option value="javascript" <%=category.equals("javascript") ? "selected": "" %>>javascript</option>
+	            <option value="jsp" <%=category.equals("jsp") ? "selected": "" %>>jsp</option>
+	         </select>
+	   </div>
+	   <div class="mt-3">
 	         <label for="title" class="form-label">제목</label>
 	         <input type="text" id="title" class="form-control" name="title" value="<%=dto.getTitle()%>"/>
-	    </div>
-	    <div class="mt-3">
-	         <label for="category">말머리</label>
-	         <select name="category" class="form-select">
-	            <option value="">Please choose an option</option>
-	            <option value="java" <%=category.equals("java") ? "selected": "" %> >Java</option>
-	            <option value="javascript" <%=category.equals("javascript") ? "selected": "" %>>JavaScript</option>
-	            <option value="jsp" <%=category.equals("jsp") ? "selected": "" %>>JSP</option>
-	         </select>
 	    </div>
 	   <div class="mt-3">
 	      <label for="content">내용</label>
@@ -104,5 +113,6 @@
    });
 
 </script>
+<jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
 </html>

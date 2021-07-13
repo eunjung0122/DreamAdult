@@ -32,7 +32,7 @@ public class QnADao {
 					"	(SELECT result1.*, ROWNUM AS rnum" + 
 					"	 FROM" + 
 					"		(SELECT DISTINCT board_qna.num, count(*)OVER(PARTITION BY board_qna.num) AS cnt," + 
-					"		 writer, board_qna.nick, title, TO_CHAR(board_qna.regdate,'YYYY.MM.DD')regdate" + 
+					"		 writer, board_qna.nick, title, TO_CHAR(board_qna.regdate,'YYYY.MM.DD')regdate, grade" + 
 					"		 FROM board_qna" + 
 					"		 INNER JOIN users ON board_qna.writer = users.id" + 
 					"		 INNER JOIN qnalike ON board_qna.num = qnalike.num" + 
@@ -50,6 +50,7 @@ public class QnADao {
 				dto2.setNick(rs.getString("nick"));
 				dto2.setTitle(rs.getString("title"));
 				dto2.setRegdate(rs.getString("regdate"));
+				dto2.setGrade(rs.getString("grade"));
 				list.add(dto2);
 			}
 		} catch (Exception e) {
@@ -80,7 +81,7 @@ public class QnADao {
 					+ " FROM"
 					+ "	(SELECT result1.*, ROWNUM AS rnum"
 					+ " FROM"
-					+ "	(SELECT num,B.nick,title,viewCount,B.regdate,category" + 
+					+ "	(SELECT num,B.nick,title,viewCount,TO_CHAR(B.regdate,'YYYY.MM.DD')regdate,category" + 
 					"	FROM BOARD_QNA B,USERS U" + 
 					"	WHERE B.WRITER=U.ID AND WRITER=?"
 					+ " ORDER BY num DESC) result1)"
@@ -166,7 +167,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT writer, nick, title, content, viewCount, regdate, category"
+			String sql = "SELECT writer, nick, title, content, viewCount, category, regdate"
 					+ " FROM board_QnA"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -357,7 +358,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -408,7 +409,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -461,7 +462,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -514,7 +515,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -568,7 +569,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -622,7 +623,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -676,7 +677,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -730,7 +731,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -789,7 +790,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
 					+ "		FROM board_QnA"
 					+ " 	ORDER BY num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
@@ -876,7 +877,7 @@ public class QnADao {
 					+ "	FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
 					+ "		FROM board_QnA"
 					+ "		WHERE title LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
@@ -930,7 +931,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
 					+ "		FROM board_QnA"
 					+ "		WHERE nick LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
@@ -984,7 +985,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
 					+ "		FROM board_QnA"
 					+ "		WHERE title LIKE '%'||?||'%' OR content LIKE '%'||?||'%'"
 					+ " 	ORDER BY num DESC)result1)"
@@ -1038,7 +1039,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
 					+ "		FROM board_QnA"
 					+ "		WHERE category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
@@ -1233,7 +1234,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
 					+ "		FROM board_QnA"
 					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
@@ -1287,7 +1288,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
 					+ "		FROM board_QnA"
 					+ "		WHERE nick LIKE '%'||?||'%' AND category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"
@@ -1342,7 +1343,7 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
 					+ "		FROM board_QnA"
 					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
 					+ " 	ORDER BY num DESC)result1)"

@@ -218,7 +218,7 @@
 		  </ul>
 		</nav>
 	</div>
-
+<jsp:include page="../include/footer.jsp"></jsp:include>
 
 <script>
 	let commentLinks=document.querySelectorAll(".comment-link");

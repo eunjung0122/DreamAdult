@@ -79,15 +79,23 @@
       padding: 5px;
    }
    
-
+	h1>a{
+		display:inline-block;
+	}
    
 </style>
 </head>
 <body>
-<jsp:include page="../../include/navber.jsp"></jsp:include>
+<jsp:include page="../../include/navber.jsp"><jsp:param value="study" name="thisPage"/></jsp:include>
 <div class="container">
-	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/study/private/myPage.jsp">글 </a>/<a href="${pageContext.request.contextPath}/qna/private/myComment.jsp">댓글</a></h1>
-	<table>
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Study</li>
+	  </ol>
+	</nav>
+	<h1><a href="${pageContext.request.contextPath}/study/private/myPage.jsp" class="btn btn-s btn-custom-gray me-2">내가 쓴 글 </a><a href="${pageContext.request.contextPath}/study/private/myComment.jsp" class="btn btn-s btn-custom-dark">댓글</a></h1>
+	<table class="table table-hover">
 		<thead>
 			<th>댓글번호</th>
 			<th>원글제목</th>
@@ -135,7 +143,7 @@
          <%} %>
       </ul>
    </div>
-   
 </div>
+<jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -57,7 +57,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>/file/private/myComment.jsp</title>
+<title>DreamAdult</title>
 <style>
    .page-ui a{
       text-decoration: none;
@@ -83,7 +83,10 @@
    }
    
 
-   
+   	h1 > a{
+		display:inline-block;
+	}
+	
 </style>
 </head>
 <body>
@@ -91,8 +94,14 @@
    <jsp:param value="file" name="thisPage"/>
 </jsp:include>
 <div class="container">
-	<h1>내가 쓴 <a href="${pageContext.request.contextPath}/file/private/myPage.jsp">글 </a>/<a href="${pageContext.request.contextPath}/file/private/myComment.jsp">댓글</a></h1>
-	<table>
+	<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="${pageContext.request.contextPath}">Home</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">File</li>
+	  </ol>
+	</nav>
+	<h1> <a href="${pageContext.request.contextPath}/file/private/myPage.jsp" class="btn btn-s btn-custom-gray me-2">내가 쓴 글 </a> <a href="${pageContext.request.contextPath}/file/private/myComment.jsp" class="btn btn-s btn-custom-dark">댓글</a></h1>
+	<table class="table table-hover">
 		<thead>
 			<th>댓글번호</th>
 			<th>원글제목</th>
@@ -140,7 +149,7 @@
          <%} %>
       </ul>
    </div>
-   
 </div>
+<jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
 </html>
