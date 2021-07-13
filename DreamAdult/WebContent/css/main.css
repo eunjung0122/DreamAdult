@@ -45,6 +45,21 @@ a {display:block; text-decoration: none !important;}
 	max-height:700px;
 	transition: all .2s ease-in-out;
 }
+.table-row:first-of-type .img-wrap{
+	position:relative;
+}
+.table-row:first-of-type .img-wrap img{
+	position:absolute;
+	top:0;
+	left:0;
+	opacity:0;
+}
+.table-row:first-of-type .img-wrap img:first-of-type{
+	opacity:1;
+}
+.table-row:first-of-type .img-wrap:hover img{
+	opacity:1;
+}
 .column{
 	padding:0;
 	margin:0;
