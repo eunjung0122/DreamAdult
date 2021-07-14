@@ -8,11 +8,6 @@
 	
 	String id=(String)session.getAttribute("id");
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Dream Adult</title>
 <jsp:include page="resource.jsp"></jsp:include>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -92,8 +87,7 @@ body {
 </style>
 </head>
 <body>
-
-	<nav id="menuBer" class="navbar navbar-light navbar-expand-lg title-font" style="">
+	<nav id="menuBer" class="navbar navbar-light navbar-expand-lg title-font">
       <div class="container">
          <a class="navbar-brand mbHdLeft" href="<%=request.getContextPath() %>/">
             <img src="${pageContext.request.contextPath}/images/logo2.png" width="21" height="21" />
@@ -103,9 +97,9 @@ body {
             data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
          </button>
-         <div style="margin-top:22px;" class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav m-auto ">
-               <li class="nav-item ms-2 mbHdBottom">
+         <div class="collapse navbar-collapse mbhdBottom" id="navbarNav">
+            <ul class="navbar-nav m-auto">
+               <li class="nav-item ms-2">
                		<a
 						class="nav-link"
 
@@ -246,10 +240,4 @@ body {
 		} );
 	} );
 </script>
-
-		
-	
-
-
 </body>
-</html>

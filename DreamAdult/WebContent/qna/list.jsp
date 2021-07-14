@@ -120,7 +120,7 @@
 </jsp:include>
 <div class="sub_page container">
 	<h1 class="main_tit">
-		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72">
+		<img style="width:72px; height:72px;" src="https://www.kakaocorp.com/page/ico_customer.png"/>
 		<span>묻고답하기</span>
 	</h1>
 	<!--  <p class="main_txt">

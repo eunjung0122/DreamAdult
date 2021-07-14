@@ -24,6 +24,10 @@ ul{
 .mbMnMem{
 	display:none;
 }
+.MbDrMem{
+	padding-left:10px !important;
+	padding-right:10px !important;
+}
 @media (max-width: 991.98px) {
 	.navbar-toggler{
 		margin-left:auto;
@@ -51,15 +55,12 @@ ul{
 	.mbHdLeft{
 		margin-left:6px;
 	}
-	.mbHdBottom{
-	 	padding-top:24px;
-	}
-	.MbDrMem{
-		margin-left:10px;
-	}
 	.MbDrBook{
 		margin-top:10px;
 		margin-left:24px;
+	}
+	.mbhdBottom{
+		margin-top:22px;
 	}
 }
 

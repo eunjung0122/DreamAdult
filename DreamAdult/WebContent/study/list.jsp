@@ -120,7 +120,7 @@
 </jsp:include>
 <div class="sub_page container">
 	<h1 class="main_tit">
-		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/category/322d2261017a00001.png?type=thumb&opt=C72x72">
+		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 		<span>개념쌓기</span>
 	</h1>
 	<form action="list.jsp" method="get" id="myForm" class="search-bar">
