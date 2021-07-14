@@ -433,9 +433,9 @@
 							<span class="txt_date">2021년 7월 14일</span>
 							<strong class="tit_item">Chapter 4, 기능 테스트 및 수정 & 디자인 구현</strong>
 							<span class="tag_item">
-								<span class="txt_tag">#해내다니</span>
-								<span class="txt_tag">#우리도몰랐다</span>
-								<span class="txt_tag">#뿌듯</span>
+								<span class="txt_tag">#왜잘되던기능이안돼지?</span>
+								<span class="txt_tag">#혼돈의도가니</span>
+								<span class="txt_tag">#끝이보인다</span>
 							</span>
 						</div>
 					</div>

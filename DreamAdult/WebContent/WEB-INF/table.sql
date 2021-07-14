@@ -68,10 +68,5 @@ CREATE SEQUENCE board_qna_comment_seq;
 CREATE TABLE bookmark_qna(
 	num NUMBER,
 	id VARCHAR2(100),
-	category VARCHAR2(100),
-	nick VARCHAR2(100),
-	title VARCHAR2(100),
-	viewCount NUMBER,
-	regdate VARCHAR2(100), 
 	bookmark CHAR(3) DEFAULT 'no'  
 );

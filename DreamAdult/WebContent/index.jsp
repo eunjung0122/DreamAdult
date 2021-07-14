@@ -149,7 +149,7 @@
 							<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/65636b49017800001.png?type=thumb&opt=C72x72"/>
 							<span class="txt_cate">탄생스토리</span>
 						</span>
-						<a class="card-main-tit card-l" href="" style="display:block;">
+						<a class="card-main-tit card-l" href="history.jsp" style="display:block;">
 							<strong class="tit_card">찰칵! 그녀들의 소소한 단합대회</strong>
 						</a>
 						<p class="card-tag">#이상한사람아니예요 #잊지못할추억 #정호쌤짱짱 #에듀윌포토존</p>
