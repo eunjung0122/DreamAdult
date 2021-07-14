@@ -320,7 +320,7 @@
 								</div>
 		                  		<%}else{ %>
 		                  		<div style="display:inline-block; vertical-align:middle;">
-		                     		<img class="profile-image" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
+		                     		<img class="profile-image" width="25" height="25" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
 	                     		</div>
 		                  		<%} %>
 		                  		<p style="display:inline-block; vertical-align:middle; margin-left:10px; margin-bottom:0;">

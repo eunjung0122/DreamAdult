@@ -52,7 +52,7 @@
   					<path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-1 0A7 7 0 1 0 1 8a7 7 0 0 0 14 0z"/>
 				</svg>
 	   		<%}else{ %>
-	      		<img class="profile-image" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
+	      		<img class="profile-image" width="25" height="25" src="${pageContext.request.contextPath}<%=tmp.getProfile()%>"/>
 			<%} %>
 	        <span><%=tmp.getNick() %></span>
 	        <%if(tmp.getNum() != tmp.getComment_group()){ %>
