@@ -37,7 +37,7 @@
 <jsp:include page="../../include/navber.jsp"></jsp:include>
 <div class="sub_page container">
    	<h1 class="main_tit">
-		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/category/322d2261017a00001.png?type=thumb&opt=C72x72">
+		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72"/>
 		<span style="display:inline-block; font-size: 2.0rem;">개념쌓기</span>
 	</h1>
    <table class="table table-hover">
@@ -119,7 +119,7 @@
    </table>
    
    <h1 class="main_tit">
-		<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6565671c017800001.png?type=thumb&opt=C72x72">
+		<img style="width:72px; height:72px;" src="https://www.kakaocorp.com/page/ico_customer.png"/>
 		<span style="display:inline-block; font-size: 2.0rem;">묻고답하기</span>
    </h1>
    <table class="table table-hover">
