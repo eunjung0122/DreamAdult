@@ -673,6 +673,19 @@
 		      }
 	   });
    }
+   
+   if(myGrade!='admin'){
+	   document.querySelector(".fix-link").addEventListener("click", function(){
+		   Swal.fire({
+				  position: 'top-50 start-50',
+				  icon: 'error',
+				  text: '"관리자(admin)" 등급만 접근권한이 부여됩니다."',
+				  showConfirmButton: false,
+				  timer: 1500
+			})
+	   });
+   }
+   
 </script>
 <jsp:include page="../../include/footer.jsp"></jsp:include>
 </body>
