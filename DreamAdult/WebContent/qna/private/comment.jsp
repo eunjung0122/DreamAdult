@@ -52,8 +52,8 @@
    
    /* 댓글 프로필 이미지를 작은 원형으로 만든다. */
    .profile-image{
-      width: 50px;
-      height: 50px;
+      width: 25px;
+      height: 25px;
       border: 1px solid #cecece;
       border-radius: 50%;
    }
