@@ -101,7 +101,7 @@ body {
             <ul class="navbar-nav m-auto">
                <li class="nav-item ms-2">
                		<a
-						class="nav-link"
+						class="nav-link <%=thisPage.equals("history") ? "active" : "" %>"
 
 						href="<%=request.getContextPath() %>/history.jsp">
 						<img class="mbMnImage" src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/6562b710017800001.png?type=thumb&opt=C72x72"/>

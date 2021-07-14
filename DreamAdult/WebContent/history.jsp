@@ -293,7 +293,7 @@
 </style>
 </head>
 <body>
-<jsp:include page="include/navber.jsp"></jsp:include>
+<jsp:include page="include/navber.jsp"><jsp:param value="history" name="thisPage"/></jsp:include>
 <div class="contain_align">
 	<h1 class="page_tit">
 	    <span class="tit_header">
