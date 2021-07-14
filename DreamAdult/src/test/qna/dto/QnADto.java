@@ -14,11 +14,12 @@ public class QnADto {
 	private int endRowNum;
 	private int prevNum;
 	private int nextNum;
+	private int fix;
 	
 	public QnADto() {}
 
 	public QnADto(int num, String writer, String nick, String title, String content, int viewCount, String regdate,
-			String category, String grade, int startRowNum, int endRowNum, int prevNum, int nextNum) {
+			String category, String grade, int startRowNum, int endRowNum, int prevNum, int nextNum, int fix) {
 		super();
 		this.num = num;
 		this.writer = writer;
@@ -33,6 +34,7 @@ public class QnADto {
 		this.endRowNum = endRowNum;
 		this.prevNum = prevNum;
 		this.nextNum = nextNum;
+		this.fix = fix;
 	}
 
 	public int getNum() {
@@ -138,4 +140,13 @@ public class QnADto {
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
 	}
+
+	public int getFix() {
+		return fix;
+	}
+
+	public void setFix(int fix) {
+		this.fix = fix;
+	}
+
 }

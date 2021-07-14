@@ -790,9 +790,9 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate,fix"
 					+ "		FROM board_QnA"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -877,10 +877,10 @@ public class QnADao {
 					+ "	FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate,fix"
 					+ "		FROM board_QnA"
 					+ "		WHERE title LIKE '%'||?||'%'"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -931,10 +931,10 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate,fix"
 					+ "		FROM board_QnA"
 					+ "		WHERE nick LIKE '%'||?||'%'"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -985,10 +985,10 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate"
+					+ "		(SELECT num,writer,nick,title,viewCount,category,TO_CHAR(regdate,'YYYY.MM.DD')regdate,fix"
 					+ "		FROM board_QnA"
 					+ "		WHERE title LIKE '%'||?||'%' OR content LIKE '%'||?||'%'"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1039,10 +1039,10 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category,fix"
 					+ "		FROM board_QnA"
 					+ "		WHERE category LIKE ?"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1234,10 +1234,10 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category,fix"
 					+ "		FROM board_QnA"
 					+ "		WHERE title LIKE '%'||?||'%' AND category LIKE ?"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
@@ -1343,10 +1343,10 @@ public class QnADao {
 					+ "FROM"
 					+ "	(SELECT result1.*,ROWNUM as rnum"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category"
+					+ "		(SELECT num,writer,nick,title,viewCount,TO_CHAR(regdate,'YYYY.MM.DD')regdate,category,fix"
 					+ "		FROM board_QnA"
 					+ "		WHERE (title LIKE '%'||?||'%' OR content LIKE '%'||?||'%') AND category LIKE ?"
-					+ " 	ORDER BY num DESC)result1)"
+					+ " 	ORDER BY fix DESC, num DESC)result1)"
 					+ "	WHERE rnum>=? AND rnum<=?";
 			//PreparedStatement 객체의 참조값 얻어오기
 			pstmt = conn.prepareStatement(sql);
