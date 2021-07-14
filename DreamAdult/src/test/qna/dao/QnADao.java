@@ -19,6 +19,72 @@ public class QnADao {
 		return dao;
 	}
 	
+	public boolean fix(QnADto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int flag = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "UPDATE board_qna"
+					+ "	SET fix=1"
+					+ "	WHERE num=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 바인딩할 내용 있으면 바인딩
+			pstmt.setInt(1, dto.getNum());
+			//insert or update or delete 문 수행하고 변화된 row의 갯수 리턴받기
+			flag = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public boolean unfix(QnADto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int flag = 0;
+		try {
+			conn = new DbcpBean().getConn();
+			//실행할 sql문 작성
+			String sql = "UPDATE board_qna"
+					+ "	SET fix=0"
+					+ "	WHERE num=?";
+			pstmt = conn.prepareStatement(sql);
+			//? 바인딩할 내용 있으면 바인딩
+			pstmt.setInt(1, dto.getNum());
+			//insert or update or delete 문 수행하고 변화된 row의 갯수 리턴받기
+			flag = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if (flag > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public List<QnADto> getLikeMaxList(QnADto dto){
 		List<QnADto> list = new ArrayList<QnADto>();
 		Connection conn = null;
@@ -167,7 +233,7 @@ public class QnADao {
 			//Connection 객체의 참조값 얻어오기
 			conn = new DbcpBean().getConn();
 			//실행할 sql문 작성
-			String sql = "SELECT writer, nick, title, content, viewCount, category, regdate"
+			String sql = "SELECT writer, nick, title, content, viewCount, category, regdate,fix"
 					+ " FROM board_QnA"
 					+ " WHERE num=?";
 			//PreparedStatement 객체의 참조값 얻어오기
@@ -187,6 +253,7 @@ public class QnADao {
 				dto.setViewCount(rs.getInt("viewCount"));
 				dto.setRegdate(rs.getString("regdate"));
 				dto.setCategory(rs.getString("category"));
+				dto.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -358,7 +425,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -383,6 +450,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -409,7 +477,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -436,6 +504,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -462,7 +531,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -487,6 +556,7 @@ public class QnADao {
 				dto2.setViewCount(rs.getInt("viewCount"));
 				dto2.setRegdate(rs.getString("regdate"));
 				dto2.setCategory(rs.getString("category"));
+				dto2.setFix(rs.getInt("fix"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
 			}
@@ -515,7 +585,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -543,6 +613,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -569,7 +640,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -596,6 +667,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -623,7 +695,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -651,6 +723,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -677,7 +750,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -705,6 +778,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -731,7 +805,7 @@ public class QnADao {
 			//실행할 sql문 작성
 			String sql = "SELECT *"
 					+ "	FROM"
-					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,"
+					+ "		(SELECT num,writer,nick,title,content,viewCount,TO_CHAR(regdate,'YYYY.MM.DD HH:MI')regdate,category,fix,"
 					+ "		LAG(num,1,0) OVER(ORDER BY num DESC) AS prevNum,"
 					+ "		LEAD(num,1,0) OVER(ORDER BY num DESC) nextNum"
 					+ "		FROM board_QnA"
@@ -760,6 +834,7 @@ public class QnADao {
 				dto2.setCategory(rs.getString("category"));
 				dto2.setPrevNum(rs.getInt("prevNum"));
 				dto2.setNextNum(rs.getInt("nextNum"));
+				dto2.setFix(rs.getInt("fix"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
