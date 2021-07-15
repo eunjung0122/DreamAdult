@@ -140,7 +140,7 @@
 	}else if(grade.equals("adult")){
 		grade_mark="★";
 	}else if(grade.equals("admin")){
-		grade_mark="★★";
+		grade_mark="♥";
 	}
 	
 	boolean isFix=false;

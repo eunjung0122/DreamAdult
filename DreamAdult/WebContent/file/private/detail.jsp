@@ -131,6 +131,8 @@
 		grade_mark="♣";
 	}else if(grade.equals("adult")){
 		grade_mark="★";
+	}else if(grade.equals("amnin")){
+		grade_mark="♥";
 	}
 	
 %>    
