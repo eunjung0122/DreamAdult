@@ -231,11 +231,11 @@
 						<span class="info_cate">
 							<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 							<span class="txt_cate">묻고답하기</span>
-							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(1).getNum())%></span>	
+							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(0).getNum())%></span>	
 						</span>
 						<%if(qnaList.size()>1) {%>
-						<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
-							<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
+						<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
+							<strong class="tit_card"><%=qnaList.get(0).getTitle() %></strong>
 						</a>
 						<p>
 							<span><%=qnaList.get(1).getNick() %></span>
@@ -274,10 +274,10 @@
 						<span class="info_cate">
 							<img src="https://www.kakaocorp.com/page/ico_customer.png"/>
 							<span class="txt_cate">묻고답하기</span>
-							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(0).getNum())%></span>	
+							<svg class="liked" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/></svg>&nbsp;&nbsp;&nbsp;&nbsp;<span class="likeCount">x<%=QnALikeDao.getInstance().getCount(qnaList.get(1).getNum())%></span>	
 							<%if(qnaList.size()>0) {%>
-							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>">
-								<strong class="tit_card"><%=qnaList.get(0).getTitle() %></strong>
+							<a class="card-main-tit" href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>">
+								<strong class="tit_card"><%=qnaList.get(1).getTitle() %></strong>
 							</a>
 							<p>
 								<span><%=qnaList.get(0).getNick() %></span>
