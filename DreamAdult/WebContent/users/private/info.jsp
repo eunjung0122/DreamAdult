@@ -71,13 +71,13 @@
 			<th>관심언어</th>
 			<td>
 				<label>
-					<input type="checkbox" name="language" value="Java" <%=lang.contains("Java") ? "checked":""%>/> 자바
+					<input type="checkbox" name="language" value="Java" <%=lang.contains("Java") ? "checked":""%> disabled/> 자바
 				</label>
 				<label>
-					<input type="checkbox" name="language" value="Javascript" <%=lang.contains("Javascript") ? "checked":""%>/> 자바스크립트
+					<input type="checkbox" name="language" value="Javascript" <%=lang.contains("Javascript") ? "checked":""%> disabled/> 자바스크립트
 				</label>
 				<label>
-					<input type="checkbox" name="language" value="JSP" <%=lang.contains("JSP") ? "checked":""%>/> JSP
+					<input type="checkbox" name="language" value="JSP" <%=lang.contains("JSP") ? "checked":""%> disabled/> JSP
 				</label>
 			</td>
 		</tr>
