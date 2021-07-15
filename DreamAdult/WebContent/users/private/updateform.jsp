@@ -131,6 +131,7 @@ let svgImage='<svg id="profileImage" xmlns="http://www.w3.org/2000/svg" width="2
 		.then(function(data){
 			// data 는 {imagePath:"/upload/xxx.jpg"} 형식의 object 이다.
 			console.log(data);
+			document.querySelector("#profileImage").style.display="none";
 			let img=`<img id="profileImage" src="<%=request.getContextPath()%>\${data.imagePath}"/>`;
 			document.querySelector("#profileLink").innerHTML=img;
 			// input name="profile" 요소의 value 값으로 이미지 경로 넣어주기
