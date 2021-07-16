@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Dream Adult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
-<jsp:include page="include/resource.jsp"></jsp:include>
+<link rel="stylesheet" href="historystyle.css" />
 <style>
 .contain_align{
 	width:364px;
