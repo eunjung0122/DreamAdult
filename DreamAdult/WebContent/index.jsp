@@ -154,10 +154,10 @@
 						</a>
 						<p class="card-tag">#이상한사람아니예요 #잊지못할추억 #정호쌤짱짱 #에듀윌포토존</p>
 					</span>
-					<div class="img-wrap">
+					<a href="history.jsp" class="img-wrap">
 						<img src="images/00.jpg"/>
 						<img src="images/11.jpg"/>
-					</div>
+					</a>
 				</li>
 			</ul>
 		</div>
@@ -181,9 +181,9 @@
 						</p>
 						<%} %>
 					</span>
-					<div class="img-wrap">
+					<a href="file/private/detail.jsp?num=<%=fileList.get(0).getNum() %>" class="img-wrap">
 						<img src="https://t1.kakaocdn.net/kakaocorp/kakaocorp/admin/news/79590191017a00001.jpg?type=thumb&opt=C630x472"/>
-					</div>
+					</a>
 				</li>
 				<li class="box box-s">
 					<span class="txt_wrap">
@@ -222,9 +222,9 @@
 						</p>
 						<%} %>
 					</span>
-					<div class="img-wrap">
+					<a href="study/private/detail.jsp?num=<%=studyList.get(1).getNum()%>" class="img-wrap">
 						<img src="https://images.unsplash.com/photo-1621416953228-87ad15716483?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80"/>
-					</div>
+					</a>
 				</li>
 				<li class="box box-m">
 					<span class="txt_wrap">
@@ -244,9 +244,9 @@
 						</p>
 						<%} %>
 					</span>
-					<div class="img-wrap">
+					<a href="qna/private/detail.jsp?num=<%=qnaList.get(0).getNum()%>" class="img-wrap">
 						<img src="images/cactusLine.png"/>
-					</div>
+					</a>
 				</li>
 				<li class="box box-m">
 					<span class="txt_wrap">
@@ -266,7 +266,7 @@
 						</p>
 						<%} %>
 					</span>
-					<div class="img-wrap" style="background:#f77028; height:210px;"></div>
+					<a href="file/private/detail.jsp?num=<%=fileList.get(1).getNum()%>" class="img-wrap" style="background:#f77028; height:210px;"></a>
 				</li>
 				
 				<li class="box box-m">
@@ -287,9 +287,9 @@
 							<%} %>
 						</span>
 					</span>
-					<div class="img-wrap">
+					<a href="qna/private/detail.jsp?num=<%=qnaList.get(1).getNum()%>" class="img-wrap">
 						<img src="images/star.png"/>
-					</div>
+					</a>
 				</li>
 				<li class="box box-m">
 					<span class="txt_wrap">
@@ -309,9 +309,9 @@
 						</p>
 						<%} %>
 					</span>
-					<div class="img-wrap">
+					<a href="study/private/detail.jsp?num=<%=studyList.get(2).getNum()%>" class="img-wrap">
 						<img src="https://images.unsplash.com/photo-1540760938999-077b8231d890?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1951&q=80"/>
-					</div>
+					</a>
 				</li>
 				<li class="box box-m">
 					<span class="txt_wrap">
@@ -331,7 +331,7 @@
 						</p>
 						<%} %>
 					</span>
-					<div class="img-wrap" style="background:#801ee3; height:210px;"></div>
+					<a href="file/private/detail.jsp?num=<%=fileList.get(2).getNum()%>" class="img-wrap" style="background:#801ee3; height:210px;"></a>
 				</li>
 				<li class="box box-s">
 					<span class="txt_wrap">
