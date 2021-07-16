@@ -49,18 +49,17 @@ ul{
 		font-weight:600;
 		color:#000;
 	}
+	
 	.mbMnMem{
 		display:block;
 	}
 	.mbHdLeft{
 		margin-left:6px;
 	}
-	.mbDrBookLeft{
-		padding-left:10px;
-	}
 	.MbDrBook{
 		margin-top:10px;
-		margin-left:40px;
+		margin-left:21px;
+		
 	}
 	.mbhdBottom{
 		margin-top:22px;
