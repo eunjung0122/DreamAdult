@@ -886,6 +886,7 @@ public class QnADao {
 				tmp.setViewCount(rs.getInt("viewCount"));
 				tmp.setRegdate(rs.getString("regdate"));
 				tmp.setCategory(rs.getString("category"));
+				tmp.setFix(rs.getInt("fix"));
 				list.add(tmp);
 			}
 		} catch (Exception e) {

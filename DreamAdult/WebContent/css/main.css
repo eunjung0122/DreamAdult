@@ -178,7 +178,7 @@ a {display:block; text-decoration: none !important;}
 .wrap-etc .item_etc:first-of-type>div {
 	background: #fae100;
 	background-image:
-		url(https://www.daumkakao.com/page/bg_home_service.png);
+		url(https://www.kakaocorp.com/page/bg_home_service.png);
 	background-size: 160px 160px;
 	background-repeat: no-repeat;
 	background-position: 85% 85%;
@@ -187,7 +187,7 @@ a {display:block; text-decoration: none !important;}
 .wrap-etc .item_etc:last-of-type>div {
 	background: #3c64ff;
 	background-image:
-		url(https://www.daumkakao.com/page/bg_home_recruit.png);
+		url(https://www.kakaocorp.com/page/bg_home_recruit.png);
 	background-size: 309px 160px;
 	background-repeat: no-repeat;
 	background-position: 85% 85%;
@@ -247,6 +247,9 @@ a {display:block; text-decoration: none !important;}
 	.table-row:first-of-type .box{
 		height:auto;
 	}
+	.table-row:first-of-type .img-wrap{
+		height:223px;
+	}
 	.main_page.container{
 		max-width:364px;
 	}
@@ -278,8 +281,8 @@ a {display:block; text-decoration: none !important;}
 }
 /*btn-design*/
 button.btn{
-	padding-left:0 !important;
-	padding-right:0 !important;
+	padding-top:0 !important;
+	padding-bottom:0 !important;
 }
 .btn{
 	vertical-align: top;
