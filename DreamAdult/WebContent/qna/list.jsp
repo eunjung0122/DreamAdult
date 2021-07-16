@@ -113,6 +113,15 @@
 <title>Dream Adult</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/logo2.png" type="image/x-icon" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+<style>
+	.table tr.fix{
+		background:#fae100;
+	}
+	.table tr.fix td{
+		font-weight:700;
+	}
+	
+</style>
 </head>
 <body>
 <jsp:include page="../include/navber.jsp">
@@ -176,7 +185,7 @@
 		</thead>
 		<tbody>
 		<%for(QnADto tmp:list){%>
-         <tr>
+         <tr class="<%=tmp.getFix() == 1 ? "fix" : ""%>">
             <td><%=tmp.getNum() %></td>
             <td><%=tmp.getCategory() %></td>
 
