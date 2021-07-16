@@ -34,8 +34,8 @@
 </head>
 <body>
 <jsp:include page="../../include/navber.jsp"></jsp:include>
-<div class="container">
-	<h1>가입 정보</h1>
+<div class="container" style="text-align:center;">
+	<h1 style="margin:80px 0;">가입 정보</h1>
 	<table class="table">
 		<tr>
 			<th>아이디</th>
