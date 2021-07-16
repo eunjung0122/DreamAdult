@@ -44,7 +44,7 @@
 		
 		if(grade.equals("child")&&commentCount>=5&&commentCount<20){
 			isUpgrade=UsersDao.getInstance().upgradeStudent(id);
-		}else if(!grade.equals("adult")&&commentCount>=20){
+		}else if(!grade.equals("adult")&&!grade.equals("admin")&&commentCount>=20){
 			isUpgrade=UsersDao.getInstance().upgradeAdult(id);
 		}
 	}
