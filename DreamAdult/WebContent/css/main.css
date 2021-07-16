@@ -473,6 +473,9 @@ button.btn{
 	border:none;
 	padding:40px 0;
 }
+.order-wrap{
+	margin-bottom:40px;
+}
 .btn-wrap{
 	text-align:right;
 }
